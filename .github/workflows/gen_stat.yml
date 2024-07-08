@@ -1,0 +1,25 @@
+name: generate Statistics
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: config for git
+        run: |
+          git config user.email "<>"
+          git config user.name "Statistik Bot"
+
+      - name: compute
+        run: |
+          ./.github/workflows/stats.sh
+
+      - name: push stats
+        run: |
+          git push origin
