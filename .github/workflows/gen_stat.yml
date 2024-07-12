@@ -2,7 +2,7 @@ name: generate Statistics
 
 on:
   schedule:
-    - cron: '0 6 1 * *'
+    - cron: '0 6 * * *'
 
 jobs:
   generate:
@@ -18,8 +18,10 @@ jobs:
 
       - name: compute
         run: |
-          ./.github/workflows/stats.sh
+          ./.github/stats.sh
 
       - name: push stats
         run: |
+          git add docs/STATS.md
+          git commit -m "[Statistik Bot] tägliches Update der STATS.md"
           git push origin

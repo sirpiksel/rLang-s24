@@ -8,16 +8,17 @@ Anhand der Commits wird kontrolliert ob jeder aktiv mitgewirkt hat, zur Selbstko
 
 ## Aufgaben
 - [x] Projekt Verteilung
-- [ ] Teilnehmer:innen in Repository hinzufügen.
+- [x] Teilnehmer:innen in Repository hinzufügen.
 - [ ] Aufgaben Verteilung
-- [ ] Erstellen der Erzeuger für AR(p)- und MA(q)-Prozesse
-- [ ] `sample autocovariance function`
-- [ ] `Durbin-Levinson`-Algorithmus unter Verwendung der `sample autocovariance`-Funktion
-- [ ] `Innovation`-Algorithmus
-- [ ] Periodogramm zum Schätzen der sprektralen Dichte,
-- [ ] komfortable Plot-Funktionen zur Darstellung der Zeitreihen, ihrer spektralen Dichten und der Schätzung letzterer
-- [ ] Illustrieren der Methoden anhand geeigneter Beispiele.
-- [ ] Vignette
+- [x] Erstellen der Erzeuger für AR(p)- und MA(q)-Prozesse (Philip)
+- [ ] `sample autocovariance function` ()
+- [ ] `Durbin-Levinson`-Algorithmus unter Verwendung der `sample autocovariance`-Funktion ()
+- [ ] `Innovation`-Algorithmus ()
+- [ ] Periodogramm zum Schätzen der sprektralen Dichte, ()
+- [ ] komfortable Plot-Funktionen zur Darstellung der Zeitreihen, ihrer spektralen Dichten und der Schätzung letzterer ()
+- [ ] Illustrieren der Methoden anhand geeigneter Beispiele. ()
+- [ ] Vignette ()
+- [ ] Zugriffsrechte für Betreuer freischalten
 - [ ] Zwischenbericht
 - [ ] Abschlussbericht
 - [ ] Abschlusspräsentation

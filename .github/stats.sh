@@ -1,12 +1,12 @@
 #!/bin/bash
 
-developers=("Philip ks")
+developers=("DStaengle", "alexaander01", "SebastianMeierUni", "Clemens-Uni", "Philip ks")
 
 date_run=$(date +%d.%m.%y)
 total_commits=$(git rev-list --all --count)
 
-start_file=".github/workflows/prefix.md"
-template_file=".github/workflows/template.md"
+start_file=".github/prefix.md"
+template_file=".github/template.md"
 output_file="docs/STATS.md"
 
 sed -e "s/{{date_run}}/$date_run/" \

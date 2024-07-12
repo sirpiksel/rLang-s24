@@ -3,7 +3,7 @@ Type: Package
 Title: Analyse von Zeitreihendaten
 Version: 0.0
 Date: 2024-07-08
-Author: Daniela Stängle, Sebastian Meier, Alexander Klaus, Philip Kastura-Sahl
+Author: Daniela Stängle, Sebastian Meier, Alexander Klaus, Clemens Glomb, Philip Kastura-Sahl
 Maintainer: Philip Kastura-Sahl <pleaseDont@seriously.dont>
 Description: Zur Analyse von Zeitreihendaten betrachten wir hier vor allem autoregressive (auto regressive, AR) Prozesse und gleitende Mittelwerte (moving average processes, MA). Das R-Paket soll die Simulation solcher Prozesse und die Schätzung ihrer Eigenschaften ermöglichen.
 License: WTFPL
