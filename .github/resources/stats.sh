@@ -5,8 +5,8 @@ developers=("DStaengle", "alexaander01", "SebastianMeierUni", "Clemens-Uni", "Ph
 date_run=$(date +%d.%m.%y)
 total_commits=$(git rev-list --all --count)
 
-start_file=".github/prefix.md"
-template_file=".github/template.md"
+start_file=".github/resources/prefix.md"
+template_file=".github/resources/template.md"
 output_file="docs/STATS.md"
 
 sed -e "s/{{date_run}}/$date_run/" \

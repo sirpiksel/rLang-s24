@@ -15,20 +15,14 @@
             overlays = [ devshell.overlays.default ];
           };
         rPackages = pkgs.rPackages;
-        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ devtools dplyr stringr tidyverse tibble magrittr ]; };
+        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ devtools tidyverse ]; };
 
       in
       {
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rLang-shell";
-          packages = with pkgs; [ rWrapper nixpkgs-fmt ];
-          git.hooks = {
-            enable = true;
-            pre-commit.text = ''
-              nix flake check
-            '';
-          };
+          packages = with pkgs; [ rWrapper ];
           commands = [
             {
               name = "run";
@@ -40,16 +34,23 @@
             {
               name = "build";
               command = ''
-                R CMD build
+                R CMD build 'src'
               '';
               help = "build the package tarball";
             }
             {
               name = "check";
               command = ''
-                R CMD check
+                R CMD check 'src'
               '';
               help = "check the package tarball";
+            }
+            {
+              name = "format";
+              command = ''
+                Rscript -e "install.packages('styler', repos = 'https://cloud.r-project.org', quiet = TRUE); styler::style_pkg('src')"
+              '';
+              help = "format the code using styler";
             }
           ];
         });

@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+src/inst/doc
+src/vignettes/*.html
+src/vignettes/*.R

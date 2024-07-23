@@ -9,8 +9,7 @@
 \packageDescription{zeitreihen}
 }
 \details{
-%%  ~~ An overview of how to use the package, ~~
-%%  ~~ including the most important functions ~~
+  zeitreihen (german for time series) is a package for time series analasis and comprises methods for analysing data in order to extract meaningful statistis and other characterisitcs of the data such as time series forecasting.
 }
 \author{
 \packageAuthor{zeitreihen}
@@ -18,7 +17,7 @@
 Maintainer: \packageMaintainer{zeitreihen}
 }
 \references{
-%%  ~~ Literature or other references for background information ~~
+  Introduction to time series and forecasting, Springer (2016), https://link.springer.com/book/10.1007/978-3-319-29854-2
 }
 \keyword{package}
 
@@ -31,5 +30,5 @@ Maintainer: \packageMaintainer{zeitreihen}
 %%  ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-%%  ~~ Optional simple examples of the most important functions ~~
+  %%  ~~ Optional simple examples of the most important functions ~~
 }

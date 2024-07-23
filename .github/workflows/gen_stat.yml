@@ -10,6 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github
+            docs
+          fetch-depth: 0
 
       - name: config for git
         run: |
@@ -18,10 +23,13 @@ jobs:
 
       - name: compute
         run: |
-          ./.github/stats.sh
+          ./.github/resources/stats.sh
+          cat docs/STATS.md
 
       - name: push stats
         run: |
-          git add docs/STATS.md
-          git commit -m "[Statistik Bot] tägliches Update der STATS.md"
-          git push origin
+          if [[ "$(git log -1 --pretty=%B)" != "[Statistik Bot]"* ]]; then;
+            git add docs/STATS.md
+            git commit -m "[Statistik Bot] update der STATS.md"
+            git push origin
+          fi

@@ -1,0 +1,43 @@
+name: format code
+
+on:
+  workflow_dispatch:
+    inputs:
+      ignoreLock:
+        description: 'Ignore flake.lock'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  formatCode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            src
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: config for git
+        run: |
+          git config user.email "<>"
+          git config user.name "Formatting Bot"
+
+      - name: delete Lockfile
+        if: ${{ inputs.ignoreLock }}
+        run: |
+          rm flake.lock
+
+      - name: format code
+        run: |
+          nix develop -c format
+
+      - name: push formated code
+        run: |
+          git add src
+          git commit -m "[Formatting Bot] formatiere code nach tidyverse style guide"
+          git push origin
