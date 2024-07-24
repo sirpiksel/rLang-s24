@@ -28,7 +28,7 @@ jobs:
 
       - name: push stats
         run: |
-          if [[ "$(git log -1 --pretty=%B)" != "[Statistik Bot]"* ]]; then;
+          if [[ "$(git log -1 --pretty=%B)" != "[Statistik Bot]"* ]]; then
             git add docs/STATS.md
             git commit -m "[Statistik Bot] update der STATS.md"
             git push origin
