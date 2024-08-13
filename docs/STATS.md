@@ -1,11 +1,11 @@
 # Statistics
-(25.07.24)
+(13.08.24)
 > Git Statistiken; noch unklar ob die Statistiken für die Bewertung auch so gewertet werden.
 
 Angenommen jeder Commit würde gleich viel Aufwand enthalten, dann müsste jedes Mitglied **20%** der Commits des Projekts beitragen. \
 In der Praxis gilt das nur als grobe Orientierung, dementsprechend ausschlaggebend sind die Statistiken.
 
-Gesamtzahl an Commits `5`
+Gesamtzahl an Commits `7`
 
 ---
 
@@ -52,7 +52,7 @@ Gesamtzahl an Commits `5`
 <details>
   <summary>Philip ks</summary>
 
-  \# lines added: `546` \
-  \# commits: `5` \
-  % commits: `100.00%`
+  \# lines added: `598` \
+  \# commits: `6` \
+  % commits: `85.71%`
 </details>
