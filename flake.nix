@@ -27,7 +27,7 @@
             {
               name = "run";
               command = ''
-                for file in $(ls *.R | sort); do printf "\n\nRunning $file\n"; Rscript $file; done
+                Rscript
               '';
               help = "run script";
             }
@@ -46,9 +46,16 @@
               help = "check the package tarball";
             }
             {
+              name = "document";
+              command = ''
+                Rscript scr-roxygenize.R
+              '';
+              help = "generate documentation using roxygen2";
+            }
+            {
               name = "format";
               command = ''
-                Rscript -e "install.packages('styler', repos = 'https://cloud.r-project.org', quiet = TRUE); styler::style_pkg('src')"
+                Rscript scr-formatting.R
               '';
               help = "format the code using styler";
             }

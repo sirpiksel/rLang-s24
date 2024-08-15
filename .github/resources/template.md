@@ -6,5 +6,6 @@
 
   \# lines added: `{{dev_cloc_add}}` \
   \# commits: `{{dev_commits}}` \
-  % commits: `{{dev_percent}}%`
+  % lines: `{{dev_cloc_per}}%` \
+  % commits: `{{dev_commit_per}}%`
 </details>
