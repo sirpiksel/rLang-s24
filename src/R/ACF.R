@@ -1,20 +1,33 @@
-#' Autocorrelation Function
+#' @title Autocorrelation Function (ACF)
 #'
-#' The Autocorrelation Function quantifies the degree of similarity between a time series and its lagged versions over successive time intervals, aiding in the detection of repeating patterns and trends.
+#' @description `ACF` computes the autocorrelation function of a time series, which measures the correlation between the time series and its lagged versions over successive time intervals. The function also identifies the first lag where the autocorrelation drops below a specified confidence threshold.
 #'
-#' @param X time series as a numeric vector.
-#' @param max_lag integer of the maximum lag to be checked. Set to the length of the time series by default.
-#' @param confidence that below this threshold covariances are concidered negligible.
+#' @details
+#' The autocorrelation function (ACF) is a key tool in time series analysis that helps to identify repeating patterns, trends, or seasonal effects by quantifying the degree of similarity between a time series and its lagged versions. Given a time series \eqn{\{X_1, \dots, X_n\}}, the function calculates the autocorrelation for lags ranging from 0 up to `max_lag`. The function also checks for the first lag where the autocorrelation falls below a specified confidence threshold, returning this lag as `p`.
 #'
-#' @return p index of first lag that has dropped below confidence threshold; rho numerical vector of autocorrelation for each lag.
+#' @param X A numeric vector representing the time series data.
+#'
+#' @param max_lag An integer specifying the maximum lag to compute the autocorrelation function. By default, it is set to the length of the time series.
+#'
+#' @param confidence A numeric value representing the threshold below which autocorrelations are considered negligible. The default value is calculated as \eqn{1.96 / \sqrt{max\_lag}}.
+#'
+#' @return A list containing the following components:
+#' \item{p}{An integer representing the first lag where the autocorrelation drops below the confidence threshold.}
+#' \item{rho}{A numeric vector containing the autocorrelation values for each lag.}
+#' \item{kappa}{A numeric value representing the autocovariance at the last computed lag.}
+#' \item{sigma2}{A numeric value representing the variance of the time series.}
 #'
 #' @examples
-#' X <- as.numeric(tsdl::tsdl[[1]])
-#' p <- zeitreihen::ACF(X)$p
+#' # Generate a sample time series
+#' X <- rnorm(100)
 #'
-#' P <- zeitreihen::simulate(X, 14, zeitreihen::AR, p)
+#' # Calculate the autocorrelation function and the first significant lag
+#' result <- ACF(X)
+#' p <- result$p
+#' rho <- result$rho
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
+#'
 #' @export
 ACF <- function(X, max_lag = length(X), confidence = 1.96 / sqrt(max_lag)) {
   stopifnot(

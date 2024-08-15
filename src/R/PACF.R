@@ -1,20 +1,33 @@
-#' Partial Autocorrelation Function
+#' @title Partial Autocorrelation Function (PACF)
 #'
-#' The Partial Autocorrelation Function measures the correlation between a time series and its lagged values, to identify the direct effect of a lag on the series.
+#' @description `PACF` computes the partial autocorrelation function of a time series, which quantifies the correlation between the time series and its lagged versions, accounting for the influence of intervening lags. The function also identifies the first lag where the partial autocorrelation drops below a specified confidence threshold.
 #'
-#' @param X time series as a numeric vector.
-#' @param max_lag integer of the maximum lag to be checked. Set to the length of the time series by default.
-#' @param confidence that below this threshold covariances are concidered negligible.
+#' @details
+#' The partial autocorrelation function (PACF) is used in time series analysis to measure the correlation between the time series and its lagged versions, after removing the effect of shorter lags. This makes PACF particularly useful in identifying the direct effect of a lag on the time series, which is helpful in determining the order of an autoregressive (AR) model.
 #'
-#' @return q index of first lag that has dropped below confidence threshold; alpha numerical vector of autocorrelation for each lag.
+#' For a given time series \eqn{\{X_1, \dots, X_n\}}, the PACF is computed for lags up to `max_lag` by solving the Yule-Walker equations. The function also identifies the first lag where the partial autocorrelation coefficient falls below a specified confidence threshold, returning this lag as `q`.
+#'
+#' @param X A numeric vector representing the time series data.
+#'
+#' @param max_lag An integer specifying the maximum lag to compute the partial autocorrelation function. By default, it is set to the length of the time series.
+#'
+#' @param confidence A numeric value representing the threshold below which partial autocorrelations are considered negligible. The default value is calculated as \eqn{1.96 / \sqrt{max\_lag}}.
+#'
+#' @return A list containing the following components:
+#' \item{q}{An integer representing the first lag where the partial autocorrelation drops below the confidence threshold.}
+#' \item{alpha}{A numeric vector containing the partial autocorrelation coefficients for each lag.}
 #'
 #' @examples
-#' X <- as.numeric(tsdl::tsdl[[1]])
-#' q <- zeitreihen::PACF(X)$q
+#' # Generate a sample time series
+#' X <- rnorm(100)
 #'
-#' P <- zeitreihen::simulate(X, 14, zeitreihen::MA, q)
+#' # Calculate the partial autocorrelation function and the first significant lag
+#' result <- PACF(X)
+#' q <- result$q
+#' alpha <- result$alpha
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
+#'
 #' @export
 PACF <- function(X, max_lag = length(X), confidence = 1.96 / sqrt(max_lag)) {
   stopifnot(

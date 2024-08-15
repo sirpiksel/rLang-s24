@@ -4,24 +4,27 @@
 \alias{plot}
 \title{Custom Time Series Plotting Function}
 \usage{
-plot(X_hat, h)
+plot(X, h)
 }
 \arguments{
-\item{h}{integer specifying the number of predictions in X.}
+\item{X}{A numeric vector representing the time series data, including the predictions.}
 
-\item{X}{time series as a numeric vector.}
+\item{h}{An integer specifying the number of predictions to be highlighted in the plot. The value of `h` must be a positive integer and should not exceed the length of `X_hat`.}
 }
 \value{
-plot of X with `h` predictions marked in red.
+A line plot displaying the time series with the last `h` values highlighted as predictions in red.
 }
 \description{
-This function plots a vector `X` as a time series, with the last `h` indicated to be the predictions.
+`plot` generates a custom line plot of a time series vector, highlighting the last `h` values as predictions. The plot displays the time series in blue and the predictions in red, with an appropriate legend.
+}
+\details{
+This function is designed to visualize a time series, where the last `h` values are considered predictions and are highlighted in a different color. The main part of the time series is plotted in blue, while the predicted values are plotted in red. The function automatically generates a legend to distinguish between the observed and predicted values.
 }
 \examples{
-X <- rnorm(100) # Generate a random vector of 100 elements
-zeitreihen::plot(X, 10) # Plot with the last 10 elements in a different color
+# Generate a random time series with 100 elements
+X_hat <- rnorm(100)
 
-}
-\references{
-Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
+# Plot the time series with the last 10 elements highlighted as predictions
+plot(X_hat, 10)
+
 }
