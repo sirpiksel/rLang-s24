@@ -3,6 +3,6 @@
 # apply as needed.
 #
 
-install.packages('styler', repos = 'https://cloud.r-project.org', quiet = TRUE)
+if(!require(styler)) install.packages('styler', repos = 'https://cloud.r-project.org')
 library(styler)
 styler::style_pkg('src/')

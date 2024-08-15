@@ -1,13 +1,17 @@
 #' Custom Time Series Plotting Function
 #'
-#' This function plots a vector `X` as a line graph, with the last `h` indicated to be the predictions.
+#' This function plots a vector `X` as a time series, with the last `h` indicated to be the predictions.
 #'
-#' @param X A numeric vector.
-#' @param h An integer specifying the number of predictions in X.
-#' @return A plot of X with `h` predictions marked in red.
+#' @param X time series as a numeric vector.
+#' @param h integer specifying the number of predictions in X.
+#'
+#' @return plot of X with `h` predictions marked in red.
+#'
 #' @examples
-#' X <- rnorm(100)          # Generate a random vector of 100 elements
-#' zeitreihen::plot(X, 10)  # Plot with the last 10 elements in a different color
+#' X <- rnorm(100) # Generate a random vector of 100 elements
+#' zeitreihen::plot(X, 10) # Plot with the last 10 elements in a different color
+#'
+#' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #' @export
 plot <- function(X_hat, h) {
   stopifnot(
