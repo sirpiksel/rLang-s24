@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Two separate lists for display names and corresponding identifiers
 display_names=("Daniela Stängle" "Alexander Klaus" "Sebastian Meier" "Clemens Glomb" "Philip Kastura-Sahl")
