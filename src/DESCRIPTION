@@ -3,15 +3,19 @@ Type: Package
 Title: Analyse von Zeitreihendaten
 Version: 0.0
 Date: 2024-07-08
-Author: Daniela Stängle, Sebastian Meier, Alexander Klaus, Clemens Glomb, Philip Kastura-Sahl
+Author: Daniela Staengle, Sebastian Meier, Alexander Klaus, Clemens Glomb, Philip Kastura-Sahl
 Maintainer: Philip Kastura-Sahl <pleaseDont@seriously.dont>
 Description: In order to analyse time series data, we primarily consider autoregressive (AR) processes and moving average processes (MA). The R package is intended to enable the simulation of such processes and the estimation of their properties.
 Encoding: UTF-8
 License: MIT
+Encoding: UTF-8
 Suggests: 
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
+<<<<<<< HEAD
 Config/testthat/edition: 3
+=======
+>>>>>>> TEAM_DLA
 RoxygenNote: 7.3.2
