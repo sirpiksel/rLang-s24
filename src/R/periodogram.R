@@ -5,7 +5,8 @@
 #' @details
 #' The periodogram is a sample-based function from which we obtain estimators of the spectral density.
 #' For a given time series \eqn{\{x_1, \dots, x_n\}}, the periodogram can be computed using the formula:
-#' \deqn{I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^n x_t e^{-it\lambda} \right|^2.}
+#' 
+#' \deqn{I_n(\lambda) = \displaystyle{\frac{1}{n}} \left| \displaystyle{\sum_{t=1}^n x_t e^{-it\lambda}} \right|^2.}
 #' 
 #' @param x A numeric or complex atomic vector representing the time series data. The series should be stationary, 
 #' meaning that its mean and variance do not change over time.

@@ -1,4 +1,4 @@
-#' @title Compute the Innovations Algorithm for Time Series
+#' @title Recursive calculation of coefficients with the Innovations Algorithm
 #'
 #' @description `IA` can be used to compute the innovations and the innovation variances for a time series.
 #'
@@ -6,10 +6,20 @@
 #' The innovations algorithm is a recursive method used in time series analysis to compute the best linear predictors of a time series and their associated prediction errors, known as innovations. For a given time series \eqn{\{x_1, \dots, x_n\}}, the algorithm provides a way to decompose the series into uncorrelated components.
 #'
 #' The algorithm works by computing the innovations and their variances step by step, using the given autocovariance function of the time series. It is particularly useful in the context of ARMA models and other linear time series models.
+#' 
+#' The coefficients \eqn{\theta_{n1}, \dots, \theta_{nn}} can be computed recursively from the equations
+#' 
+#' \deqn{\nu_0 = \kappa(1, 1),}
+#' 
+#' \deqn{\theta_{n, n-k} = \nu_k^{-1} \left( \kappa(n+1, k+1) - \displaystyle{\sum_{j=0}^{k-1} \theta_{k, k-j} \theta_{n, n-j} \nu_j} \right), \quad 0 \leq k < n,}
+#' 
+#' and
+#' 
+#' \deqn{\nu_n = \kappa(n+1, n+1) - \displaystyle{\sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j}.}
 #'
-#' @param X time series as a numeric vector.
-#' @param q integer of the maximum lag to be checked. Set to the length of the time series - 1 by default.
-#' @param matrix a boolean wether or not to output a matrix
+#' @param X A numeric vector representing the time series data.
+#' @param q An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.
+#' @param matrix A boolean indicating whether or not to output a matrix.
 #'
 #' @returns A list with two components:
 #' \item{innovations}{A numeric vector containing the computed innovations.}
@@ -27,7 +37,6 @@
 #' print(out$coeffs)
 #'
 #' @export
-
 IA <- function(X, q = (length(X) - 1), matrix = FALSE) {
   n <- length(X)
   nu <- numeric(n)

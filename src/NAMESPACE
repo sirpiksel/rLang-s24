@@ -3,7 +3,7 @@
 export(ACF)
 export(IA)
 export(PACF)
+export(periodogram)
 export(plot)
-export(prep_Durbin_Levinson)
 export(sample_autocovariance_function)
 export(simulate)
