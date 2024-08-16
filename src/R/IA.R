@@ -19,13 +19,12 @@
 #'
 #' @examples
 #' # Generate a sample time series and its autocovariance
-#' x <- rnorm(100)
-#' acf <- acf(x, plot = FALSE)$acf
+#' X <- rnorm(100)
 #'
-#' # Calculate the innovations and their variances
-#' results <- innovations_algorithm(x, acf)
-#' innovations <- results$innovations
-#' variances <- results$innovation_variances
+#' # Calculate coefficients
+#' out <- IA(X)
+#' print(out$nu_n)
+#' print(out$coeffs)
 #'
 #' @export
 
