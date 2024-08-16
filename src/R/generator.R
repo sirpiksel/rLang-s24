@@ -10,11 +10,11 @@
 #' 
 #' @param t An integer that gives the desired length of the time series.
 #' 
-#' @param phi The coefficients of the Ar(p) process.
+#' @param phi A numeric or complex vector of length \eqn{p} that contains the coefficients of the Ar(p) process.
 #' 
 #' @param sigma A numeric value representing the variance of the white noise. By default it is set to 1.
 #' 
-#' @param start A numeric vector, that contains the first \eq{p} observations. By default these observations are set to 0.
+#' @param start A numeric vector, that contains the first \eqn{p} observations. By default these observations are set to 0.
 #' 
 #' @returns A numeric vector that contains the generated Ar(p) time series.
 #' 
@@ -58,7 +58,7 @@ make_ar <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
 #' 
 #' @details
 #' The MA(q) model can be defined by the equation
-#' \deqn{X_t = Z_t+\theta_1 Z_{t-1} + \theta_2 Z_{t-2} + \dots + \theta_p Z_{t-p}}
+#' \deqn{X_t = Z_t+\theta_1 Z_{t-1} + \theta_2 Z_{t-2} + \dots + \theta_q Z_{t-q}}
 #' where \eqn{t} is the time and \eqn{Z_t} is white 
 #' noise with mean zero and variance \eqn{\sigma^2}.
 #' 

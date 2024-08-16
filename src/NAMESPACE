@@ -3,6 +3,8 @@
 export(ACF)
 export(IA)
 export(PACF)
+export(make_ar)
+export(make_ma)
 export(periodogram)
 export(plot)
 export(sample_autocovariance_function)
