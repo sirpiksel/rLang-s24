@@ -2,7 +2,7 @@
 
 # Two separate lists for display names and corresponding identifiers
 display_names=("Daniela Stängle" "Alexander Klaus" "Sebastian Meier" "Clemens Glomb" "Philip Kastura-Sahl")
-identifiers=("daniela.staengle@hotmail.de" "alexaander01" "smeier.ngd@gmail.com" "75215973+Clemens-Uni@users.noreply.github.com" "3000piksel@gmail.com")
+identifiers=("daniela.staengle@hotmail.de" "alexanderklaus01@gmail.com" "smeier.ngd@gmail.com" "75215973+Clemens-Uni@users.noreply.github.com" "3000piksel@gmail.com")
 
 date_run=$(date +%d.%m.%y)
 total_cloc=$(git log --all --pretty=tformat: --numstat | awk '{ add += $1 } END { print add }')
