@@ -7,8 +7,8 @@ Author: Daniela Staengle, Sebastian Meier, Alexander Klaus, Clemens Glomb, Phili
 Maintainer: Philip Kastura-Sahl <pleaseDont@seriously.dont>
 Description: In order to analyse time series data, we primarily consider autoregressive (AR) processes and moving average processes (MA). The R package is intended to enable the simulation of such processes and the estimation of their properties.
 Encoding: UTF-8
-License: MIT
-Suggests: 
+License: MIT + file LICENSE
+Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)

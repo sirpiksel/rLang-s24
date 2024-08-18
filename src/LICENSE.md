@@ -1,6 +1,6 @@
-The MIT License (MIT)
+# MIT License
 
-Copyright (c) 2024 Daniela Stängle, Sebastian Meier, Alexander Klaus, Clemens Glomb, Philip Kastura-Sahl
+Copyright (c) 2024 zeitreihen authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
