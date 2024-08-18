@@ -9,7 +9,7 @@ plot(X, h)
 \arguments{
 \item{X}{A numeric vector representing the time series data, including the predictions.}
 
-\item{h}{An integer specifying the number of predictions to be highlighted in the plot. The value of \code{h} must be a positive integer and should not exceed the length of \code{X_hat}.}
+\item{h}{an integer specifying the number of predictions to be highlighted in the plot. The value of \code{h} must be a positive integer and should not exceed the length of \code{X_hat}.}
 }
 \value{
 A line plot displaying the time series with the last \code{h} values highlighted as predictions in red.

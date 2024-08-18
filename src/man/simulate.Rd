@@ -4,12 +4,12 @@
 \alias{simulate}
 \title{Time Series Simulation Function}
 \usage{
-simulate(X, h = 1, model = zeitreihen::auto_model, lag, coeffs, plot = False)
+simulate(X, h = 1, model, lag, coeffs, plot = False)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data.}
 
-\item{h}{An integer specifying the number of predictions to be computed. The default value is \code{1}.}
+\item{h}{an integer specifying the number of predictions to be computed. The default value is \code{1}.}
 
 \item{model}{A function from the \code{zeitreihen} package to be used as the predictive model. The default is \code{zeitreihen::auto_model}.}
 
@@ -27,19 +27,6 @@ A numeric vector containing the \code{h} predicted values appended to the origin
 }
 \details{
 This function simulates future observations of a time series by using a specified model from the \code{zeitreihen} package. The user can specify the number of predictions (\code{h}), the model to be used, the lag order, and the model coefficients. If \code{plot} is set to \code{TRUE}, the function will generate a plot showing the time series with the predictions highlighted.
-}
-\examples{
-X <- rnorm(100) # Generate a random time series
-
-# Generate 31 predictions using the default model
-predictions <- simulate(X, 31)
-
-# Generate predictions and plot the results
-predictions <- simulate(X, 31, plot = TRUE)
-
-# Use a specific AR model with a lag of 1
-predictions <- simulate(X, 14, model = zeitreihen::AR, lag = 1)
-
 }
 \references{
 Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
