@@ -35,14 +35,15 @@
             {
               name = "build";
               command = ''
-                R CMD build 'src'
+                Rscript -e 'devtools::document(pkg = "src/")'
+                Rscript -e 'devtools::build_vignettes(pkg = "src/")'
               '';
               help = "build the package tarball";
             }
             {
               name = "check";
               command = ''
-                R CMD check 'src'
+                Rscript -e 'devtools::check(pkg = "src/")'
               '';
               help = "check the package tarball";
             }
@@ -59,6 +60,13 @@
                 Rscript scr-formatting.R
               '';
               help = "format the code using styler";
+            }
+            {
+              name = "clean";
+              command = ''
+                rm -rf src.Rcheck *.tar.gz
+              '';
+              help = "remove Rcheck directory and compiled package";
             }
           ];
         });
