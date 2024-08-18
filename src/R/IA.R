@@ -19,7 +19,6 @@
 #'
 #' @param X A numeric vector representing the time series data.
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.
-#' @param matrix A boolean indicating whether or not to output a matrix.
 #'
 #' @returns A list with two components:
 #' \item{innovations}{A numeric vector containing the computed innovations.}
@@ -44,8 +43,7 @@ IA <- function(X, max_lag = length(X)) {
     "X must be only contain numeric or complex values" = is.numeric(X) | is.complex(X),
     "X must be filled with finite values." = is.finite(X),
     "max_lag must be an integer." = max_lag %% 1 == 0 & length(max_lag) == 1,
-    "q cannot exceed length(X) - 1" = maxlag <= length(X),
-    "matrix must be a logical value" = is.logical(matrix)
+    "q cannot exceed length(X) - 1" = max_lag <= length(X)
   )
 
   nu <- numeric(max_lag)
@@ -66,6 +64,6 @@ IA <- function(X, max_lag = length(X)) {
     }
     nu[i + 1] <- autocov[1] - sum(theta_mat[i + 1, 1:i]^2 * nu[1:i])
   }
-  coeffs <- theta_mat[n, (n - 1):(n - q)]
+  coeffs <- theta_mat[max_lag, (max_lag - 1):1]
   return(list(theta = theta_mat, nu = nu, coeffs = coeffs))
 }
