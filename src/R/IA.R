@@ -53,9 +53,9 @@ IA <- function(X, max_lag = length(X)) {
   autocov <- sample_ACVF(X, 0:(max_lag - 1))
   
   # initialize
+  nu[1] <- autocov[1]
   theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)
   theta_mat[2, 1] <- 1 / nu[1] * autocov[2]
-  nu[1] <- autocov[1]
   nu[2] <- autocov[1] - theta_mat[2, 1]^2 * nu[1]
 
   # calculate theta_mat,n-k n rows
