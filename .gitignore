@@ -7,4 +7,4 @@ src/vignettes/*.R
 .RData
 .Rhistory
 .Rproj.user/
-rLang-s24.Rproj
+*.Rproj
