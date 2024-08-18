@@ -24,8 +24,8 @@
 #' @examples
 #' x <- c(1, 2, 3, 4)
 #' h <- c(0, 1, 2)
-#' sample_autocovariance_function(x, h)
-sample_autocovariance_function <- function(x, h = 0:(length(x) - 1)) {
+#' sample_ACVF(x, h)
+sample_ACVF <- function(x, h = 0:(length(x) - 1)) {
   stopifnot(
     "x must be numeric" = is.numeric(x),
     "x has NA entries" = !any(is.na(x)),
@@ -50,7 +50,7 @@ sample_autocovariance_function <- function(x, h = 0:(length(x) - 1)) {
 
 
 
-function_fabric_sample_autocovariance_function <- function(x) {
+fabric_sample_ACVF <- function(x) {
   stopifnot(
     "x must be numeric" = is.numeric(x),
     "x has NA entries" = !any(is.na(x))
@@ -61,7 +61,7 @@ function_fabric_sample_autocovariance_function <- function(x) {
   function(h) {
     stopifnot(
       "h must be numeric" = is.numeric(h),
-      "h must be an integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
+      "h must integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
       "length of x > -h and h < length of x" = (h < n) && (-n < h)
     )
 
@@ -72,7 +72,7 @@ function_fabric_sample_autocovariance_function <- function(x) {
 
 
 
-stand_alone_sample_autocovariance_function <- function(x, h) {
+lone_sample_ACVF <- function(x, h) {
   stopifnot(
     "x must be numeric" = is.numeric(x),
     "x has NA entries" = !any(is.na(x)),
