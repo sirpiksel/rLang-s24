@@ -4,12 +4,12 @@
 \alias{IA}
 \title{Recursive calculation of coefficients using the Innovations Algorithm}
 \usage{
-IA(X, q = (length(X) - 1), matrix = FALSE)
+IA(X, max_lag = length(X))
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data.}
 
-\item{q}{An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.}
+\item{max_lag}{An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.}
 
 \item{matrix}{A boolean indicating whether or not to output a matrix.}
 }
@@ -19,7 +19,7 @@ A list with two components:
 \item{innovation_variances}{A numeric vector containing the variances of the innovations.}
 }
 \description{
-`IA` can be used to compute the innovations and the innovation variances for a time series.
+\code{IA} can be used to compute the innovations and the innovation variances for a time series.
 }
 \details{
 The innovations algorithm is a recursive method used in time series analysis to compute the best linear predictors of a time series and their associated prediction errors, known as innovations. For a given time series \eqn{\{x_1, \dots, x_n\}}, the algorithm provides a way to decompose the series into uncorrelated components.
@@ -42,8 +42,9 @@ X <- rnorm(100)
 
 # Calculate coefficients
 out <- IA(X)
-print(out$nu_n)
+print(out$nu)
 print(out$coeffs)
+print(out$theta)
 
 }
 \references{

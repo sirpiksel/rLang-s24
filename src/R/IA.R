@@ -18,7 +18,7 @@
 #' \deqn{\nu_n = \kappa(n+1, n+1) - \displaystyle{\sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j}.}
 #'
 #' @param X A numeric vector representing the time series data.
-#' @param q An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.
+#' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.
 #' @param matrix A boolean indicating whether or not to output a matrix.
 #'
 #' @returns A list with two components:
@@ -33,34 +33,39 @@
 #'
 #' # Calculate coefficients
 #' out <- IA(X)
-#' print(out$nu_n)
+#' print(out$nu)
 #' print(out$coeffs)
+#' print(out$theta)
 #'
 #' @export
-IA <- function(X, q = (length(X) - 1), matrix = FALSE) {
-  n <- length(X)
-  nu <- numeric(n)
+IA <- function(X, max_lag = length(X)) {
+  stopifnot(
+    "X must be a native vector" = is.atomic(X),
+    "X must be only contain numeric or complex values" = is.numeric(X) | is.complex(X),
+    "X must be filled with finite values." = is.finite(X),
+    "max_lag must be an integer." = max_lag %% 1 == 0 & length(max_lag) == 1,
+    "q cannot exceed length(X) - 1" = maxlag <= length(X),
+    "matrix must be a logical value" = is.logical(matrix)
+  )
+
+  nu <- numeric(max_lag)
   # Calculate autocovariance at the start of the algorithm
-  autocov <- sample_ACVF(X, 0:(n - 1))
+  autocov <- sample_ACVF(X, 0:(max_lag - 1))
   # Value v_0
   nu[1] <- autocov[1]
-  theta <- matrix(0, ncol = n, nrow = n)
-  theta[2, 1] <- 1 / nu[1] * autocov[2]
-  nu[2] <- autocov[1] - theta[2, 1]^2 * nu[1]
+  theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)
+  theta_mat[2, 1] <- 1 / nu[1] * autocov[2]
+  nu[2] <- autocov[1] - theta_mat[2, 1]^2 * nu[1]
 
-  # calculata theta_n,n-k n rows
-  for (i in 2:(n - 1)) {
-    # Diagonal element theta_n,n has to be calcuated first in every iteration
-    theta[i + 1, 1] <- 1 / nu[1] * autocov[i + 1]
+  # calculata theta_mat,n-k n rows
+  for (i in 2:(max_lag - 1)) {
+    # Diagonal element theta_mat,n has to be calcuated first in every iteration
+    theta_mat[i + 1, 1] <- 1 / nu[1] * autocov[i + 1]
     for (k in 1:(i - 1)) {
-      theta[i + 1, k + 1] <- 1 / nu[k + 1] * (autocov[i - k + 1] - sum(theta[k + 1, 1:k] * theta[i + 1, 1:k] * nu[1:k]))
+      theta_mat[i + 1, k + 1] <- 1 / nu[k + 1] * (autocov[i - k + 1] - sum(theta_mat[k + 1, 1:k] * theta_mat[i + 1, 1:k] * nu[1:k]))
     }
-    nu[i + 1] <- autocov[1] - sum(theta[i + 1, 1:i]^2 * nu[1:i])
+    nu[i + 1] <- autocov[1] - sum(theta_mat[i + 1, 1:i]^2 * nu[1:i])
   }
-  coeffs <- theta[n, (n - 1):(n - q)]
-  if (matrix == TRUE) {
-    return(list(theta_n = theta, nu_n = nu, coeffs = coeffs))
-  } else {
-    return(list(nu_n = nu, coeffs = coeffs))
-  }
+  coeffs <- theta_mat[n, (n - 1):(n - q)]
+  return(list(theta = theta_mat, nu = nu, coeffs = coeffs))
 }
