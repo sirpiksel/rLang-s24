@@ -41,7 +41,7 @@ IA <- function(X, q = (length(X) - 1), matrix = FALSE) {
   n <- length(X)
   nu <- numeric(n)
   # Calculate autocovariance at the start of the algorithm
-  autocov <- sample_ACVF(X, 0:(n-1))
+  autocov <- sample_ACVF(X, 0:(n - 1))
   # Value v_0
   nu[1] <- autocov[1]
   theta <- matrix(0, ncol = n, nrow = n)
