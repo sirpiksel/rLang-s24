@@ -37,9 +37,6 @@
 #'
 #' @param X A numeric vector representing the time series data. The data should be a stationary time series.
 #'
-#' @param m An integer representing the order of the autoregressive model. The value of \code{m} must satisfy \eqn{0 < m < n},
-#' where \code{n} is the length of the \code{data}.
-#'
 #' @returns A list containing:
 #' \tabular{lcccl}{
 #'   \code{phi} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the computed AR coefficients \eqn{\phi{n1}, \dots, \phi{nn}}. \cr
