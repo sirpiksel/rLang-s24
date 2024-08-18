@@ -1,4 +1,4 @@
-#' @title The Sample Autocovariance Function
+#' @title Sample Autocovariance Function
 #'
 #' @description
 #' `sample_ACVF` computes the sample autocovariance of a given time series at a specified lag.
@@ -14,10 +14,10 @@
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
 #'
-#' @param h An integer vector representing the lag values, where each value \eqn{h_i} must be unique and
+#' @param h An integer atomic vector representing the lag values, where each value \eqn{h_i} must be unique and
 #' fulfill the condition: \eqn{-\text{length}(X) < h_i < \text{length}(X)}.
 #'
-#' @returns A numeric vector containing the calculated values of the sample autocovariance function corresponding to each entry in `h`.
+#' @returns A numeric atomic vector containing the calculated values of the sample autocovariance function corresponding to each entry in `h`.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'

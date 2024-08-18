@@ -2,18 +2,18 @@
 % Please edit documentation in R/sample_ACVF.R
 \name{sample_ACVF}
 \alias{sample_ACVF}
-\title{The Sample Autocovariance Function}
+\title{Sample Autocovariance Function}
 \usage{
 sample_ACVF(X, h = 0:(length(X) - 1))
 }
 \arguments{
 \item{X}{A numeric or complex atomic vector representing the time series data.}
 
-\item{h}{An integer vector representing the lag values, where each value \eqn{h_i} must be unique and
+\item{h}{An integer atomic vector representing the lag values, where each value \eqn{h_i} must be unique and
 fulfill the condition: \eqn{-\text{length}(X) < h_i < \text{length}(X)}.}
 }
 \value{
-A numeric vector containing the calculated values of the sample autocovariance function corresponding to each entry in \code{h}.
+A numeric atomic vector containing the calculated values of the sample autocovariance function corresponding to each entry in \code{h}.
 }
 \description{
 \code{sample_ACVF} computes the sample autocovariance of a given time series at a specified lag.
