@@ -17,15 +17,16 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @export
-simulate <- function(X, h = 1, model, lag, coeffs, plot = False) {
+simulate <- function(X, h = 1, model, lag, coeffs, plot = FALSE) {
   stopifnot(
     "X must be numeric vector." = is.vector(X) & all(is.numeric(X)),
     "h must be integer of at least 1." = 0 < h & h == as.integer(h),
     "incompatible model. Only accepts models from zeitreihen package" = exists(deparse(substitute(model)), where = "package:zeitreihen", mode = "function"),
     "lag must be integer." = lag == as.integer(lag),
     "coeffs must be numeric vector." = is.vector(coeffs) & all(is.numeric(coeffs)),
-    "plot must be a boolean." = is.boolean(plot)
+    "plot must be a boolean." = is.logical(plot)
   )
+
 
   for (i in 1:h) {
     X <- c(X, model(X, lag, coeffs))
@@ -35,5 +36,6 @@ simulate <- function(X, h = 1, model, lag, coeffs, plot = False) {
     zeitreihen::plot(X, h)
   }
 
-  return(tail(X, h))
+  n <- length(X)
+  return(X[(n - h):n])
 }

@@ -4,7 +4,7 @@
 \alias{simulate}
 \title{Time Series Simulation Function}
 \usage{
-simulate(X, h = 1, model, lag, coeffs, plot = False)
+simulate(X, h = 1, model, lag, coeffs, plot = FALSE)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data.}

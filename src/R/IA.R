@@ -48,10 +48,10 @@ IA <- function(X, max_lag = length(X)) {
   )
 
   nu <- numeric(max_lag)
-  
+
   # Calculate autocovariance at the start of the algorithm
   autocov <- sample_ACVF(X, 0:(max_lag - 1))
-  
+
   # initialize
   nu[1] <- autocov[1]
   theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)

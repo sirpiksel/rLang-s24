@@ -1,4 +1,5 @@
-# Test conditions for data
+# TESTING DLA
+## Test conditions for data
 
 test_that("Test conditions on data", {
   data <- list(1, 2, 3, 4)
@@ -20,7 +21,7 @@ test_that("Test conditions on data", {
   expect_error(DLA(data), "Data must be provided and must not be empty")
 })
 
-# Test conditions for m
+## Test conditions for m
 
 test_that("Test conditions on m", {
   data <- c(1, 2, 3, 4)
@@ -45,7 +46,7 @@ test_that("Test conditions on m", {
   expect_error(pdl(m), "A valid value for m must be provided")
 })
 
-# Test for numerical stability and correctness
+## Test for numerical stability and correctness
 
 test_that("Test numerical stability and correctness", {
   data <- c(1, 2, 3, 4)
@@ -68,7 +69,7 @@ test_that("Test numerical stability and correctness", {
   expect_error(pdl(2), "v\\[2\\] is too close to zero, which may cause numerical instability.")
 })
 
-# Test for the behavior of m at extreme values
+## Test for the behavior of m at extreme values
 
 test_that("Test conditions on extreme values of m", {
   data <- c(2, 4, 6, 8, 10)

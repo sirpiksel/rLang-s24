@@ -1,4 +1,4 @@
-## TESTING: fabric_ACVF
+# TESTING fabric_ACVF
 ## Test conditions on x
 
 test_that("TEST fabric_ACVF: conditions on x", {

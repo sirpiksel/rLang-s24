@@ -241,4 +241,3 @@ test_that("TEST make_ar: correctness", {
   expect_equal(sol[4], 1 + werte[4])
   expect_equal(sol[5], 1 + werte[4] + werte[5])
 })
-
