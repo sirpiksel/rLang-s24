@@ -4,7 +4,7 @@
 #' `periodogram` computes the periodogram of a given time series, which can be used to estimate the spectral density.
 #'
 #' @details
-#' The periodogram is a sample-based function from which we obtain estimators of the spectral density.
+#' The \strong{periodogram} is a sample-based function from which we obtain estimators of the spectral density.
 #' For a given time series \eqn{\{x_1, \dots, x_n\}}, the periodogram can be computed using the formula:
 #'
 #' \deqn{I_n(\lambda) = \displaystyle{\frac{1}{n}} \left| \displaystyle{\sum_{t=1}^n x_t e^{-it\lambda}} \right|^2.}

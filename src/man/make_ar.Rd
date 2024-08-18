@@ -2,34 +2,35 @@
 % Please edit documentation in R/generator.R
 \name{make_ar}
 \alias{make_ar}
-\title{AR(p) generator (\code{make_ar})}
+\title{Generator for AR(p) processes}
 \usage{
 make_ar(t, phi, sigma = 1, start = numeric(length(phi)))
 }
 \arguments{
-\item{t}{An integer that gives the desired length of the time series.}
+\item{t}{An integer specifying the desired length of the time series.}
 
-\item{phi}{A numeric or complex vector of length \eqn{p} that contains the coefficients of the AR(p) process.}
+\item{phi}{A numeric or complex atomic vector of length \code{p} containing the coefficients of the AR(p) process.}
 
-\item{sigma}{A numeric value representing the variance of the white noise. By default it is set to 1.}
+\item{sigma}{A numeric value representing the variance of the white noise, with a default value of 1.}
 
-\item{start}{A numeric vector, that contains the first \eqn{p} observations. By default these observations are set to 0.}
+\item{start}{A numeric atomic vector containing the first \code{p} observations, which are 0 by default.}
 }
 \value{
-A numeric vector that contains the generated AR(p) time series.
+An atomic numeric vector containing the generated AR(p) time series.
 }
 \description{
 \code{make_ar} generates a synthetic time series that follows an AR(p) model.
 }
 \details{
 The AR(p) model can be defined by the equation
-\deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t}
-where \eqn{t} is the time and \eqn{Z_t} is white
-noise with mean zero and variance \eqn{\sigma^2}.
+
+\deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t,}
+
+where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is white noise with a mean of zero and a variance of \eqn{\sigma^2}.
 }
 \examples{
-# Generate a sample AR(1) time series of length 100 with coefficient \eqn{\phi=-0.7}.
-ar_one <- make_ar(100, -0.7)
+# Simple AR(1) model
+ar_one <- make_ar(t = 100, phi = -0.7)
 ts.plot(ar_one)
 acf(ar_one)
 

@@ -1,33 +1,33 @@
-#' @title  AR(p) generator (`make_ar`)
+#' @title  Generator for AR(p) processes
 #'
 #' @description `make_ar` generates a synthetic time series that follows an AR(p) model.
 #'
 #' @details
 #' The AR(p) model can be defined by the equation
-#' \deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t}
-#' where \eqn{t} is the time and \eqn{Z_t} is white
-#' noise with mean zero and variance \eqn{\sigma^2}.
+#' 
+#' \deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t,}
+#' 
+#' where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is white noise with a mean of zero and a variance of \eqn{\sigma^2}.
 #'
-#' @param t An integer that gives the desired length of the time series.
+#' @param t An integer specifying the desired length of the time series.
 #'
-#' @param phi A numeric or complex vector of length \eqn{p} that contains the coefficients of the AR(p) process.
+#' @param phi A numeric or complex atomic vector of length `p` containing the coefficients of the AR(p) process.
 #'
-#' @param sigma A numeric value representing the variance of the white noise. By default it is set to 1.
+#' @param sigma A numeric value representing the variance of the white noise, with a default value of 1.
 #'
-#' @param start A numeric vector, that contains the first \eqn{p} observations. By default these observations are set to 0.
+#' @param start A numeric atomic vector containing the first `p` observations, which are 0 by default.
 #'
-#' @returns A numeric vector that contains the generated AR(p) time series.
-#'
-#' @examples
-#' # Generate a sample AR(1) time series of length 100 with coefficient \eqn{\phi=-0.7}.
-#' ar_one <- make_ar(100, -0.7)
-#' ts.plot(ar_one)
-#' acf(ar_one)
+#' @returns An atomic numeric vector containing the generated AR(p) time series.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
+#' @examples
+#' # Simple AR(1) model
+#' ar_one <- make_ar(t = 100, phi = -0.7)
+#' ts.plot(ar_one)
+#' acf(ar_one)
+#'
 #' @export
-
 make_ar <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
   stopifnot(
     "t must be a value of length 1" = (is.atomic(t) & length(t) == 1),
@@ -67,31 +67,32 @@ make_ar <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
   return(X)
 }
 
-#' @title  MA(q) generator (`make_ma`)
+#' @title Generator for MA(q) processes
 #'
-#' @description `make_ma` generates a synthetic time series that follows a MA(q) model.
+#' @description `make_ma` generates a synthetic time series that follows an MA(q) model.
 #'
 #' @details
 #' The MA(q) model can be defined by the equation
-#' \deqn{X_t = Z_t+\theta_1 Z_{t-1} + \theta_2 Z_{t-2} + \dots + \theta_q Z_{t-q}}
-#' where \eqn{t} is the time and \eqn{Z_t} is white
-#' noise with mean zero and variance \eqn{\sigma^2}.
+#' 
+#' \deqn{X_t = Z_t + \theta_1 Z_{t-1} + \theta_2 Z_{t-2} + \dots + \theta_q Z_{t-q},}
+#' 
+#' where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is white noise with a mean of zero and variance of \eqn{\sigma^2}.
 #'
-#' @param t An integer that gives the desired length of the time series.
+#' @param t An integer specifying the desired length of the time series.
 #'
-#' @param theta A numeric or complex vector of length \eqn{q} that contains the coefficients of the MA(q) process.
+#' @param theta A numeric or complex atomic vector of length `q` containing the coefficients of the MA(q) process.
 #'
-#' @param sigma A numeric value representing the variance of the white noise. By default it is set to 1.
+#' @param sigma A numeric value representing the variance of the white noise, with a default value of 1.
 #'
-#' @returns A numeric vector that contains the generated Ma(q) time series.
+#' @returns A numeric atomic vector containing the generated MA(q) time series.
+#'
+#' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Generate a sample MA(1) time series of length 100 with coefficient \eqn{\phi=-0.25}.
+#' # Simple AR(1) model
 #' ma_one <- make_ma(100, -0.25)
 #' ts.plot(ma_one)
 #' acf(ma_one)
-#'
-#' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @export
 make_ma <- function(t, theta, sigma = 1) {

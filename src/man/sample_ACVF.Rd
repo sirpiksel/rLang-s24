@@ -23,7 +23,7 @@ Let \eqn{\{x_1, \dots , x_n \}} be observations of a time series. The \strong{sa
 
 \deqn{\bar{x} = \displaystyle{\frac{1}{n} \sum^n_{t=1} x_t}.}
 
-The \strong{sample autocovariance function} measures the covariance between values of a time series across different lags
+The \strong{sample autocovariance function} measures the covariance between values of a time series across different lags and is given by
 
 \deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 }
