@@ -2,8 +2,8 @@
 
 export(DLA)
 export(IA)
-export(make_ar)
-export(make_ma)
+export(make_AR)
+export(make_MA)
 export(periodogram)
 export(plot)
 export(sample_ACVF)

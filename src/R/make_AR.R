@@ -1,6 +1,6 @@
 #' @title  Generator for AR(p) processes
 #'
-#' @description `make_ar` generates a synthetic time series that follows an AR(p) model.
+#' @description `make_AR` generates a synthetic time series that follows an AR(p) model.
 #'
 #' @details
 #' The AR(p) model can be defined by the equation
@@ -23,12 +23,12 @@
 #'
 #' @examples
 #' # Simple AR(1) model
-#' ar_one <- make_ar(t = 100, phi = -0.7)
+#' ar_one <- make_AR(t = 100, phi = -0.7)
 #' ts.plot(ar_one)
 #' acf(ar_one)
 #'
 #' @export
-make_ar <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
+make_AR <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
   stopifnot(
     "t must be a value of length 1" = (is.atomic(t) & length(t) == 1),
     "t must not be infinite" = !is.infinite(t),
@@ -66,4 +66,3 @@ make_ar <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
 
   return(X)
 }
-
