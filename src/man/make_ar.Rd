@@ -2,27 +2,27 @@
 % Please edit documentation in R/generator.R
 \name{make_ar}
 \alias{make_ar}
-\title{Ar(p) generator (`make_ar`)}
+\title{AR(p) generator (`make_ar`)}
 \usage{
 make_ar(t, phi, sigma = 1, start = numeric(length(phi)))
 }
 \arguments{
 \item{t}{An integer that gives the desired length of the time series.}
 
-\item{phi}{A numeric or complex vector of length \eqn{p} that contains the coefficients of the Ar(p) process.}
+\item{phi}{A numeric or complex vector of length \eqn{p} that contains the coefficients of the AR(p) process.}
 
 \item{sigma}{A numeric value representing the variance of the white noise. By default it is set to 1.}
 
 \item{start}{A numeric vector, that contains the first \eqn{p} observations. By default these observations are set to 0.}
 }
 \value{
-A numeric vector that contains the generated Ar(p) time series.
+A numeric vector that contains the generated AR(p) time series.
 }
 \description{
-`make_ar` generates a synthetic time series that follows an Ar(p) model.
+`make_ar` generates a synthetic time series that follows an AR(p) model.
 }
 \details{
-The Ar(p) model can be defined by the equation
+The AR(p) model can be defined by the equation
 \deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t}
 where \eqn{t} is the time and \eqn{Z_t} is white 
 noise with mean zero and variance \eqn{\sigma^2}.
