@@ -22,12 +22,12 @@ A numeric vector that contains the generated Ma(q) time series.
 \details{
 The MA(q) model can be defined by the equation
 \deqn{X_t = Z_t+\theta_1 Z_{t-1} + \theta_2 Z_{t-2} + \dots + \theta_q Z_{t-q}}
-where \eqn{t} is the time and \eqn{Z_t} is white 
+where \eqn{t} is the time and \eqn{Z_t} is white
 noise with mean zero and variance \eqn{\sigma^2}.
 }
 \examples{
-Generate a sample MA(1) time series of length 100 with coefficient \eqn{\phi=-0.25}.
-ma_one <- make_ma(100,-0.25)
+# Generate a sample MA(1) time series of length 100 with coefficient \eqn{\phi=-0.25}.
+ma_one <- make_ma(100, -0.25)
 ts.plot(ma_one)
 acf(ma_one)
 

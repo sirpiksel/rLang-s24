@@ -2,7 +2,7 @@
 % Please edit documentation in R/IA.R
 \name{IA}
 \alias{IA}
-\title{Recursive calculation of coefficients with the Innovations Algorithm}
+\title{Recursive calculation of coefficients using the Innovations Algorithm}
 \usage{
 IA(X, q = (length(X) - 1), matrix = FALSE)
 }

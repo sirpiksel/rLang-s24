@@ -7,7 +7,7 @@
 periodogram(x, lambda)
 }
 \arguments{
-\item{x}{A numeric or complex atomic vector representing the time series data. The series should be stationary, 
+\item{x}{A numeric or complex atomic vector representing the time series data. The series should be stationary,
 meaning that its mean and variance do not change over time.}
 
 \item{lambda}{A numerical value from the interval \eqn{(- \pi, \pi]}, which represents the frequency at which the periodogram is evaluated.}
@@ -29,7 +29,7 @@ For a given time series \eqn{\{x_1, \dots, x_n\}}, the periodogram can be comput
 x <- rnorm(100)
 
 # Calculate the periodogram
-periodogram(x, pi/2)
+periodogram(x, pi / 2)
 
 }
 \references{

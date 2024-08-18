@@ -24,12 +24,12 @@ A numeric vector that contains the generated AR(p) time series.
 \details{
 The AR(p) model can be defined by the equation
 \deqn{X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + \dots + \phi_p X_{t-p} + Z_t}
-where \eqn{t} is the time and \eqn{Z_t} is white 
+where \eqn{t} is the time and \eqn{Z_t} is white
 noise with mean zero and variance \eqn{\sigma^2}.
 }
 \examples{
-Generate a sample AR(1) time series of length 100 with coefficient \eqn{\phi=-0.7}.
-ar_one <- make_ar(100,-0.7)
+# Generate a sample AR(1) time series of length 100 with coefficient \eqn{\phi=-0.7}.
+ar_one <- make_ar(100, -0.7)
 ts.plot(ar_one)
 acf(ar_one)
 
