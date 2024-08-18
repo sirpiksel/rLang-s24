@@ -53,10 +53,10 @@ test_that("TEST make_ar: conditions on phi", {
   expect_error(make_ar(t, phi), "phi must be an atomic vector")
 
   phi <- c()
-  expect_error(make_ar(t, phi), "phi must have positive length")
+  expect_error(make_ar(t, phi), "phi must be an atomic vector")
 
   phi <- NULL
-  expect_error(make_ar(t, phi), "phi must have positive length")
+  expect_error(make_ar(t, phi), "phi must be an atomic vector")
 
   phi <- numeric(0)
   expect_error(make_ar(t, phi), "phi must have positive length")
@@ -109,10 +109,10 @@ test_that("TEST make_ar: conditions on start", {
   expect_error(make_ar(t, phi, start = start), "start must be an atomic vector")
 
   start <- c()
-  expect_error(make_ar(t, phi, start = start), "start must have positive length")
+  expect_error(make_ar(t, phi, start = start), "start must be an atomic vector")
 
   start <- NULL
-  expect_error(make_ar(t, phi, start = start), "start must have positive length")
+  expect_error(make_ar(t, phi, start = start), "start must be an atomic vector")
 
   start <- numeric(0)
   expect_error(make_ar(t, phi, start = start), "start must have positive length")
@@ -297,10 +297,10 @@ test_that("TEST make_ma: conditions on theta", {
   expect_error(make_ma(t, theta), "theta must be an atomic vector")
 
   theta <- c()
-  expect_error(make_ma(t, theta), "theta must have positive length")
+  expect_error(make_ma(t, theta), "theta must be an atomic vector")
 
   theta <- NULL
-  expect_error(make_ma(t, theta), "theta must have positive length")
+  expect_error(make_ma(t, theta), "theta must be an atomic vector")
 
   theta <- numeric(0)
   expect_error(make_ma(t, theta), "theta must have positive length")
