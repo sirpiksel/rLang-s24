@@ -103,7 +103,7 @@ DLA <- function(X) {
         v[i] <- epsilon
       }
 
-      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / (v[i] + epsilon)
+      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / v[i]
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
     }
     return(list(phi = phi, v = v))
