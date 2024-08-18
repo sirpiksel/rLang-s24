@@ -1,88 +1,135 @@
-# TESTING DLA
-## Test conditions for data
+# Test conditions for X
 
-test_that("Test conditions on data", {
-  data <- list(1, 2, 3, 4)
-  expect_error(DLA(data), "Data must be provided and must not be empty")
+test_that("TEST DLA: conditions on X", {
+  
+  X<-NULL
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+  
+  X<-c()
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+  
+  x<-numeric(0)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+  
+  X <- list(1, 2, 3, 4)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 
-  data <- c("s", "s", "t", "s")
-  expect_error(DLA(data), "Data must be provided and must not be empty")
+  X <- c("s", "s", "t", "s")
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+  
+  X <- c(T, F, F, T)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 
-  data <- data.frame(1:4)
-  expect_error(DLA(data), "Data must be provided and must not be empty")
+  X <- data.frame(1:4)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 
-  data <- data.frame(list(1:4))
-  expect_error(DLA(data), "Data must be provided and must not be empty")
+  X <- data.frame(list(1:4))
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 
-  data <- matrix(list(1:4))
-  expect_error(DLA(data), "Data must be provided and must not be empty")
-
-  data <- numeric(0)
-  expect_error(DLA(data), "Data must be provided and must not be empty")
+  X <- matrix(list(1:4))
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+  
+  X <- c(NA,2)
+  expect_error(DLA(X), "X may not contain NAs")
+  
+  X <- c(Inf,2)
+  expect_error(DLA(X), "X may not contain Inf or -Inf values")
+  
+  X <- c(2,-Inf)
+  expect_error(DLA(X), "X may not contain Inf or -Inf values")
+  
 })
 
-## Test conditions for m
 
-test_that("Test conditions on m", {
-  data <- c(1, 2, 3, 4)
-  pdl <- DLA(data)
 
-  m <- 4.5
-  expect_error(pdl(m), "A valid value for m must be provided")
+# Test conditions for m
 
-  m <- "2"
-  expect_error(pdl(m), "A valid value for m must be provided")
-
-  m <- list(2.5)
-  expect_error(pdl(m), "A valid value for m must be provided")
-
+test_that("TEST DLA: conditions on m", {
+  X <- c(1, 2, 3, 4)
+  pdl <- DLA(X)
+  
   m <- c(1, 2)
-  expect_error(pdl(m), "A valid value for m must be provided")
-
+  expect_error(pdl(m), "m must be a value of length 1")
+  
   m <- matrix(1:4)
-  expect_error(pdl(m), "A valid value for m must be provided")
-
+  expect_error(pdl(m), "m must be a value of length 1")
+  
+  m <- list(1:4)
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- Inf
+  expect_error(pdl(m), "m must not be infinite")
+  
+  m <- -Inf
+  expect_error(pdl(m), "m must not be infinite")
+  
+  m <- NA_integer_
+  expect_error(pdl(m), "m must not be NA")
+  
+  m <- NA_real_
+  expect_error(pdl(m), "m must not be NA")
+  
+  m <- NA
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- data.frame(c(1))
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- list(2)
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- "2"
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- T
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- 1+2i
+  expect_error(pdl(m), "m must be numeric")
+  
+  m <- 2.3
+  expect_error(pdl(m), "m must be an integer")
+  
+  m <- -1
+  expect_error(pdl(m), "m must be between 0 and length of X")
+  
+  m <- 0
+  expect_error(pdl(m), "m must be between 0 and length of X")
+  
+  m <- -1
+  expect_error(pdl(m), "m must be between 0 and length of X")
+  
+  m <- 4
+  expect_error(pdl(m), "m must be between 0 and length of X")
+  
+  m <- 5
+  expect_error(pdl(m), "m must be between 0 and length of X")
+  
   m <- numeric(0)
-  expect_error(pdl(m), "A valid value for m must be provided")
+  expect_error(pdl(m), "m must be a value of length 1")
+
 })
 
-## Test for numerical stability and correctness
+# Test on correctness
 
-test_that("Test numerical stability and correctness", {
-  data <- c(1, 2, 3, 4)
-  pdl <- DLA(data)
+test_that("TEST DLA: correctness", {
+  X <- c(2, 4, 6, 8, 10)
+  pdl <- DLA(X)
 
   result <- pdl(2)
+  
+  expect_equal(result$v[1], 8)
+  expect_equal(result$v[2], 6.72)
+  expect_equal(result$phi[1], 0.4 + (-2.08/6.72)*-0.4)
+  expect_equal(result$phi[2], -2.08/6.72)
 
-  expect_true(is.list(result))
-  expect_true(all(names(result) %in% c("phi", "v")))
-  expect_equal(length(result$phi), 2)
-  expect_equal(length(result$v), 2)
-
-  # Test for numerical stability at gamma[1] close to zero
-  data <- c(0, 0, 0, 0)
-  expect_error(DLA(data)(2), "gamma\\[1\\] is too close to zero, which may cause numerical instability.")
-
-  # Test for numerical stability at v[i] close to zero
-  data <- c(1, 1, 1, 1)
-  pdl <- DLA(data)
-  expect_error(pdl(2), "v\\[2\\] is too close to zero, which may cause numerical instability.")
 })
 
-## Test for the behavior of m at extreme values
+# Test for the behavior of m at extreme values
 
-test_that("Test conditions on extreme values of m", {
-  data <- c(2, 4, 6, 8, 10)
-  pdl <- DLA(data)
-
-  m <- 5
-  expect_error(pdl(m), "0 < m < length(data)")
-
-  m <- -1
-  expect_error(pdl(m), "0 < m < length(data)")
-
-  m <- 0
-  expect_error(pdl(m), "0 < m < length(data)")
+test_that("Test on return", {
+  X <- c(2, 4, 6, 8, 10)
+  pdl <- DLA(X)
 
   m <- 1
   result <- pdl(m)

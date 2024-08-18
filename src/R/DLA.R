@@ -60,7 +60,11 @@
 #' @export
 DLA <- function(X) {
   stopifnot(
-    "Data must be provided and must not be empty" = !missing(X) && length(X) > 0
+    "X must not be empty" = !missing(X),
+    "The values of X must be numeric or complex" = is.atomic(X) & (is.numeric(X) | is.complex(X)),
+    "X must have positive length" = length(X) > 0,
+    "X may not contain NAs" = !any(is.na(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
   n <- length(X)
   saf <- fabric_sample_ACVF(X)
@@ -68,8 +72,12 @@ DLA <- function(X) {
 
   function(m) {
     stopifnot(
-      "A valid value for m must be provided" = !missing(m) && length(m) > 0,
-      "0 < m < length(data)" = 0 < m & m < n
+      "m must be a value of length 1" = length(m) == 1,
+      "m must be numeric" = is.numeric(m),
+      "m must not be infinite" = !is.infinite(m),
+      "m must not be NA" = !is.na(m),
+      "m must be an integer" = m %% 1 == 0,
+      "m must be between 0 and length of X" = (0 < m) & (m < n)
     )
 
     gamma <- sapply(0:m, saf)
