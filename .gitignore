@@ -7,4 +7,5 @@ src/vignettes/*.R
 .RData
 .Rhistory
 .Rproj.user/
+src.Rcheck
 *.Rproj

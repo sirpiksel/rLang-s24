@@ -15,6 +15,7 @@
             overlays = [ devshell.overlays.default ];
           };
         rPackages = pkgs.rPackages;
+        pandoc = pkgs.pandoc;
         rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ devtools tidyverse ]; };
 
       in
@@ -22,7 +23,7 @@
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rLang-shell";
-          packages = with pkgs; [ rWrapper ];
+          packages = with pkgs; [ rWrapper pandoc ];
           commands = [
             {
               name = "run";
