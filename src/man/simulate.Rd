@@ -9,24 +9,24 @@ simulate(X, h = 1, model = zeitreihen::auto_model, lag, coeffs, plot = False)
 \arguments{
 \item{X}{A numeric vector representing the time series data.}
 
-\item{h}{An integer specifying the number of predictions to be computed. The default value is `1`.}
+\item{h}{An integer specifying the number of predictions to be computed. The default value is \code{1}.}
 
-\item{model}{A function from the `zeitreihen` package to be used as the predictive model. The default is `zeitreihen::auto_model`.}
+\item{model}{A function from the \code{zeitreihen} package to be used as the predictive model. The default is \code{zeitreihen::auto_model}.}
 
 \item{lag}{An integer specifying the lag order for the model. This parameter can be used to override the default lag of the chosen model.}
 
 \item{coeffs}{A numeric vector specifying the coefficients for the model. This parameter can be used to override the default coefficients of the chosen model.}
 
-\item{plot}{A logical value indicating whether to plot the time series along with its predictions. The default value is `FALSE`.}
+\item{plot}{A logical value indicating whether to plot the time series along with its predictions. The default value is \code{FALSE}.}
 }
 \value{
-A numeric vector containing the `h` predicted values appended to the original time series.
+A numeric vector containing the \code{h} predicted values appended to the original time series.
 }
 \description{
-`simulate` generates future values (predictions) for a given time series by applying a specified model. The function can also plot the original series with the predictions appended if desired.
+\code{simulate} generates future values (predictions) for a given time series by applying a specified model. The function can also plot the original series with the predictions appended if desired.
 }
 \details{
-This function simulates future observations of a time series by using a specified model from the `zeitreihen` package. The user can specify the number of predictions (`h`), the model to be used, the lag order, and the model coefficients. If `plot` is set to `TRUE`, the function will generate a plot showing the time series with the predictions highlighted.
+This function simulates future observations of a time series by using a specified model from the \code{zeitreihen} package. The user can specify the number of predictions (\code{h}), the model to be used, the lag order, and the model coefficients. If \code{plot} is set to \code{TRUE}, the function will generate a plot showing the time series with the predictions highlighted.
 }
 \examples{
 X <- rnorm(100) # Generate a random time series

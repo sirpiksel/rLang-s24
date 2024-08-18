@@ -1,46 +1,64 @@
-#' @title sample autocovariance function
+#' @title The Sample Autocovariance Function
 #'
 #' @description
-#' Computes the sample autocovariance of the lag h based on data x.
+#' `sample_ACVF` computes the sample autocovariance of a given time series at a specified lag.
 #'
 #' @details
-#' Consider the observed data \eqn{\{x_1,x_2,...,x_n\}}, which represents a Time Series.
-#' The sample autocovariance function (\eqn{\hat \gamma}) measures the covariance between values of a Time Series over different lag.
+#' Let \eqn{\{x_1, \dots , x_n \}} be observations of a time series. The \strong{sample mean} of \eqn{x_1, \dots , x_n} is
+#' 
+#' \deqn{\bar{x} = \displaystyle{\frac{1}{n} \sum^n_{t=1} x_t}.}
+#' 
+#' The \strong{sample autocovariance function} measures the covariance between values of a time series across different lags
 #'
-#' \eqn{\hat \gamma(h) = \sum_{t=1}^{n - |h|} (x_{t + |h|)}- \bar x) \cdot (x_t - \bar x)}, -n < h < n and
-#' \eqn{\bar x = n^{-1} \cdot \sum_{t=1}^{n} x_{t}}
+#' \deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 #'
-#' @param x A numeric vector representing Time Series data. NA entries are not allowed.
-#' @param h A integer vector contains the lag. NA entries are not allowed and h should be unique.
+#' @param X A numeric or complex atomic vector representing the time series data.
+#' 
+#' @param h An integer vector representing the lag values, where each value \eqn{h_i} must be unique and
+#' fulfill the condition: \eqn{-\text{length}(X) < h_i < \text{length}(X)}.
 #'
-#' For all entries of h: -length(x) < entries < length(x).
-#'
-#' @returns A numeric vector, which contains computation of the sample autocovariance function based on the entries of h.
+#' @returns A numeric vector containing the calculated values of the sample autocovariance function corresponding to each entry in `h`.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
-#' @export
-#'
 #' @examples
-#' x <- c(1, 2, 3, 4)
+#' # Basic usage
+#' X <- c(1, 2, 3, 4, 5)
 #' h <- c(0, 1, 2)
-#' sample_ACVF(x, h)
-sample_ACVF <- function(x, h = 0:(length(x) - 1)) {
+#' sample_ACVF(X, h)
+#' 
+#' # Sample ACVF with a Single Lag
+#' X <- c(2, 4, 6, 8, 10)
+#' h <- 0
+#' sample_ACVF(X, h)
+#' 
+#' # Sample ACVF with Random Data
+#' set.seed(123)
+#' X <- rnorm(100)
+#' h <- c(-2, 0, 2)
+#' sample_ACVF(X, h)
+#' 
+#' @export
+sample_ACVF <- function(X, h = 0:(length(X) - 1)) {
   stopifnot(
-    "x must be numeric" = is.numeric(x),
-    "x has NA entries" = !any(is.na(x)),
+    "X must be an atomic vector" = is.atomic(X),
+    "X must have positive length" = length(X) > 0,
+    "X may not contain NAs" = !any(is.na(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "The values of X must be numeric or complex" = (is.numeric(X) | is.complex(X)),
     "h must be numeric" = is.numeric(h),
-    "h has NA entries" = !any(is.na(h)),
-    "h must integer vector" = all(h %% 1 == 0),
-    "length of h == length of distinct elements of h" = length(h) == length(unique(h)),
-    "length of x > -h and h < length of x, for all h" = all(h < length(x)) && all(-length(x) < h)
+    "h may not contain NAs" = !any(is.na(h)),
+    "h may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "h must be an integer vector" = all(h %% 1 == 0),
+    "The values of h must be unique" = length(h) == length(unique(h)),
+    "All values of h must be from the interval (-length(X), length(X))" = all(h < length(X) & h > -length(X))
   )
 
-  xbar <- mean(x)
-  n <- length(x)
+  n <- length(X)
+  xbar <- mean(X)
 
   solution <- sapply(h, \(h) {
-    sum((x[(1 + abs(h)):n] - xbar) * (x[1:(n - abs(h))] - xbar)) / n
+    sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
   })
 
   attr(solution, "names") <- h
@@ -49,40 +67,42 @@ sample_ACVF <- function(x, h = 0:(length(x) - 1)) {
 }
 
 
-
-fabric_sample_ACVF <- function(x) {
+fabric_sample_ACVF <- function(X) {
   stopifnot(
-    "x must be numeric" = is.numeric(x),
-    "x has NA entries" = !any(is.na(x))
+    "X must be numeric" = is.numeric(X),
+    "X has NA entries" = !any(is.na(X))
   )
 
-  xbar <- mean(x)
-  n <- length(x)
+  xbar <- mean(X)
+  n <- length(X)
+  
   function(h) {
     stopifnot(
       "h must be numeric" = is.numeric(h),
       "h must integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
-      "length of x > -h and h < length of x" = (h < n) && (-n < h)
+      "length of X > -h and h < length of X" = (h < n) && (-n < h)
     )
 
-    solution <- sum((x[(1 + abs(h)):n] - xbar) * (x[1:(n - abs(h))] - xbar)) / n
+    solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
+    
     return(solution)
   }
 }
 
 
-
-lone_sample_ACVF <- function(x, h) {
+lone_sample_ACVF <- function(X, h) {
   stopifnot(
-    "x must be numeric" = is.numeric(x),
-    "x has NA entries" = !any(is.na(x)),
+    "X must be numeric" = is.numeric(X),
+    "X has NA entries" = !any(is.na(X)),
     "h must be numeric" = is.numeric(h),
     "h must be an integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
-    "length of x > -h and h < length of x" = (h < length(x)) && (-length(x) < h)
+    "length of X > -h and h < length of X" = (h < length(X)) && (-length(X) < h)
   )
 
-  xbar <- mean(x)
-  n <- length(x)
-  solution <- sum((x[(1 + abs(h)):n] - xbar) * (x[1:(n - abs(h))] - xbar)) / n
+  n <- length(X)
+  xbar <- mean(X)
+  
+  solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
+  
   return(solution)
 }

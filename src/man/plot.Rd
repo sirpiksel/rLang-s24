@@ -9,16 +9,16 @@ plot(X, h)
 \arguments{
 \item{X}{A numeric vector representing the time series data, including the predictions.}
 
-\item{h}{An integer specifying the number of predictions to be highlighted in the plot. The value of `h` must be a positive integer and should not exceed the length of `X_hat`.}
+\item{h}{An integer specifying the number of predictions to be highlighted in the plot. The value of \code{h} must be a positive integer and should not exceed the length of \code{X_hat}.}
 }
 \value{
-A line plot displaying the time series with the last `h` values highlighted as predictions in red.
+A line plot displaying the time series with the last \code{h} values highlighted as predictions in red.
 }
 \description{
-`plot` generates a custom line plot of a time series vector, highlighting the last `h` values as predictions. The plot displays the time series in blue and the predictions in red, with an appropriate legend.
+\code{plot} generates a custom line plot of a time series vector, highlighting the last \code{h} values as predictions. The plot displays the time series in blue and the predictions in red, with an appropriate legend.
 }
 \details{
-This function is designed to visualize a time series, where the last `h` values are considered predictions and are highlighted in a different color. The main part of the time series is plotted in blue, while the predicted values are plotted in red. The function automatically generates a legend to distinguish between the observed and predicted values.
+This function is designed to visualize a time series, where the last \code{h} values are considered predictions and are highlighted in a different color. The main part of the time series is plotted in blue, while the predicted values are plotted in red. The function automatically generates a legend to distinguish between the observed and predicted values.
 }
 \examples{
 # Generate a random time series with 100 elements

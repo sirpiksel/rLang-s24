@@ -2,7 +2,7 @@
 % Please edit documentation in R/generator.R
 \name{make_ar}
 \alias{make_ar}
-\title{AR(p) generator (`make_ar`)}
+\title{AR(p) generator (\code{make_ar})}
 \usage{
 make_ar(t, phi, sigma = 1, start = numeric(length(phi)))
 }
@@ -19,7 +19,7 @@ make_ar(t, phi, sigma = 1, start = numeric(length(phi)))
 A numeric vector that contains the generated AR(p) time series.
 }
 \description{
-`make_ar` generates a synthetic time series that follows an AR(p) model.
+\code{make_ar} generates a synthetic time series that follows an AR(p) model.
 }
 \details{
 The AR(p) model can be defined by the equation

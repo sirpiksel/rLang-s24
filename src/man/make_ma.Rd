@@ -2,7 +2,7 @@
 % Please edit documentation in R/generator.R
 \name{make_ma}
 \alias{make_ma}
-\title{MA(q) generator (`make_ma`)}
+\title{MA(q) generator (\code{make_ma})}
 \usage{
 make_ma(t, theta, sigma = 1)
 }
@@ -17,7 +17,7 @@ make_ma(t, theta, sigma = 1)
 A numeric vector that contains the generated Ma(q) time series.
 }
 \description{
-`make_ma` generates a synthetic time series that follows a MA(q) model.
+\code{make_ma} generates a synthetic time series that follows a MA(q) model.
 }
 \details{
 The MA(q) model can be defined by the equation

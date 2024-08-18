@@ -1,6 +1,7 @@
 #' @title Estimate the Spectral Density of a Time Series using a Periodogram
 #'
-#' @description `periodogram` computes the periodogram of a time series, which can be used to estimate the spectral density.
+#' @description
+#' `periodogram` computes the periodogram of a given time series, which can be used to estimate the spectral density.
 #'
 #' @details
 #' The periodogram is a sample-based function from which we obtain estimators of the spectral density.
@@ -11,9 +12,9 @@
 #' @param X A numeric or complex atomic vector representing the time series data. The series should be stationary,
 #' meaning that its mean and variance do not change over time.
 #'
-#' @param lambda A numerical value from the interval \eqn{(- \pi, \pi]}, which represents the frequency at which the periodogram is evaluated.
+#' @param lambda A numeric value from the interval \eqn{(- \pi, \pi]} that represents the frequency at which the periodogram is evaluated.
 #'
-#' @returns A numerical value that represents the periodogram.
+#' @returns A numeric value representing the periodogram.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'

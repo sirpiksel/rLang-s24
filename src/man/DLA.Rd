@@ -15,12 +15,12 @@ where \code{n} is the length of the \code{data}.}
 \value{
 A list containing:
 \tabular{lcccl}{
-  \code{phi} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the computed AR coefficients \eqn{\phi{n1}, \dots, \phi{nn}}. \cr
-  \code{v} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the innovation variances.Row 2, Col 2 \cr
+\code{phi} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the computed AR coefficients \eqn{\phi{n1}, \dots, \phi{nn}}. \cr
+\code{v} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the innovation variances.Row 2, Col 2 \cr
 }
 }
 \description{
-`DLA` is a function to compute the Durbin-Levinson recursion for time series data.
+\code{DLA} is a function to compute the Durbin-Levinson recursion for time series data.
 }
 \details{
 The Durbin-Levinson algorithm is used to recursively compute the coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}

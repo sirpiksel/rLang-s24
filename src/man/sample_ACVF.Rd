@@ -2,34 +2,48 @@
 % Please edit documentation in R/sample_ACVF.R
 \name{sample_ACVF}
 \alias{sample_ACVF}
-\title{sample autocovariance function}
+\title{The Sample Autocovariance Function}
 \usage{
-sample_ACVF(x, h = 0:(length(x) - 1))
+sample_ACVF(X, h = 0:(length(X) - 1))
 }
 \arguments{
-\item{x}{A numeric vector representing Time Series data. NA entries are not allowed.}
+\item{X}{A numeric or complex atomic vector representing the time series data.}
 
-\item{h}{A integer vector contains the lag. NA entries are not allowed and h should be unique.
-
-For all entries of h: -length(x) < entries < length(x).}
+\item{h}{An integer vector representing the lag values, where each value \eqn{h_i} must be unique and
+fulfill the condition: \eqn{-\text{length}(X) < h_i < \text{length}(X)}.}
 }
 \value{
-A numeric vector, which contains computation of the sample autocovariance function based on the entries of h.
+A numeric vector containing the calculated values of the sample autocovariance function corresponding to each entry in \code{h}.
 }
 \description{
-Computes the sample autocovariance of the lag h based on data x.
+\code{sample_ACVF} computes the sample autocovariance of a given time series at a specified lag.
 }
 \details{
-Consider the observed data \eqn{\{x_1,x_2,...,x_n\}}, which represents a Time Series.
-The sample autocovariance function (\eqn{\hat \gamma}) measures the covariance between values of a Time Series over different lag.
+Let \eqn{\{x_1, \dots , x_n \}} be observations of a time series. The \strong{sample mean} of \eqn{x_1, \dots , x_n} is
 
-\eqn{\hat \gamma(h) = \sum_{t=1}^{n - |h|} (x_{t + |h|)}- \bar x) \cdot (x_t - \bar x)}, -n < h < n and
-\eqn{\bar x = n^{-1} \cdot \sum_{t=1}^{n} x_{t}}
+\deqn{\bar{x} = \displaystyle{\frac{1}{n} \sum^n_{t=1} x_t}.}
+
+The \strong{sample autocovariance function} measures the covariance between values of a time series across different lags
+
+\deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 }
 \examples{
-x <- c(1, 2, 3, 4)
+# Basic usage
+X <- c(1, 2, 3, 4, 5)
 h <- c(0, 1, 2)
-sample_ACVF(x, h)
+sample_ACVF(X, h)
+
+# Sample ACVF with a Single Lag
+X <- c(2, 4, 6, 8, 10)
+h <- 0
+sample_ACVF(X, h)
+
+# Sample ACVF with Random Data
+set.seed(123)
+X <- rnorm(100)
+h <- c(-2, 0, 2)
+sample_ACVF(X, h)
+
 }
 \references{
 Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
