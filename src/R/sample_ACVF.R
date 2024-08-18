@@ -79,7 +79,7 @@ fabric_sample_ACVF <- function(X) {
   function(h) {
     stopifnot(
       "h must be numeric" = is.numeric(h),
-      "h must integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
+      "h must be integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
       "length of X > -h and h < length of X" = (h < n) && (-n < h)
     )
 
@@ -88,7 +88,6 @@ fabric_sample_ACVF <- function(X) {
     return(solution)
   }
 }
-
 
 lone_sample_ACVF <- function(X, h) {
   stopifnot(
