@@ -62,7 +62,9 @@
 #'
 #' @export
 DLA <- function(X) {
-  stopifnot("Data must be provided and must not be empty" = !missing(X) && length(X) > 0)
+  stopifnot(
+    "Data must be provided and must not be empty" = !missing(X) && length(X) > 0
+  )
   n <- length(X)
   saf <- fabric_sample_ACVF(X)
   epsilon <- .Machine$double.eps # smallest value for double types
@@ -77,12 +79,13 @@ DLA <- function(X) {
     v <- numeric(m)
     phi <- numeric(m)
 
+
     if (abs(gamma[1]) < epsilon) {
-      stop("gamma[1] is too close to zero, which may cause numerical instability.")
+      gamma[1] <- epsilon
     }
 
     v[1] <- gamma[1]
-    phi[1] <- gamma[2] / (gamma[1] + epsilon)
+    phi[1] <- gamma[2] / (gamma[1])
 
     if (m == 1) {
       return(list(phi = phi, v = v))
@@ -92,7 +95,7 @@ DLA <- function(X) {
       v[i] <- v[i - 1] * (1 - phi[i - 1]**2)
 
       if (abs(v[i]) < epsilon) {
-        stop(paste("v[", i, "] is too close to zero, which may cause numerical instability.", sep = ""))
+        v[i] <- epsilon
       }
 
       phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / (v[i] + epsilon)
