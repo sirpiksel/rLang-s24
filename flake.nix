@@ -15,15 +15,16 @@
             overlays = [ devshell.overlays.default ];
           };
         rPackages = pkgs.rPackages;
+        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ styler roxygen2 devtools tidyverse ]; };
         pandoc = pkgs.pandoc;
-        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ devtools tidyverse ]; };
+        qpdf = pkgs.qpdf;
 
       in
       {
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rLang-shell";
-          packages = with pkgs; [ rWrapper pandoc ];
+          packages = with pkgs; [ R rWrapper  pandoc qpdf ];
           commands = [
             {
               name = "run";

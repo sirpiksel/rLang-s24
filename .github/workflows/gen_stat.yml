@@ -2,7 +2,7 @@ name: generate Statistics
 
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 3 * * *'
 
 jobs:
   generate:
@@ -30,6 +30,6 @@ jobs:
         run: |
           if [[ "$(git log -1 --pretty=%B)" != "[Statistik Bot]"* ]]; then
             git add docs/STATS.md
-            git commit -m "[Statistik Bot] update der STATS.md"
+            git commit -m "[Statistik Bot] update of STATS.md"
             git push origin
           fi

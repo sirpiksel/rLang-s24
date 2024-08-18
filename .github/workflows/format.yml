@@ -1,6 +1,8 @@
 name: format code
 
 on:
+  schedule:
+    - cron: '0 2 * * *'
   workflow_dispatch:
     inputs:
       ignoreLock:
@@ -26,15 +28,15 @@ jobs:
 
       - name: delete Lockfile
         if: ${{ inputs.ignoreLock }}
-        run: |
-          rm flake.lock
+        run: rm flake.lock
 
       - name: format code
-        run: |
-          nix develop -c format
+        run: nix develop -c format
 
       - name: push formated code
         run: |
           git add src
-          git commit -m "[Formatting Bot] formatiere code nach tidyverse style guide"
-          git push origin
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "[Formatting Bot] format code according to tidyverse style guide"
+            git push origin
+          fi
