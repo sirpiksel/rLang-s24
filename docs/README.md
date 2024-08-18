@@ -1,4 +1,5 @@
 # Zeitreihen in R
+[![test code](https://github.com/sirpiksel/rLang-s24/actions/workflows/test.yml/badge.svg)](https://github.com/sirpiksel/rLang-s24/actions/workflows/test.yml)
 > [!NOTE]
 > Ein Projekt zur Vorlesung 'Die Programmiersprache R und ihre Anwendungen in der Stochastik' der Universität Heidelberg
 
