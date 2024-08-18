@@ -5,15 +5,15 @@
 #'
 #' @details
 #' Let \eqn{\{x_1, \dots , x_n \}} be observations of a time series. The \strong{sample mean} of \eqn{x_1, \dots , x_n} is
-#' 
+#'
 #' \deqn{\bar{x} = \displaystyle{\frac{1}{n} \sum^n_{t=1} x_t}.}
-#' 
+#'
 #' The \strong{sample autocovariance function} measures the covariance between values of a time series across different lags
 #'
 #' \deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
-#' 
+#'
 #' @param h An integer vector representing the lag values, where each value \eqn{h_i} must be unique and
 #' fulfill the condition: \eqn{-\text{length}(X) < h_i < \text{length}(X)}.
 #'
@@ -26,18 +26,18 @@
 #' X <- c(1, 2, 3, 4, 5)
 #' h <- c(0, 1, 2)
 #' sample_ACVF(X, h)
-#' 
+#'
 #' # Sample ACVF with a Single Lag
 #' X <- c(2, 4, 6, 8, 10)
 #' h <- 0
 #' sample_ACVF(X, h)
-#' 
+#'
 #' # Sample ACVF with Random Data
 #' set.seed(123)
 #' X <- rnorm(100)
 #' h <- c(-2, 0, 2)
 #' sample_ACVF(X, h)
-#' 
+#'
 #' @export
 sample_ACVF <- function(X, h = 0:(length(X) - 1)) {
   stopifnot(
@@ -75,7 +75,7 @@ fabric_sample_ACVF <- function(X) {
 
   xbar <- mean(X)
   n <- length(X)
-  
+
   function(h) {
     stopifnot(
       "h must be numeric" = is.numeric(h),
@@ -84,7 +84,7 @@ fabric_sample_ACVF <- function(X) {
     )
 
     solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
-    
+
     return(solution)
   }
 }
@@ -101,8 +101,8 @@ lone_sample_ACVF <- function(X, h) {
 
   n <- length(X)
   xbar <- mean(X)
-  
+
   solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
-  
+
   return(solution)
 }

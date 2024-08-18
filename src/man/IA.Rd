@@ -10,13 +10,12 @@ IA(X, max_lag = length(X))
 \item{X}{A numeric vector representing the time series data.}
 
 \item{max_lag}{An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.}
-
-\item{matrix}{A boolean indicating whether or not to output a matrix.}
 }
 \value{
-A list with two components:
-\item{innovations}{A numeric vector containing the computed innovations.}
-\item{innovation_variances}{A numeric vector containing the variances of the innovations.}
+A list with three components:
+\item{coeffs}{numeric vector containing the computed time series coefficients}
+\item{nu}{numeric vector containing the innovations / variances}
+\item{theta}{coefficient matrix of the Innovations algorithm}
 }
 \description{
 \code{IA} can be used to compute the innovations and the innovation variances for a time series.
@@ -42,8 +41,8 @@ X <- rnorm(100)
 
 # Calculate coefficients
 out <- IA(X)
-print(out$nu)
 print(out$coeffs)
+print(out$nu)
 print(out$theta)
 
 }

@@ -20,9 +20,10 @@
 #' @param X A numeric vector representing the time series data.
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series minus 1.
 #'
-#' @returns A list with two components:
-#' \item{innovations}{A numeric vector containing the computed innovations.}
-#' \item{innovation_variances}{A numeric vector containing the variances of the innovations.}
+#' @returns A list with three components:
+#' \item{coeffs}{numeric vector containing the computed time series coefficients}
+#' \item{nu}{numeric vector containing the innovations / variances}
+#' \item{theta}{coefficient matrix of the Innovations algorithm}
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
@@ -32,8 +33,8 @@
 #'
 #' # Calculate coefficients
 #' out <- IA(X)
-#' print(out$nu)
 #' print(out$coeffs)
+#' print(out$nu)
 #' print(out$theta)
 #'
 #' @export
@@ -49,13 +50,13 @@ IA <- function(X, max_lag = length(X)) {
   nu <- numeric(max_lag)
   # Calculate autocovariance at the start of the algorithm
   autocov <- sample_ACVF(X, 0:(max_lag - 1))
-  # Value v_0
-  nu[1] <- autocov[1]
+  # initialize
   theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)
   theta_mat[2, 1] <- 1 / nu[1] * autocov[2]
+  nu[1] <- autocov[1]
   nu[2] <- autocov[1] - theta_mat[2, 1]^2 * nu[1]
 
-  # calculata theta_mat,n-k n rows
+  # calculate theta_mat,n-k n rows
   for (i in 2:(max_lag - 1)) {
     # Diagonal element theta_mat,n has to be calcuated first in every iteration
     theta_mat[i + 1, 1] <- 1 / nu[1] * autocov[i + 1]
@@ -65,5 +66,5 @@ IA <- function(X, max_lag = length(X)) {
     nu[i + 1] <- autocov[1] - sum(theta_mat[i + 1, 1:i]^2 * nu[1:i])
   }
   coeffs <- theta_mat[max_lag, (max_lag - 1):1]
-  return(list(theta = theta_mat, nu = nu, coeffs = coeffs))
+  return(list(coeffs = coeffs, nu = nu, theta = theta_mat))
 }
