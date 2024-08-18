@@ -8,9 +8,6 @@ DLA(X)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data. The data should be a stationary time series.}
-
-\item{m}{An integer representing the order of the autoregressive model. The value of \code{m} must satisfy \eqn{0 < m < n},
-where \code{n} is the length of the \code{data}.}
 }
 \value{
 A list containing:
