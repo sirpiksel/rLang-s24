@@ -3,20 +3,25 @@
 > Ein Projekt zur Vorlesung 'Die Programmiersprache R und ihre Anwendungen in der Stochastik' der Universität Heidelberg
 
 ## interne Statistiken
-Anhand der Commits wird kontrolliert ob jeder aktiv mitgewirkt hat, zur Selbstkontrolle kann jeder hier seine eigenen Statistiken einsehen. \
-[zu den Statistiken](STATS.md)
+> [!CAUTION]
+> Statistiken & Commits sind **NICHT REPRÄSENTATIV** für unsere Mitarbeit. \
+> Durch Squash-Merges, Merge-Konflikte und Pair-Programming repräsentieren die Commit-Autoren **NICHT** die Urheber des Codes.
+
+**Die gerechte Arbeitsaufteilung wurde durch vorzeitige Planung sichergestellt.**
+
+([zu den Statistiken](STATS.md))
 
 ## Aufgaben
 - [x] Projekt Verteilung
 - [x] Teilnehmer:innen in Repository hinzufügen.
 - [x] Aufgaben Verteilung
-- [ ] Erstellen der Erzeuger für AR(p)- und MA(q)-Prozesse (Alle)
-- [ ] `sample autocovariance function` (Pair-Programming)
-- [ ] `Durbin-Levinson`-Algorithmus unter Verwendung der `sample autocovariance`-Funktion (Pair-Programming)
-- [ ] `Innovation`-Algorithmus (Pair-Programming)
-- [ ] Periodogramm zum Schätzen der sprektralen Dichte, (Pair-Programming)
-- [ ] komfortable Plot-Funktionen zur Darstellung der Zeitreihen, ihrer spektralen Dichten und der Schätzung letzterer (Alle)
-- [ ] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle)
+- [x] Erstellen der Erzeuger für AR(p)- und MA(q)-Prozesse (Daniela & Alexander)
+- [x] `sample autocovariance function` (Clemens & Sebastian)
+- [x] `Durbin-Levinson`-Algorithmus unter Verwendung der `sample autocovariance`-Funktion (Clemens & Sebastian)
+- [x] `Innovations`-Algorithmus (Daniela & Philip)
+- [x] Periodogramm zum Schätzen der sprektralen Dichte, (Alexander)
+- [ ] komfortable Plot-Funktionen zur Darstellung der Zeitreihen ihrer spektralen Dichten und der Schätzung letzterer (Philip)
+- [ ] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle, parallel zur Entwicklung)
 - [ ] Vignette ()
 - [ ] Zugriffsrechte für Betreuer freischalten
 - [x] Zwischenbericht

@@ -22,18 +22,18 @@
 #' X <- sin(2 * pi * 1:100 / 100)
 #' lambda <- 2 * pi / 100
 #' periodogram(X, lambda)
-#' 
+#'
 #' # Periodogram for a complex exponential curve
 #' X <- exp(2 * pi * 1i * 1:100 / 100)
 #' lambda <- 2 * pi / 100
 #' periodogram(X, lambda)
-#' 
+#'
 #' # Periodogram for white noise
 #' set.seed(123)
 #' X <- rnorm(100)
 #' lambda <- pi / 4
 #' periodogram(X, lambda)
-#' 
+#'
 #' @export
 periodogram <- function(X, lambda) {
   stopifnot(
