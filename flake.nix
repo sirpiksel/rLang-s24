@@ -24,7 +24,7 @@
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rLang-shell";
-          packages = with pkgs; [ R rWrapper  pandoc qpdf ];
+          packages = with pkgs; [ R rWrapper pandoc qpdf ];
           commands = [
             {
               name = "run";
