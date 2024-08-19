@@ -114,9 +114,9 @@ test_that("TEST fabric_ACVF: correctness", {
 
 
 
-## TESTING: stand_alone_sample_autocovariance_function
+## TESTING lone_sample_ACVF
 
-test_that("TEST stand_alone_sample_autocovariance_function: parameter X, h", {
+test_that("TEST lone_sample_ACVF: parameter X, h", {
   ## Checking for wrong Input of h
 
   X <- c(2, 4, 6, 8, 10)

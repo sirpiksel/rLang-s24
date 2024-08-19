@@ -4,15 +4,15 @@
 \alias{plot}
 \title{Custom Time Series Plotting Function}
 \usage{
-plot(X, h)
+plot(X, samples)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data, including the predictions.}
 
-\item{h}{an integer specifying the number of predictions to be highlighted in the plot. The value of \code{h} must be a positive integer and should not exceed the length of \code{X_hat}.}
+\item{samples}{an integer specifying the number of samples to evaluate the periodogram with.}
 }
 \value{
-A line plot displaying the time series with the last \code{h} values highlighted as predictions in red.
+A line plot displaying the spectral density estimate of the time series.
 }
 \description{
 \code{plot} generates a custom line plot of a time series vector, highlighting the last \code{h} values as predictions. The plot displays the time series in blue and the predictions in red, with an appropriate legend.
@@ -22,9 +22,9 @@ This function is designed to visualize a time series, where the last \code{h} va
 }
 \examples{
 # Generate a random time series with 100 elements
-X_hat <- rnorm(100)
+X <- rnorm(100)
 
 # Plot the time series with the last 10 elements highlighted as predictions
-plot(X_hat, 10)
+plot(X, 100)
 
 }

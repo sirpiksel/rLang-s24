@@ -6,27 +6,35 @@
 #' This function is designed to visualize a time series, where the last `h` values are considered predictions and are highlighted in a different color. The main part of the time series is plotted in blue, while the predicted values are plotted in red. The function automatically generates a legend to distinguish between the observed and predicted values.
 #'
 #' @param X A numeric vector representing the time series data, including the predictions.
-#' @param h an integer specifying the number of predictions to be highlighted in the plot. The value of `h` must be a positive integer and should not exceed the length of `X_hat`.
+#' @param samples an integer specifying the number of samples to evaluate the periodogram with.
 #'
-#' @return A line plot displaying the time series with the last `h` values highlighted as predictions in red.
+#' @return A line plot displaying the spectral density estimate of the time series.
 #'
 #' @examples
 #' # Generate a random time series with 100 elements
-#' X_hat <- rnorm(100)
+#' X <- rnorm(100)
 #'
 #' # Plot the time series with the last 10 elements highlighted as predictions
-#' plot(X_hat, 10)
+#' plot(X, 100)
 #'
 #' @export
-plot <- function(X, h) {
+plot <- function(X, samples) {
   stopifnot(
-    "h is not a numeric integer" = h %% 1 == 0,
-    "h cannot be greater than the length of X" = h <= length(X)
+    "X must be an atomic vector" = is.atomic(X),
+    "X must have positive length" = length(X) > 0,
+    "X may not contain NAs" = !any(is.na(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "X must be numeric or complex" = (is.numeric(X) | is.complex(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "samples must be numeric" = is.numeric(samples),
+    "samples must be an integer" = samples %% 1 == 0 & length(samples) == 1
   )
 
-  P <- (length(X) - h + 1):length(X)
+  lambdas <- seq(from = -pi, to = pi, length.out = samples + 1)[-1]
 
-  graphics::plot(1:length(X), X, type = "l", col = "blue", xlab = "Index", ylab = "Value", main = "Custom Line Plot")
-  graphics::lines(P, X[P], col = "red")
-  graphics::legend("topright", legend = c("X", "P"), col = c("blue", "red"), lty = 1)
+  I <- sapply(lambdas, \(i) {
+    periodogram(X, i)
+  })
+
+  graphics::plot(1:length(I), I, type = "l", col = "blue", xlab = "Index", ylab = "Value", main = "The spectral density estimate of X")
 }
