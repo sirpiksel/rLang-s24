@@ -11,7 +11,7 @@ make_MA(t, theta, sigma = 1)
 
 \item{theta}{A numeric or complex atomic vector of length \code{q} containing the coefficients of the MA(q) process.}
 
-\item{sigma}{A numeric value representing the variance of the white noise, with a default value of 1.}
+\item{sigma}{A numeric value representing the standard deviation of the white noise, with a default value of 1.}
 }
 \value{
 A numeric atomic vector containing the generated MA(q) time series.
@@ -29,8 +29,8 @@ where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is whit
 \examples{
 # Simple MA(1) model
 ma_one <- make_MA(100, -0.25)
-ts.plot(ma_one)
-acf(ma_one)
+zeitreihen::plot(ma_one, 100)
+sample_ACVF(ma_one)
 
 }
 \references{

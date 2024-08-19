@@ -199,7 +199,7 @@ test_that("TEST make_ar: correctness", {
   theta <- 2
   sigma <- 1
   start <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_AR(t, theta, sigma, start)
@@ -214,7 +214,7 @@ test_that("TEST make_ar: correctness", {
   theta <- c(1, 1)
   sigma <- 1
   start <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_AR(t, theta, sigma, start)
@@ -230,7 +230,7 @@ test_that("TEST make_ar: correctness", {
   theta <- c(1, 1, 1)
   sigma <- 1
   start <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_AR(t, theta, sigma, start)

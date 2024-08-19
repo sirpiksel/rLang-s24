@@ -13,7 +13,7 @@
 #'
 #' @param phi A numeric or complex atomic vector of length `p` containing the coefficients of the AR(p) process.
 #'
-#' @param sigma A numeric value representing the variance of the white noise, with a default value of 1.
+#' @param sigma A numeric value representing the standard deviation of the white noise, with a default value of 1.
 #'
 #' @param start A numeric atomic vector containing the first `p` observations, which are 0 by default.
 #'
@@ -24,8 +24,8 @@
 #' @examples
 #' # Simple AR(1) model
 #' ar_one <- make_AR(t = 100, phi = -0.7)
-#' ts.plot(ar_one)
-#' acf(ar_one)
+#' zeitreihen::plot(ar_one, 100)
+#' sample_ACVF(ar_one)
 #'
 #' @export
 make_AR <- function(t, phi, sigma = 1, start = numeric(length(phi))) {

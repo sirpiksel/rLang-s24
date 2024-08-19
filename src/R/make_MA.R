@@ -13,7 +13,7 @@
 #'
 #' @param theta A numeric or complex atomic vector of length `q` containing the coefficients of the MA(q) process.
 #'
-#' @param sigma A numeric value representing the variance of the white noise, with a default value of 1.
+#' @param sigma A numeric value representing the standard deviation of the white noise, with a default value of 1.
 #'
 #' @returns A numeric atomic vector containing the generated MA(q) time series.
 #'
@@ -22,8 +22,8 @@
 #' @examples
 #' # Simple MA(1) model
 #' ma_one <- make_MA(100, -0.25)
-#' ts.plot(ma_one)
-#' acf(ma_one)
+#' zeitreihen::plot(ma_one, 100)
+#' sample_ACVF(ma_one)
 #'
 #' @export
 make_MA <- function(t, theta, sigma = 1) {

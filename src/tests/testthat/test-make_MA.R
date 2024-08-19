@@ -142,7 +142,7 @@ test_that("TEST make_ma: correctness", {
   t <- 3
   theta <- 1
   sigma <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_MA(t, theta, sigma)
@@ -156,7 +156,7 @@ test_that("TEST make_ma: correctness", {
   t <- 3
   theta <- c(1, 1)
   sigma <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_MA(t, theta, sigma)
@@ -170,7 +170,7 @@ test_that("TEST make_ma: correctness", {
   t <- 4
   theta <- c(1, 1, 1)
   sigma <- 1
-  werte <- rnorm(12, mean = 0, sd = 1)
+  werte <- rnorm(12, mean = 0, sd = sigma)
   set.seed(123)
 
   sol <- make_MA(t, theta, sigma)

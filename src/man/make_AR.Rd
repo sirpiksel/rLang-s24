@@ -11,7 +11,7 @@ make_AR(t, phi, sigma = 1, start = numeric(length(phi)))
 
 \item{phi}{A numeric or complex atomic vector of length \code{p} containing the coefficients of the AR(p) process.}
 
-\item{sigma}{A numeric value representing the variance of the white noise, with a default value of 1.}
+\item{sigma}{A numeric value representing the standard deviation of the white noise, with a default value of 1.}
 
 \item{start}{A numeric atomic vector containing the first \code{p} observations, which are 0 by default.}
 }
@@ -31,8 +31,8 @@ where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is whit
 \examples{
 # Simple AR(1) model
 ar_one <- make_AR(t = 100, phi = -0.7)
-ts.plot(ar_one)
-acf(ar_one)
+zeitreihen::plot(ar_one, 100)
+sample_ACVF(ar_one)
 
 }
 \references{
