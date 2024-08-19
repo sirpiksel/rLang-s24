@@ -21,9 +21,9 @@
 - [x] `Durbin-Levinson`-Algorithmus unter Verwendung der `sample autocovariance`-Funktion (Clemens & Sebastian)
 - [x] `Innovations`-Algorithmus (Daniela & Philip)
 - [x] Periodogramm zum Schätzen der sprektralen Dichte, (Alexander)
-- [ ] komfortable Plot-Funktionen zur Darstellung der Zeitreihen ihrer spektralen Dichten und der Schätzung letzterer (Philip)
-- [ ] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle, parallel zur Entwicklung)
-- [ ] Vignette ()
+- [x] komfortable Plot-Funktionen zur Darstellung der Zeitreihen ihrer spektralen Dichten und der Schätzung letzterer (Philip)
+- [x] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle, parallel zur Entwicklung)
+- [ ] Vignette (Alle)
 - [ ] Zugriffsrechte für Betreuer freischalten
 - [x] Zwischenbericht
 - [ ] Abschlussbericht
