@@ -2,23 +2,23 @@
 % Please edit documentation in R/plot.R
 \name{plot}
 \alias{plot}
-\title{Custom Time Series Plotting Function}
+\title{Custom Spectral Density Plotting Function}
 \usage{
-plot(X, samples)
+plot(X, n)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data, including the predictions.}
 
-\item{samples}{an integer specifying the number of samples to evaluate the periodogram with.}
+\item{n}{an integer specifying the number of samples to evaluate the periodogram with.}
 }
 \value{
 A line plot displaying the spectral density estimate of the time series.
 }
 \description{
-\code{plot} generates a custom line plot of a time series vector, highlighting the last \code{h} values as predictions. The plot displays the time series in blue and the predictions in red, with an appropriate legend.
+\code{plot} computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(-\pi, \pi]} and manages errors.
 }
 \details{
-This function is designed to visualize a time series, where the last \code{h} values are considered predictions and are highlighted in a different color. The main part of the time series is plotted in blue, while the predicted values are plotted in red. The function automatically generates a legend to distinguish between the observed and predicted values.
+The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. The samples are evaluated at evenly spaced points over the interval \eqn{(-\pi, \pi]}. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
 }
 \examples{
 # Generate a random time series with 100 elements
