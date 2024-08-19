@@ -1,57 +1,59 @@
-#' @title Recursive calculation of coefficients using the Durbin-Levinson Algorithm
+#' @title Recursive Calculation of Coefficients using the Durbin-Levinson Algorithm
 #'
-#' @description `DLA` is a function to compute the Durbin-Levinson recursion for time series data.
+#' @description `DLA` can be used to perform the Durbin-Levinson recursion on time series data.
 #'
 #' @details
-#' The Durbin-Levinson algorithm is used to recursively compute the coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}
-#' for a given time series \eqn{\{x_1, \dots, x_n\}}. The recursion can be expressed as:
+#' The \strong{Durbin-Levinson Algorithm} is used to recursively calculate the coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}
+#' for a given time series \eqn{\{x_1, \dots, x_n\}}. The recursion can be expressed as follows:
+#' 
+#' \deqn{\phi_{nn} = \left[ \gamma(n) - \displaystyle{\sum_{j=1}^{n-1} \phi_{n-1, j} \gamma(n-j)} \right] \nu_{n-1}^{-1},}
+#' 
 #' \deqn{
-#' \phi_{nn} = \left[ \gamma(n) - \sum_{j=1}^{n-1} \phi_{n-1,j} \gamma(n-j) \right] v_{n-1}^{-1},
-#' }
-#' \deqn{
-#' \left[ \begin{array}{c}
-#' \phi_{n1} \\
-#' \vdots \\
-#' \phi_{n,n-1}
-#' \end{array} \right]
+#' \left[ \begin{array}{c} 
+#'        \phi_{n1} \\
+#'        \vdots \\
+#'        \phi_{n, n-1}
+#'        \end{array}
+#' \right]
 #' =
 #' \left[ \begin{array}{c}
-#' \phi_{n-1,1} \\
-#' \vdots \\
-#' \phi_{n-1,n-1}
-#' \end{array} \right]
+#'        \phi_{n-1,1} \\
+#'        \vdots \\
+#'        \phi_{n-1,n-1}
+#'        \end{array}
+#' \right]
 #' -
 #' \phi_{nn}
 #' \left[ \begin{array}{c}
-#' \phi_{n-1,n-1} \\
-#' \vdots \\
-#' \phi_{n-1,1}
-#' \end{array} \right],
-#' }
-#' \deqn{
-#' v_n = v_{n-1} \left[1 - \phi_{nn}^2\right],
-#' }
-#' where \eqn{\phi_{11} = \frac{\gamma(1)}{\gamma(0)}} and \eqn{v_0 = \gamma(0)}.
+#'        \phi_{n-1,n-1} \\
+#'        \vdots \\
+#'        \phi_{n-1,1}
+#'        \end{array}
+#' \right]}
+#' 
+#' and
+#' 
+#' \deqn{\nu_n = \nu_{n-1} \left[1 - \phi_{nn}^2\right],}
+#' 
+#' where \eqn{\phi_{11} = \gamma(1)/\gamma(0)} and \eqn{\nu_0 = \gamma(0)}.
 #'
-#' The algorithm iteratively calculates these coefficients, which are essential in the analysis of autoregressive processes.
+#' The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes.
 #'
-#' @param X A numeric vector representing the time series data. The data should be a stationary time series.
+#' @param X A numeric or complex atomic vector representing the time series data.
+#' The series should be stationary, meaning that its mean and variance do not change over time.
 #'
-#' @returns A list containing:
-#' \tabular{lcccl}{
-#'   \code{phi} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the computed AR coefficients \eqn{\phi{n1}, \dots, \phi{nn}}. \cr
-#'   \code{v} \tab \tab \tab \tab A numeric vector of length \code{m}, representing the innovation variances.Row 2, Col 2 \cr
-#' }
-#'
+#' @returns A list with two components:
+#' \item{phi}{A numeric atomic vector of length `m`, representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
+#' \item{v}{A numeric atomic vector of length `m`, representing the innovation variances.}
+#' 
 #' @note
-#' The function includes checks for numerical stability. If any of the calculated variances \eqn{v_n} or the initial
-#' autocovariance value \eqn{\gamma(0)} is too close to zero, the function will stop and return an error to prevent
-#' numerical instability.
+#' The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial
+#' autocovariance value \eqn{\gamma(0)} is too close to zero, the function terminates and returns an error to prevent numerical instability.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Example usage
+#' # Example Usage
 #' data <- c(2, 4, 6, 8, 10)
 #' model <- DLA(data)
 #' result <- model(2)

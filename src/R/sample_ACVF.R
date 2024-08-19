@@ -1,4 +1,4 @@
-#' @title Sample Autocovariance Function
+#' @title The Sample Autocovariance Function
 #'
 #' @description
 #' `sample_ACVF` computes the sample autocovariance of a given time series at a specified lag.
@@ -22,7 +22,7 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Basic usage
+#' # Basic Usage
 #' X <- c(1, 2, 3, 4, 5)
 #' h <- c(0, 1, 2)
 #' sample_ACVF(X, h)

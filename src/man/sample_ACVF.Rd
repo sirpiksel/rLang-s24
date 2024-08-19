@@ -2,7 +2,7 @@
 % Please edit documentation in R/sample_ACVF.R
 \name{sample_ACVF}
 \alias{sample_ACVF}
-\title{Sample Autocovariance Function}
+\title{The Sample Autocovariance Function}
 \usage{
 sample_ACVF(X, h = 0:(length(X) - 1))
 }
@@ -28,7 +28,7 @@ The \strong{sample autocovariance function} measures the covariance between valu
 \deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 }
 \examples{
-# Basic usage
+# Basic Usage
 X <- c(1, 2, 3, 4, 5)
 h <- c(0, 1, 2)
 sample_ACVF(X, h)
