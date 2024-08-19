@@ -21,9 +21,9 @@
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.
 #'
 #' @returns A list with three components:
-#' \item{coeffs}{A numeric atomic vector containing the computed time series coefficients.}
-#' \item{nu}{A numeric atomic vector containing the innovations / variances.}
-#' \item{theta}{The coefficient matrix of the Innovations Algorithm.}
+#' \item{coeffs}{numerical vector of one-step predictors}
+#' \item{nu}{numerical vector of the innovations, or one-step prediction errors.}
+#' \item{theta}{numerical coefficient matrix of the Innovations Algorithm.}
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
@@ -44,7 +44,8 @@ IA <- function(X, max_lag = length(X)) {
     "X must be only contain numeric or complex values" = is.numeric(X) | is.complex(X),
     "X must be filled with finite values." = is.finite(X),
     "max_lag must be an integer." = max_lag %% 1 == 0 & length(max_lag) == 1,
-    "q cannot exceed length(X) - 1" = max_lag <= length(X)
+    "max_lag cannot exceed length(X) - 1" = max_lag <= length(X),
+    "max_lag cannot be smaller than 3" = 3 <= max_lag
   )
 
   nu <- numeric(max_lag)

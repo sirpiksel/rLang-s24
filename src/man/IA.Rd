@@ -13,9 +13,9 @@ IA(X, max_lag = length(X))
 }
 \value{
 A list with three components:
-\item{coeffs}{A numeric atomic vector containing the computed time series coefficients.}
-\item{nu}{A numeric atomic vector containing the innovations / variances.}
-\item{theta}{The coefficient matrix of the Innovations Algorithm.}
+\item{coeffs}{numerical vector of one-step predictors}
+\item{nu}{numerical vector of the innovations, or one-step prediction errors.}
+\item{theta}{numerical coefficient matrix of the Innovations Algorithm.}
 }
 \description{
 \code{IA} can be used to compute the innovations and the innovation variances for a time series.
