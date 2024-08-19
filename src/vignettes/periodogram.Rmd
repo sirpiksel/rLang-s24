@@ -1,0 +1,131 @@
+---
+title: 'Showcasing periodogram(): estimate the spectral density of a time series'
+author: 'Alexander Klaus'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The spectral density of a stationary process shows how the variance of the time series is distributed over different frequencies. As a fundamental tool of time series analysis, the `periodogram` function is used to estimate the spectral density of a stationary time series.
+
+## Example 1: Basic Usage of the Function
+
+First, generate some random time series data to work with:
+
+```{r, message=FALSE}
+devtools::load_all()
+
+set.seed(123)
+X <- rnorm(100)
+```
+
+Next, select a numerical value from the interval $(- \pi, \pi]$, which represents the frequency at which the periodogram is evaluated:
+
+```{r}
+lambda <- pi / 4
+```
+
+Now, calculate the periodogram for the time series with the specified frequency:
+
+```{r}
+periodogram(X, lambda)
+```
+
+What is happening inside the function:
+
+- *Input Validation*: The function checks whether the time series $X$ has been passed in the correct format and lambda is a numerical value from the interval $(-\pi, \pi]$.
+- Each value $X_t$ of the time series $X$ is multiplied by $e^{-it\lambda}$, where $t$ is the time index.
+- The sum of these products is computed.
+- The absolute value of this sum is calculated and raised to the power of 2.
+- The result is divided by the length of the time series $n$ and returned as the periodogram value.
+
+## Example 2: Periodogram for a Simple Sine Curve
+
+Create a simple sine curve sample:
+
+```{r}
+X <- sin(2 * pi * 1:100 / 100)
+```
+
+Define the frequency of the sine curve:
+
+```{r}
+lambda <- 2 * pi / 100
+```
+
+Compute the periodogram:
+
+```{r}
+periodogram(X, lambda)
+```
+
+## Example 3: Periodogram for a Complex Exponential Curve
+
+Generate a complex exponential curve sample:
+
+```{r}
+X <- exp(2 * pi * 1i * 1:100 / 100)
+```
+
+Set the frequency of the complex exponential:
+
+```{r}
+lambda <- 2 * pi / 100
+```
+
+Compute the periodogram:
+
+```{r}
+periodogram(X, lambda)
+```
+
+## Example 4: Incorrect inputs
+
+If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled:
+
+The time series data must be passed in an atomic vector:
+
+```{r, error=TRUE}
+X <- list(1, 2, 3, 4, 5)
+lambda <- pi / 2
+
+periodogram(X, lambda)
+```
+
+The values of this atomic vector must be numeric or complex:
+
+```{r, error=TRUE}
+X <- c(1, 2, "3", 4, "5i")
+lambda <- pi / 2
+
+periodogram(X, lambda)
+```
+
+In addition, the atomic vector may not contain any NAs:
+
+```{r, error=TRUE}
+X <- c(1, NA, 2, 3, NA, 5)
+lambda <- pi / 2
+
+periodogram(X, lambda)
+```
+
+The lambda parameter must be a numerical value:
+
+```{r, error=TRUE}
+X <- 1:10
+lambda <- "0"
+
+periodogram(X, lambda)
+```
+
+Also lambda must lie within the interval $(-\pi, \pi]$:
+
+```{r, error=TRUE}
+X <- 1:10
+lambda <- 2*pi
+
+periodogram(X, lambda)
+```
