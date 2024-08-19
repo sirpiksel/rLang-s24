@@ -53,7 +53,8 @@ and
 
 where \eqn{\phi_{11} = \gamma(1)/\gamma(0)} and \eqn{\nu_0 = \gamma(0)}.
 
-The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes.
+The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes
+and can be used as inputs of the \code{\link{make_AR}} function.
 }
 \note{
 The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial

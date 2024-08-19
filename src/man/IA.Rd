@@ -34,6 +34,9 @@ The coefficients \eqn{\theta_{n1}, \dots, \theta_{nn}} can be computed recursive
 and
 
 \deqn{\nu_n = \kappa(n+1, n+1) - \displaystyle{\sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j}.}
+
+The algorithm iteratively calculates these coefficients, which are essential for the analysis of moving average processes
+and can be used as inputs of the \code{\link{make_MA}} function.
 }
 \examples{
 # Generate a sample time series and its autocovariance
