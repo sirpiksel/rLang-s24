@@ -13,7 +13,7 @@ The series should be stationary, meaning that its mean and variance do not chang
 \value{
 A list with two components:
 \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-\item{nu}{A numeric atomic vector representing mean squared error of the one step predictors \eqn{\nu_{i} = E(X_{i+1} - (\theta_{i1}X_{n} + ... + \theta_{ii}X_i))^{2}}, i > 0 and \eqn{\nu_0 = \gamma(0)}.}
+\item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors \eqn{\nu_{i} = \mathbb{E}[X_{i+1} - (\theta_{i1} X_{n} + \dots + \theta_{ii}X_i)]^{2}, \ i > 0} and \eqn{\nu_0 = \gamma(0)}.}
 }
 \description{
 \code{DLA} can be used to perform the Durbin-Levinson recursion on time series data.
@@ -61,7 +61,7 @@ The function includes checks for numerical stability. If any of the calculated v
 autocovariance value \eqn{\gamma(0)} is too close to zero, the function terminates and returns an error to prevent numerical instability.
 }
 \examples{
-# Example Usage
+# Basic Usage
 data <- c(2, 4, 6, 8, 10)
 model <- DLA(data)
 result <- model(2)

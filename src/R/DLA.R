@@ -45,7 +45,7 @@
 #'
 #' @returns A list with two components:
 #' \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-#' \item{nu}{A numeric atomic vector representing mean squared error of the one step predictors \eqn{\nu_{i} = E(X_{i+1} - (\theta_{i1}X_{n} + ... + \theta_{ii}X_i))^{2}}, i > 0 and \eqn{\nu_0 = \gamma(0)}.}
+#' \item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors \eqn{\nu_{i} = \mathbb{E}[X_{i+1} - (\theta_{i1} X_{n} + \dots + \theta_{ii}X_i)]^{2}, \ i > 0} and \eqn{\nu_0 = \gamma(0)}.}
 #' 
 #' @note
 #' The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial
@@ -54,7 +54,7 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Example Usage
+#' # Basic Usage
 #' data <- c(2, 4, 6, 8, 10)
 #' model <- DLA(data)
 #' result <- model(2)
