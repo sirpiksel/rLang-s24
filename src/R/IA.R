@@ -43,7 +43,7 @@ IA <- function(X, max_lag = length(X)) {
     "X must be only contain numeric or complex values" = is.numeric(X) | is.complex(X),
     "X must be filled with finite values." = is.finite(X),
     "max_lag must be an integer." = max_lag %% 1 == 0 & length(max_lag) == 1,
-    "max_lag cannot exceed length(X) - 1" = max_lag <= length(X),
+    "max_lag cannot exceed length(X)" = max_lag <= length(X),
     "max_lag cannot be smaller than 3" = 3 <= max_lag
   )
 

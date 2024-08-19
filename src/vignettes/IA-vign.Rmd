@@ -1,0 +1,81 @@
+---
+title: "Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()"
+output: pdf_document
+author: "Daniela Stängle"
+---
+```{r setup, include=FALSE}
+library(devtools)
+load_all(".")
+knitr::opts_chunk$set(tidy = TRUE,echo = TRUE)
+```
+## Introduction
+The Innovations Algorithm is a recursive algorithm that can be applied to stationary time series \(\{X_t\}\) with
+zero-mean and finite second moments. The algorithm gives the coefficients of the one-step predictors \(\hat{X}_1,\hat{X}_2\dots\), which can be calculated recursively once the coefficients have been determined.
+Additionally the algorithm calculates the mean squared errors \(\nu_i\).  
+
+## Example 1: Basic Usage 
+To apply the algorithm to a time series X, we call the function `IA()` with parameter X
+```{r}
+X <- stats::rnorm(5, mean = 0, sd = 1)
+out <- zeitreihen::IA(X)
+```
+We obtain as output the vector `nu`, which contains the mean squared errors, 
+```{r}
+out$nu
+```
+
+the matrix \(\Theta_n=\begin{pmatrix}0&0&0&0&0\\ \theta_{11}&0&0&0&0\\ \theta_{22}&\theta_{21}&0&0&0\\
+\theta_{33}&\theta_{32}&\theta_{31}&0&0 \\ \theta_{44}&\theta_{43}&\theta_{42}&\theta_{41}&0\\\end{pmatrix}\),
+\(\\\)
+
+```{r}
+out$theta
+```
+and the vector of coefficients, `coeffs` =  \(\begin{pmatrix}\theta_{41}&\theta_{42}&\theta_{43}&\theta_{44}\end{pmatrix}\),
+```{r}
+out$coeffs
+```
+which can be used to calculate the one-step predictor \(\hat{X}_{n+1}\) via \(\newline\)
+\(\hat{X}_{n+1}=\begin{cases} 0,& \text{if } n= 0,\\ \sum\limits_{j=1}^n\theta_{nj}\left(X_{n+1-j}-\hat{X}_{n+1-j}\right),& \text{if } n= 1,2,\dots,\end{cases}.\newline\)
+For example the coefficient \(\theta_{41}\) is the coefficient before the difference of the value of the time series \(\{X_t\}\) at time \(t=4\) and its predictor \(\hat{X_4}\). 
+
+## Example 2: Using the optional parameter `max_lag`
+Additionally, the parameter `max_lag` (per default the length of the time series) can be set, to indicate till where the \(\theta\) 's should be calculated.
+```{r}
+X <- stats::rnorm(100, mean = 0, sd = 1)
+out <- zeitreihen::IA(X, max_lag = 6)
+out$nu
+out$theta
+```
+
+## Example 3: Using incorrect values
+There are several inputs which are not allowed and give the following warnings:\(\newline\)
+1. If the time series contains values which are `NaN` or `Inf`:
+```{r,error=TRUE}
+X <- NaN + stats::rnorm(10, mean = 0, sd = 1)
+Y <- c(0,0,0,Inf)
+out <- zeitreihen::IA(Y)
+out <- zeitreihen::IA(X)
+```
+\(\newline\)
+2. If the time series contains values which are not numeric or complex values:
+```{r, error=TRUE}
+X <- "2.01"
+out <- zeitreihen::IA(X)
+```
+\(\newline\)
+3. If the time series is not an atomic vector:
+```{r,error= TRUE}
+X <- list(m=matrix(1,nrow = 10,ncol = 5), "test")
+out <- IA(X)
+```
+\(\newline\)
+4. If the `max_lag` is smaller than 3, not an integer or bigger than the length of the time series:
+```{r,error=TRUE}
+X <- stats::rnorm(10,0,1)
+out <- zeitreihen::IA(X,2)
+zeitreihen::IA(X,3.14)
+zeitreihen::IA(X,51)
+```
+
+
