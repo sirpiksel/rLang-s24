@@ -12,8 +12,8 @@ The series should be stationary, meaning that its mean and variance do not chang
 }
 \value{
 A list with two components:
-\item{phi}{A numeric atomic vector of length \code{m}, representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-\item{v}{A numeric atomic vector of length \code{m}, representing the innovation variances.}
+\item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
+\item{nu}{A numeric atomic vector representing the innovation variances.}
 }
 \description{
 \code{DLA} can be used to perform the Durbin-Levinson recursion on time series data.

@@ -7,15 +7,15 @@
 IA(X, max_lag = length(X))
 }
 \arguments{
-\item{X}{A numerical or complex atomic vector representing the time series data.}
+\item{X}{A numeric or complex atomic vector representing the time series data.}
 
 \item{max_lag}{An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.}
 }
 \value{
 A list with three components:
-\item{coeffs}{A numerical atomic vector of one-step predictors.}
-\item{nu}{A numerical atomic vector of innovations or one-step prediction errors.}
-\item{theta}{A numerical coefficient matrix of the Innovations Algorithm.}
+\item{coeffs}{A numeric atomic vector of one-step predictors.}
+\item{nu}{A numeric atomic vector of innovations or one-step prediction errors.}
+\item{theta}{A numeric coefficient matrix of the Innovations Algorithm.}
 }
 \description{
 \code{IA} can be used to compute the innovations and the innovation variances for a time series.
@@ -39,14 +39,10 @@ The algorithm iteratively calculates these coefficients, which are essential for
 and can be used as inputs of the \code{\link{make_MA}} function.
 }
 \examples{
-# Generate a sample time series and its autocovariance
+# Basic Usage
 X <- rnorm(100)
-
-# Calculate the coefficients
 out <- IA(X)
-print(out$coeffs)
-print(out$nu)
-print(out$theta)
+print(out)
 
 }
 \references{

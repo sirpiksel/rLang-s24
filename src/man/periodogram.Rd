@@ -23,6 +23,9 @@ The \strong{periodogram} is a sample-based function from which we obtain estimat
 For a given time series \eqn{\{x_1, \dots, x_n\}}, the periodogram can be computed using the formula:
 
 \deqn{I_n(\lambda) = \displaystyle{\frac{1}{n}} \left| \displaystyle{\sum_{t=1}^n x_t e^{-it\lambda}} \right|^2.}
+
+Within the \code{\link{plot}} function, this function is used to calculate the periodogram
+of a given time series for several lambda values in the interval \eqn{(-\pi, \pi]}.
 }
 \examples{
 # Periodogram for a simple sine curve

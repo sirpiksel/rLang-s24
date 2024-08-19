@@ -20,25 +20,21 @@
 #' The algorithm iteratively calculates these coefficients, which are essential for the analysis of moving average processes
 #' and can be used as inputs of the \code{\link{make_MA}} function.
 #'
-#' @param X A numerical or complex atomic vector representing the time series data.
+#' @param X A numeric or complex atomic vector representing the time series data.
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.
 #'
 #' @returns A list with three components:
-#' \item{coeffs}{A numerical atomic vector of one-step predictors.}
-#' \item{nu}{A numerical atomic vector of innovations or one-step prediction errors.}
-#' \item{theta}{A numerical coefficient matrix of the Innovations Algorithm.}
+#' \item{coeffs}{A numeric atomic vector of one-step predictors.}
+#' \item{nu}{A numeric atomic vector of innovations or one-step prediction errors.}
+#' \item{theta}{A numeric coefficient matrix of the Innovations Algorithm.}
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Generate a sample time series and its autocovariance
+#' # Basic Usage
 #' X <- rnorm(100)
-#'
-#' # Calculate the coefficients
 #' out <- IA(X)
-#' print(out$coeffs)
-#' print(out$nu)
-#' print(out$theta)
+#' print(out)
 #'
 #' @export
 IA <- function(X, max_lag = length(X)) {

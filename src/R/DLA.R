@@ -44,8 +44,8 @@
 #' The series should be stationary, meaning that its mean and variance do not change over time.
 #'
 #' @returns A list with two components:
-#' \item{phi}{A numeric atomic vector of length `m`, representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-#' \item{v}{A numeric atomic vector of length `m`, representing the innovation variances.}
+#' \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
+#' \item{nu}{A numeric atomic vector representing the innovation variances.}
 #' 
 #' @note
 #' The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial

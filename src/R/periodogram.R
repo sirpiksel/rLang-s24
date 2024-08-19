@@ -9,6 +9,9 @@
 #'
 #' \deqn{I_n(\lambda) = \displaystyle{\frac{1}{n}} \left| \displaystyle{\sum_{t=1}^n x_t e^{-it\lambda}} \right|^2.}
 #'
+#' Within the \code{\link{plot}} function, this function is used to calculate the periodogram
+#' of a given time series for several lambda values in the interval \eqn{(-\pi, \pi]}.
+#'
 #' @param X A numeric or complex atomic vector representing the time series data. The series should be stationary,
 #' meaning that its mean and variance do not change over time.
 #'
