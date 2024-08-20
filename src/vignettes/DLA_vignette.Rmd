@@ -4,7 +4,7 @@ author: "Clemens Glomb"
 date: "2024-08-19"
 output: pdf_document
 vignette: >
-  %\VignetteIndexEntry{DLA_vignette}
+  %\VignetteIndexEntry{Durbin-Levinson Algorithm}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

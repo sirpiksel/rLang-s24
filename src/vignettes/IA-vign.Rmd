@@ -3,7 +3,7 @@ title: "Calculating Coefficients of the one-step predictors with the Innovations
 output: pdf_document
 author: "Daniela Stängle"
 vignette: >
-%\VignetteIndexEntry{DLA_vignette}
+%\VignetteIndexEntry{Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()}
 %\VignetteEngine{knitr::rmarkdown}
 %\VignetteEncoding{UTF-8}
 ---

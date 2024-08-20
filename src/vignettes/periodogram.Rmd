@@ -1,9 +1,9 @@
 ---
-title: 'Showcasing periodogram(): estimate the spectral density of a time series'
-author: 'Alexander Klaus'
+title: "Showcasing periodogram(): estimate the spectral density of a time series"
+author: "Alexander Klaus"
 output: pdf_document
 vignette: >
-%\VignetteIndexEntry{DLA_vignette}
+%\VignetteIndexEntry{Showcasing periodogram(): estimate the spectral density of a time series}
 %\VignetteEngine{knitr::rmarkdown}
 %\VignetteEncoding{UTF-8}
 ---

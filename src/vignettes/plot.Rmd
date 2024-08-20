@@ -3,7 +3,7 @@ title: "Using the Plotting function to Plot the estimated spectral density"
 output: rmarkdown::html_vignette
 author: "Philip Kastura-Sahl"
 vignette: >
-  %\VignetteIndexEntry{zeitreihen}
+  %\VignetteIndexEntry{Using the Plotting function to Plot the estimated spectral density}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
