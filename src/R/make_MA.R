@@ -24,14 +24,14 @@
 #' ma_one <- make_MA(t = 10, theta = -0.25, sigma = 2)
 #' zeitreihen::plot(ma_one, 100)
 #' sample_ACVF(ma_one)
-#' 
+#'
 #' #' # Simple MA(2) model with sigma 1
-#' ma_two <- make_MA(t = 10, theta = c(9,2))
+#' ma_two <- make_MA(t = 10, theta = c(9, 2))
 #' zeitreihen::plot(ma_two, 100)
 #' sample_ACVF(ma_two)
-#' 
+#'
 #' # Simple MA(3) model with sigma 1
-#' ma_three <- make_MA(t = 10, theta = c(1,3,4))
+#' ma_three <- make_MA(t = 10, theta = c(1, 3, 4))
 #' zeitreihen::plot(ma_three, 100)
 #' sample_ACVF(ma_three)
 #'

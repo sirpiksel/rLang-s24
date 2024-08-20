@@ -55,33 +55,33 @@
 #'
 #' @examples
 #' # Basic Usage
-#' 
-#' data_two <- rnorm(100,mean = 0,sd = 1)
-#' 
+#'
+#' data_two <- rnorm(100, mean = 0, sd = 1)
+#'
 #' model <- DLA(data_two)
 #' result <- model(20)
 #' print(result)
-#' 
+#'
 #' # make_AR Usage
-#' 
+#'
 #' t <- 100
-#' phi <- c(1,0,1,2)
-#' data_one <- make_AR(t,phi)
-#' 
+#' phi <- c(1, 0, 1, 2)
+#' data_one <- make_AR(t, phi)
+#'
 #' model <- DLA(data_one)
 #' result <- model(4)
 #' print(result)
-#' 
+#'
 #' # make_MA Usage
-#' 
+#'
 #' t <- 100
-#' theta <- c(0,4,1,0)
-#' data_three <- make_MA(t,theta)
-#' 
+#' theta <- c(0, 4, 1, 0)
+#' data_three <- make_MA(t, theta)
+#'
 #' model <- DLA(data_three)
 #' result <- model(4)
 #' print(result)
-#' 
+#'
 #' @export
 DLA <- function(X) {
   stopifnot(
