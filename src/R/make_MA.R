@@ -51,7 +51,7 @@ make_MA <- function(t, theta, sigma = 1) {
     "The values of theta must be numeric or complex" = (is.numeric(theta) | is.complex(theta)),
     "t must be greater than the length of theta" = t > length(theta),
     "sigma must be a value of length 1" = (is.atomic(sigma) & length(sigma) == 1),
-    "sigma must be finite" = !is.infinite(sigma),
+    "sigma must not be infinite" = !is.infinite(sigma),
     "sigma must not be NA" = !is.na(sigma),
     "sigma must be numeric" = is.numeric(sigma),
     "sigma must be positive" = sigma > 0
