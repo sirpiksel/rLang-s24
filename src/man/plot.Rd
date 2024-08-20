@@ -15,10 +15,10 @@ plot(X, n)
 A line plot displaying the spectral density estimate of the time series.
 }
 \description{
-\code{plot} computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(-\pi, \pi]} and manages errors.
+\code{plot} computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(0, \pi]} and manages errors.
 }
 \details{
-The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. The samples are evaluated at evenly spaced points over the interval \eqn{(-\pi, \pi]}. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
+The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. The samples are evaluated at evenly spaced points over the interval \eqn{(0, \pi]}. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
 }
 \examples{
 # Generate a random time series with 100 elements
@@ -27,4 +27,7 @@ X <- rnorm(500)
 # Plot the spectral density
 zeitreihen::plot(X, 100)
 
+}
+\references{
+Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 }

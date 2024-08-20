@@ -1,56 +1,52 @@
 ---
-title: "zeitreihen"
+title: "Using the Plotting function to Plot the estimated spectral density"
 output: rmarkdown::html_vignette
+author: "Philip Kastura-Sahl"
 vignette: >
   %\VignetteIndexEntry{zeitreihen}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  tidy = TRUE,
+  fig.width = 6,
+  fig.height = 6,
   comment = "#>"
 )
-```
-
-
-
-# Zeitreihen: a time series Package
-## Installation
-To begin using `zeitreihen`, you first need to install the package. You can install it from CRAN:
-```{r}
-# install.packages("zeitreihen", repos = "https://cloud.r-project.org")
-```
-
-Or directly from GitHub (for the latest development version):
-```{r}
-# if(!require(devtools)) install.packages("devtools", repos = 'https://cloud.r-project.org')
-# library(devtools)
-# devtools::install_github("sirpiksel/rLang-s24")
-```
-
-```{r}
 library(zeitreihen)
 ```
 
-For this vignette, we'll use the dataset `tsdl`, by Rob Hyndman, Professor of Statistics at Monash University, Australia
-
+## `plot()`-Function for Spectral Density Plotting
+The [**periodogram**](#periodogram) of \(\{x_1, \dots, x_n\}\) is the function
+\[
+  I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^{n} x_t e^{-it\lambda} \right|^2
+\]
+\
+The `plot(X, n)`-function provides a spectral density plot of a time series. The function takes a time series as input and returns a plot of the spectral density.
 ```{r}
-# devtools::install_github("FinYang/tsdl")
-# library(tsdl)
-# tsdl
+set.seed(742)
+num_samples <- 10
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
 ```
 
-## Conclusion
+## Adjusting the samples
+The plot takes `n`-samples from the interval of \((0, \pi]\) and evaluates the spectral density across it using the `periodogram()` function. To get a more detailed
+```{r}
+set.seed(742)
+num_samples <- 250
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
+```
 
-The `zeitreihen` package provides a powerful set of tools for data manipulation, visualization, and more. Whether you're working with magical creatures or mundane data, `zeitreihen` can help you get the job done efficiently.
-
-For more detailed information on each function, refer to the function-specific documentation. Happy coding!
+## Requirements
+- `X` should be a native vector consisting of either numeric (real numbers) or complex numbers. `X` should not include any values that are not finite such as `Inf`,`NaN` or `NA`.
+- `n` should be a whole number without any decimal component and should be a single value, not a vector.
 
 ## References
-
 If you need more information, please refer to the package documentation or the following resources:
 
-- [R for Data Science](https://r4ds.had.co.nz/)
-- [Advanced R](https://adv-r.hadley.nz/)
+- Introduction to Time Series and Forecasting: [Chapter 4.2 The Periodogram](https://link.springer.com/book/10.1007/978-3-319-29854-2)
