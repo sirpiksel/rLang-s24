@@ -70,8 +70,7 @@ IA <- function(X, max_lag = length(X)) {
 
   # calculate theta_mat,n-k n rows
   for (i in 2:(max_lag - 1)) {
-    # Diagonal element theta_mat,n has to be calculated
-    first in every iteration
+    # Diagonal element theta_mat,n has to be calculated  first in every iteration
     theta_mat[i + 1, 1] <- 1 / nu[1] * autocov[i + 1]
     for (k in 1:(i - 1)) {
       theta_mat[i + 1, k + 1] <- 1 / nu[k + 1] * (autocov[i - k + 1] - sum(theta_mat[k + 1, 1:k] * theta_mat[i + 1, 1:k] * nu[1:k]))
