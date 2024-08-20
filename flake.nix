@@ -18,13 +18,17 @@
         rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ styler roxygen2 formatR devtools tidyverse ]; };
         pandoc = pkgs.pandoc;
         qpdf = pkgs.qpdf;
+        texLive = pkgs.texlive.combine {
+          inherit (pkgs.texlive) scheme-basic
+            framed xcolor fancyvrb etoolbox;
+        };
 
       in
       {
         devShells.default = (pkgs.devshell.mkShell {
           imports = [ "${devshell}/extra/git/hooks.nix" ];
           name = "rLang-shell";
-          packages = with pkgs; [ R rWrapper pandoc qpdf ];
+          packages = with pkgs; [ R rWrapper pandoc qpdf texLive ];
           commands = [
             {
               name = "run";
