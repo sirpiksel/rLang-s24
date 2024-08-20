@@ -35,17 +35,17 @@ zeitreihen::plot(ar_one, 100)
 sample_ACVF(ar_one)
 
 # Simple AR(4) model
-ar_four <- make_AR(t = 10, phi = c(0,4,1,2), start = c(9,5))
+ar_four <- make_AR(t = 10, phi = c(0, 4, 1, 2), start = c(9, 5))
 zeitreihen::plot(ar_four, 100)
 sample_ACVF(ar_four)
 
 # Simple AR(3) model
-ar_three <- make_AR(t = 10, phi = c(6,9,1))
+ar_three <- make_AR(t = 10, phi = c(6, 9, 1))
 zeitreihen::plot(ar_three, 100)
 sample_ACVF(ar_three)
 
 # Simple AR(2) model
-ar_two <- make_AR(t = 10, phi = c(1 + 1i,0))
+ar_two <- make_AR(t = 10, phi = c(1 + 1i, 0))
 zeitreihen::plot(ar_two, 100)
 sample_ACVF(ar_two)
 
