@@ -125,7 +125,7 @@ Also lambda must lie within the interval $(-\pi, \pi]$:
 
 ```{r, error=TRUE}
 X <- 1:10
-lambda <- 2*pi
+lambda <- 2 * pi
 
 periodogram(X, lambda)
 ```

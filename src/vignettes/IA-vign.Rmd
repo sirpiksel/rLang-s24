@@ -6,7 +6,7 @@ author: "Daniela Stängle"
 ```{r setup, include=FALSE}
 library(devtools)
 load_all(".")
-knitr::opts_chunk$set(tidy = TRUE,echo = TRUE)
+knitr::opts_chunk$set(tidy = TRUE, echo = TRUE)
 ```
 ## Introduction
 The Innovations Algorithm is a recursive algorithm that can be applied to stationary time series \(\{X_t\}\) with
@@ -53,7 +53,7 @@ There are several inputs which are not allowed and give the following warnings:\
 1. If the time series contains values which are `NaN` or `Inf`:
 ```{r,error=TRUE}
 X <- NaN + stats::rnorm(10, mean = 0, sd = 1)
-Y <- c(0,0,0,Inf)
+Y <- c(0, 0, 0, Inf)
 out <- zeitreihen::IA(Y)
 out <- zeitreihen::IA(X)
 ```
@@ -66,16 +66,16 @@ out <- zeitreihen::IA(X)
 \(\newline\)
 3. If the time series is not an atomic vector:
 ```{r,error= TRUE}
-X <- list(m=matrix(1,nrow = 10,ncol = 5), "test")
+X <- list(m = matrix(1, nrow = 10, ncol = 5), "test")
 out <- IA(X)
 ```
 \(\newline\)
 4. If the `max_lag` is smaller than 3, not an integer or bigger than the length of the time series:
 ```{r,error=TRUE}
-X <- stats::rnorm(10,0,1)
-out <- zeitreihen::IA(X,2)
-zeitreihen::IA(X,3.14)
-zeitreihen::IA(X,51)
+X <- stats::rnorm(10, 0, 1)
+out <- zeitreihen::IA(X, 2)
+zeitreihen::IA(X, 3.14)
+zeitreihen::IA(X, 51)
 ```
 
 
