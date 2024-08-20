@@ -25,7 +25,7 @@ for a given time series \eqn{\{x_1, \dots, x_n\}}. The recursion can be expresse
 \deqn{\phi_{nn} = \left[ \gamma(n) - \displaystyle{\sum_{j=1}^{n-1} \phi_{n-1, j} \gamma(n-j)} \right] \nu_{n-1}^{-1},}
 
 \deqn{
-\left[ \begin{array}{c} 
+\left[ \begin{array}{c}
        \phi_{n1} \\
        \vdots \\
        \phi_{n, n-1}
@@ -62,9 +62,31 @@ autocovariance value \eqn{\gamma(0)} is too close to zero, the function terminat
 }
 \examples{
 # Basic Usage
-data <- c(2, 4, 6, 8, 10)
-model <- DLA(data)
-result <- model(2)
+
+data_two <- rnorm(100,mean = 0,sd = 1)
+
+model <- DLA(data_two)
+result <- model(20)
+print(result)
+
+# make_AR Usage
+
+t <- 100
+phi <- c(1,0,1,2)
+data_one <- make_AR(t,phi)
+
+model <- DLA(data_one)
+result <- model(4)
+print(result)
+
+# make_MA Usage
+
+t <- 100
+theta <- c(0,4,1,0)
+data_three <- make_MA(t,theta)
+
+model <- DLA(data_three)
+result <- model(4)
 print(result)
 
 }
