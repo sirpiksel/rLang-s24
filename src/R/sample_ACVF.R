@@ -48,7 +48,7 @@ sample_ACVF <- function(X, h = 0:(length(X) - 1)) {
     "The values of X must be numeric or complex" = (is.numeric(X) | is.complex(X)),
     "h must be numeric" = is.numeric(h),
     "h may not contain NAs" = !any(is.na(h)),
-    "h may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "h may not contain Inf or -Inf values" = !any(is.infinite(h)),
     "h must be an integer vector" = all(h %% 1 == 0),
     "The values of h must be unique" = length(h) == length(unique(h)),
     "All values of h must be from the interval (-length(X), length(X))" = all(h < length(X) & h > -length(X))
@@ -69,8 +69,11 @@ sample_ACVF <- function(X, h = 0:(length(X) - 1)) {
 
 fabric_sample_ACVF <- function(X) {
   stopifnot(
-    "X must be numeric" = is.numeric(X),
-    "X has NA entries" = !any(is.na(X))
+    "X must be an atomic vector" = is.atomic(X),
+    "X must have positive length" = length(X) > 0,
+    "X may not contain NAs" = !any(is.na(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "The values of X must be numeric or complex" = (is.numeric(X) | is.complex(X))
   )
 
   xbar <- mean(X)
