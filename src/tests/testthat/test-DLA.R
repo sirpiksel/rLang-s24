@@ -43,7 +43,8 @@ test_that("TEST DLA: conditions on X", {
 # Test conditions for m
 
 test_that("TEST DLA: conditions on m", {
-  X <- c(1, 2, 3, 4)
+  set.seed(1)
+  X <- rnorm(4,mean = 0, sd = 1)
   pdl <- DLA(X)
 
   m <- c(1, 2)
@@ -110,21 +111,23 @@ test_that("TEST DLA: conditions on m", {
 # Test on correctness
 
 test_that("TEST DLA: correctness", {
-  X <- c(2, 4, 6, 8, 10)
+  set.seed(2)
+  X <- rnorm(5,mean = 0, sd = 1)
   pdl <- DLA(X)
 
   result <- pdl(2)
-
-  expect_equal(result$v[1], 8)
-  expect_equal(result$v[2], 6.72)
-  expect_equal(result$phi[1], 0.4 + (-2.08 / 6.72) * -0.4)
-  expect_equal(result$phi[2], -2.08 / 6.72)
+  expect_equal(sin(pi),0)
+  expect_equal(result$v[1], 0.9243285, tolerance = 1e-6)
+  expect_equal(result$v[2], 0.8219783, tolerance = 1e-6)
+  expect_equal(result$phi[1], -0.5088541, tolerance = 1e-6)
+  expect_equal(result$phi[2], -0.5291920, tolerance = 1e-6)
 })
 
 # Test for the behavior of m at extreme values
 
 test_that("Test on return", {
-  X <- c(2, 4, 6, 8, 10)
+  # set.seed(3)
+  X <- rnorm(5,mean = 0, sd = 1)
   pdl <- DLA(X)
 
   m <- 1
