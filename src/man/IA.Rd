@@ -44,6 +44,16 @@ X <- rnorm(100)
 out <- IA(X)
 print(out)
 
+# Example: Usage for a AR(2) model
+X <- make_AR(100, phi = c(0.1,0.2))
+out <- IA(X)
+print(out)
+
+#Example: Usage for an MA(3) model
+X <- make_MA(100,theta = c(0.2,0.25,-0.3))
+out <- IA(X)
+print(out)
+
 }
 \references{
 Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
