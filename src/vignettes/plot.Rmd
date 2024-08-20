@@ -26,7 +26,7 @@ The [**periodogram**](#periodogram) of \(\{x_1, \dots, x_n\}\) is the function
 \]
 \
 The `plot(X, n)`-function provides a spectral density plot of a time series. The function takes a time series as input and returns a plot of the spectral density.
-```{r}
+```{r, basic usage}
 set.seed(742)
 num_samples <- 10
 X <- stats::rnorm(30)
@@ -35,7 +35,7 @@ zeitreihen::plot(X, num_samples)
 
 ## Adjusting the samples
 The plot takes `n`-samples from the interval of \((0, \pi]\) and evaluates the spectral density across it using the `periodogram()` function. To get a more detailed
-```{r}
+```{r, adjust sample size}
 set.seed(742)
 num_samples <- 250
 X <- stats::rnorm(30)
@@ -44,7 +44,19 @@ zeitreihen::plot(X, num_samples)
 
 ## Requirements
 - `X` should be a native vector consisting of either numeric (real numbers) or complex numbers. `X` should not include any values that are not finite such as `Inf`,`NaN` or `NA`.
+```{r, Example error with X, error = TRUE}
+set.seed(742)
+num_samples <- 10
+X <- c(0, 1, 3, 4, Inf, NA)
+zeitreihen::plot(X, num_samples)
+```
 - `n` should be a whole number without any decimal component and should be a single value, not a vector.
+```{r, Example error with n, error = TRUE}
+set.seed(742)
+num_samples <- 10.42
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
+```
 
 ## References
 If you need more information, please refer to the package documentation or the following resources:
