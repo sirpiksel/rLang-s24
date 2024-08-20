@@ -79,9 +79,9 @@ The function returns a list containing the following elements:
   We have a simple time series: `c(2, 4, 6, 8, 10)`. We use the DLA function from the zeitreihen package to calculate the coefficients `phi` and the mean squared errors `v` for this time series, focusing on `m = 2`, which means we're interested in the first two coefficients and their corresponding mean squared errors.
 
 ```{r example One}
-  library(zeitreihen)
-  DLA_data <- zeitreihen::DLA(c(2,4,6,8,10))
-  DLA_data(2)
+library(zeitreihen)
+DLA_data <- zeitreihen::DLA(c(2, 4, 6, 8, 10))
+DLA_data(2)
 ```
 ### Output Interpretation:
 

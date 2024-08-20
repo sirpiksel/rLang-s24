@@ -2,6 +2,10 @@
 title: "Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()"
 output: pdf_document
 author: "Daniela Stängle"
+vignette: >
+%\VignetteIndexEntry{DLA_vignette}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}
 ---
 ```{r setup, include=FALSE}
 library(devtools)

@@ -2,6 +2,10 @@
 title: 'Showcasing periodogram(): estimate the spectral density of a time series'
 author: 'Alexander Klaus'
 output: pdf_document
+vignette: >
+%\VignetteIndexEntry{DLA_vignette}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
