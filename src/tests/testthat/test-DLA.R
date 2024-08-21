@@ -252,7 +252,7 @@ test_that("TEST DLA: correctness", {
   set.seed(2)
   X <- rnorm(5, mean = 0, sd = 1)
   pdl <- DLA(X)
-
+  expect_warning(DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   result <- pdl(2)
   expect_equal(sin(pi), 0)
   expect_equal(result$nu[1], 0.9243285, tolerance = 1e-6)
