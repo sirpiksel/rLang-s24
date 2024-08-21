@@ -108,7 +108,7 @@ test_that("DLA: The values of X must be numeric or complex", {
 test_that("DLA: m must be a value of length 1", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- NULL
   expect_error(pdl(m), "m must be a value of length 1")
@@ -168,7 +168,7 @@ test_that("DLA: m must be a value of length 1", {
 test_that("DLA: m must be numeric", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- "a"
   expect_error(pdl(m), "m must be numeric")
@@ -186,7 +186,7 @@ test_that("DLA: m must be numeric", {
 test_that("DLA: m must not be infinite", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- Inf
   expect_error(pdl(m), "m must not be infinite")
@@ -198,7 +198,7 @@ test_that("DLA: m must not be infinite", {
 test_that("DLA: m must not be NA", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- NA_integer_
   expect_error(pdl(m), "m must not be NA")
@@ -210,7 +210,7 @@ test_that("DLA: m must not be NA", {
 test_that("DLA: m must be an integer", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- 2.5
   expect_error(pdl(m), "m must be an integer")
@@ -231,7 +231,7 @@ test_that("DLA: m must be an integer", {
 test_that("DLA: m must be between 0 and length of X", {
   set.seed(1)
   X <- rnorm(4, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- -1
   expect_error(pdl(m), "m must be between 0 and length of X")
@@ -251,8 +251,7 @@ test_that("DLA: m must be between 0 and length of X", {
 test_that("TEST DLA: correctness", {
   set.seed(2)
   X <- rnorm(5, mean = 0, sd = 1)
-  pdl <- DLA(X)
-  expect_warning(DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   result <- pdl(2)
   expect_equal(sin(pi), 0)
   expect_equal(result$nu[1], 0.9243285, tolerance = 1e-6)
@@ -266,7 +265,7 @@ test_that("TEST DLA: correctness", {
 test_that("Test on return", {
   # set.seed(3)
   X <- rnorm(5, mean = 0, sd = 1)
-  pdl <- DLA(X)
+  expect_warning(pdl <- DLA(X), "Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   m <- 1
   result <- pdl(m)

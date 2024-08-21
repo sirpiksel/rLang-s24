@@ -79,7 +79,6 @@
 #'
 #' @export
 DLA <- function(X) {
-  warning("Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   stopifnot(
     "X must not be empty" = !missing(X),
     "The values of X must be numeric or complex" = is.atomic(X) & (is.numeric(X) | is.complex(X)),
@@ -87,6 +86,7 @@ DLA <- function(X) {
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
+  warning("Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   n <- length(X)
   saf <- fabric_sample_ACVF(X)
 
