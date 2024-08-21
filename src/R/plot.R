@@ -31,7 +31,12 @@ plot <- function(X, n, from = 0, to = pi) {
     "X must be numeric or complex" = (is.numeric(X) | is.complex(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
     "n must be numeric" = is.numeric(n),
-    "n must be an integer" = n %% 1 == 0 & length(n) == 1
+    "n must be an integer" = n %% 1 == 0 & length(n) == 1,
+    "from must be numeric" = is.numeric(from),
+    "from must be greater or equal to 0" = 0 <= from,
+    "from must be smaller than to" = from < to,
+    "to must be numeric" = is.numeric(to),
+    "to must be smaller or equal to pi" = to <= pi
   )
 
   lambda <- seq(from = from, to = to, length.out = n + 1)[-1]
