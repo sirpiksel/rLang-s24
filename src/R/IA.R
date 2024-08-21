@@ -48,13 +48,20 @@
 #'
 #' @export
 IA <- function(X, max_lag = length(X)) {
+  message("This algorithm works for stationary time series with zero-mean.")
+  message("For any other time series the results may be wrong.")
   stopifnot(
-    "X must be a native vector" = is.atomic(X),
-    "X must be only contain numeric or complex values" = is.numeric(X) | is.complex(X),
-    "X must be filled with finite values." = is.finite(X),
-    "max_lag must be an integer." = max_lag %% 1 == 0 & length(max_lag) == 1,
+    "X must be an atomic vector" = is.atomic(X),
+    "X must have more than two values" = length(X) > 2,
+    "X may not contain NAs" = !any(is.na(X)),
+    "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
+    "X must only contain numeric or complex values" = (is.numeric(X) | is.complex(X)),
+    "max_lag must be numeric" = is.numeric(max_lag),
+    "max_lag must be an integer" = max_lag %% 1 == 0 & length(max_lag) == 1,
     "max_lag cannot exceed length(X)" = max_lag <= length(X),
-    "max_lag cannot be smaller than 3" = 3 <= max_lag
+    "max_lag cannot be smaller than 3" = 3 <= max_lag,
+    "max_lag may not be NA" = !(is.na(max_lag)),
+    "max_lag may not be an Inf or -Inf value" = !(is.infinite(max_lag))
   )
 
   nu <- numeric(max_lag)
