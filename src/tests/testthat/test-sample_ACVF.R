@@ -583,8 +583,8 @@ test_that("fabric_sample_ACVF: correctness", {
   fabric_sample_ACVF_neg_values <- sapply(0:-4, foo)
 
   acf_values <- acf(c(2, 4, 6, 8, 10),
-                    type = c("covariance"),
-                    plot = FALSE
+    type = c("covariance"),
+    plot = FALSE
   )$acf[, , 1]
 
   expect_equal(acf_values, fabric_sample_ACVF_values)
