@@ -4,7 +4,7 @@
 \alias{plot}
 \title{Custom Spectral Density Plotting Function}
 \usage{
-plot(X, n)
+plot(X, n, from = 0, to = pi)
 }
 \arguments{
 \item{X}{A numeric vector representing the time series data, including the predictions.}
@@ -18,7 +18,7 @@ A line plot displaying the spectral density estimate of the time series.
 \code{plot} computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(0, \pi]} and manages errors.
 }
 \details{
-The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. The samples are evaluated at evenly spaced points over the interval \eqn{(0, \pi]}. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
+The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. By default the samples are evaluated at evenly spaced points over the interval \eqn{(0, \pi]}, the interval can be changed using the \code{from} and \code{to} parameters. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
 }
 \examples{
 # Generate a random time series with 100 elements
