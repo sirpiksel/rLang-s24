@@ -65,7 +65,7 @@ make_AR <- function(t, phi, sigma = 1, start = numeric(length(phi))) {
     "start may not contain Inf or -Inf values" = !any(is.infinite(start)),
     "The values of start must be numeric or complex" = (is.numeric(start) | is.complex(start)),
     "sigma must be a value of length 1" = (is.atomic(sigma) & length(sigma) == 1),
-    "sigma must be finite" = !is.infinite(sigma),
+    "sigma must not be infinite" = !is.infinite(sigma),
     "sigma must not be NA" = !is.na(sigma),
     "sigma must be numeric" = is.numeric(sigma),
     "sigma must be positive" = sigma > 0
