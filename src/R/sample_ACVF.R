@@ -79,17 +79,20 @@ fabric_sample_ACVF <- function(X) {
   xbar <- mean(X)
   n <- length(X)
 
-  function(h) {
+  return(function(h) {
     stopifnot(
+      "h must be a value of length 1" = (is.atomic(h) && length(h) == 1),
+      "h must not be infinite" = !is.infinite(h),
+      "h must not be NA" = !is.na(h),
       "h must be numeric" = is.numeric(h),
-      "h must be integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
-      "length of X > -h and h < length of X" = (h < n) && (-n < h)
+      "h must be an integer" = h %% 1 == 0,
+      "h must be from the interval (-length(X), length(X))" = (h < n) && (-n < h)
     )
 
     solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
 
     return(solution)
-  }
+  })
 }
 
 lone_sample_ACVF <- function(X, h) {
