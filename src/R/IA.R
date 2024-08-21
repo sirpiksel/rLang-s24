@@ -48,7 +48,7 @@
 #'
 #' @export
 IA <- function(X, max_lag = length(X)) {
-  warning("This algorithm works for stationary time series with zero-mean. For any other time series the results may be wrong.")
+  warning("This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   stopifnot(
     "X must be an atomic vector" = is.atomic(X),
     "X must have more than two values" = length(X) > 2,
@@ -86,4 +86,3 @@ IA <- function(X, max_lag = length(X)) {
   coeffs <- theta_mat[max_lag, (max_lag - 1):1]
   return(list(coeffs = coeffs, nu = nu, theta = theta_mat))
 }
-
