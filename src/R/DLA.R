@@ -43,9 +43,10 @@
 #' @param X A numeric or complex atomic vector representing the time series data.
 #' The series should be stationary, meaning that its mean and variance do not change over time.
 #'
-#' @returns A list with two components:
+#' @returns The output of this function is an anonymous function. The returned function takes the value m as a parameter. The value m means that we use the last m values of the time series to predict by the Durbin-Levinson-Algorithm the next time series value. This function calculates the DLA algorithm, which then returns 
+#' a list with two components:
 #' \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-#' \item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors \eqn{\nu_{i} = \mathbb{E}[X_{i+1} - (\theta_{i1} X_{n} + \dots + \theta_{ii}X_i)]^{2}, \ i > 0} and \eqn{\nu_0 = \gamma(0)}.}
+#' \item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors.}
 #'
 #' @note
 #' The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial
@@ -78,6 +79,7 @@
 #'
 #' @export
 DLA <- function(X) {
+  warning("Please consider: This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   stopifnot(
     "X must not be empty" = !missing(X),
     "The values of X must be numeric or complex" = is.atomic(X) & (is.numeric(X) | is.complex(X)),
@@ -87,7 +89,6 @@ DLA <- function(X) {
   )
   n <- length(X)
   saf <- fabric_sample_ACVF(X)
-  epsilon <- .Machine$double.eps # smallest value for double types
 
   function(m) {
     stopifnot(
@@ -103,11 +104,6 @@ DLA <- function(X) {
     nu <- numeric(m)
     phi <- numeric(m)
 
-
-    if (abs(gamma[1]) < epsilon) {
-      gamma[1] <- epsilon
-    }
-
     nu[1] <- gamma[1]
     phi[1] <- gamma[2] / (gamma[1])
 
@@ -117,11 +113,6 @@ DLA <- function(X) {
 
     for (i in 2:m) {
       nu[i] <- nu[i - 1] * (1 - phi[i - 1]**2)
-
-      if (abs(nu[i]) < epsilon) {
-        nu[i] <- epsilon
-      }
-
       phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu[i]
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
     }

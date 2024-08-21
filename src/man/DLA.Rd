@@ -11,9 +11,10 @@ DLA(X)
 The series should be stationary, meaning that its mean and variance do not change over time.}
 }
 \value{
-A list with two components:
+The output of this function is an anonymous function. The returned function takes the value m as a parameter. The value m means that we use the last m values of the time series to predict by the Durbin-Levinson-Algorithm the next time series value. This function calculates the DLA algorithm, which then returns
+a list with two components:
 \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-\item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors \eqn{\nu_{i} = \mathbb{E}[X_{i+1} - (\theta_{i1} X_{n} + \dots + \theta_{ii}X_i)]^{2}, \ i > 0} and \eqn{\nu_0 = \gamma(0)}.}
+\item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors.}
 }
 \description{
 \code{DLA} can be used to perform the Durbin-Levinson recursion on time series data.
