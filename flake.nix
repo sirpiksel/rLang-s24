@@ -15,7 +15,7 @@
             overlays = [ devshell.overlays.default ];
           };
         rPackages = pkgs.rPackages;
-        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ styler roxygen2 formatR devtools tidyverse ]; };
+        rWrapper = pkgs.rWrapper.override{ packages = with rPackages; [ styler roxygen2 formatR devtools usethis tidyverse ]; };
         pandoc = pkgs.pandoc;
         qpdf = pkgs.qpdf;
         texLive = pkgs.texlive.combine {

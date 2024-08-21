@@ -48,7 +48,6 @@
 #'
 #' @export
 IA <- function(X, max_lag = length(X)) {
-  warning("This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
   stopifnot(
     "X must be an atomic vector" = is.atomic(X),
     "X must have more than two values" = length(X) > 2,
@@ -62,6 +61,7 @@ IA <- function(X, max_lag = length(X)) {
     "max_lag cannot exceed length(X)" = max_lag <= length(X),
     "max_lag cannot be smaller than 3" = 3 <= max_lag
   )
+  warning("This algorithm works for stationary time series with zero-mean.\nFor any other time series the results may be wrong.")
 
   nu <- numeric(max_lag)
 
