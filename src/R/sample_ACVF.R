@@ -66,7 +66,6 @@ sample_ACVF <- function(X, h = 0:(length(X) - 1)) {
   return(solution)
 }
 
-
 fabric_sample_ACVF <- function(X) {
   stopifnot(
     "X must be an atomic vector" = is.atomic(X),
@@ -93,21 +92,4 @@ fabric_sample_ACVF <- function(X) {
 
     return(solution)
   })
-}
-
-lone_sample_ACVF <- function(X, h) {
-  stopifnot(
-    "X must be numeric" = is.numeric(X),
-    "X has NA entries" = !any(is.na(X)),
-    "h must be numeric" = is.numeric(h),
-    "h must be an integer and has to have length 1" = (h %% 1 == 0) & (length(h) == 1),
-    "length of X > -h and h < length of X" = (h < length(X)) && (-length(X) < h)
-  )
-
-  n <- length(X)
-  xbar <- mean(X)
-
-  solution <- sum((X[(1 + abs(h)):n] - xbar) * (X[1:(n - abs(h))] - xbar)) / n
-
-  return(solution)
 }
