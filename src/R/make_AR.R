@@ -10,11 +10,8 @@
 #' where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is white noise with a mean of zero and a variance of \eqn{\sigma^2}.
 #'
 #' @param t An integer specifying the desired length of the time series.
-#'
 #' @param phi A numeric or complex atomic vector of length `p` containing the coefficients of the AR(p) process.
-#'
 #' @param sigma A numeric value representing the standard deviation of the white noise, with a default value of 1.
-#'
 #' @param start A numeric atomic vector containing the first `p` observations, which are 0 by default.
 #'
 #' @returns An atomic numeric vector containing the generated AR(p) time series.
@@ -31,12 +28,12 @@
 #' ar_two <- make_AR(t = 10, phi = c(1 + 1i, 0))
 #' zeitreihen::plot(ar_two, 100)
 #' sample_ACVF(ar_two)
-#' 
+#'
 #' # Example 3: Simple AR(3) model
 #' ar_three <- make_AR(t = 10, phi = c(6, 9, 1))
 #' zeitreihen::plot(ar_three, 100)
 #' sample_ACVF(ar_three)
-#' 
+#'
 #' # Example 4: Simple AR(4) model
 #' ar_four <- make_AR(t = 10, phi = c(0, 4, 1, 2), start = c(9, 5))
 #' zeitreihen::plot(ar_four, 100)

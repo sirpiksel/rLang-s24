@@ -1,249 +1,249 @@
 # Test conditions for X
 
 test_that("DLA: X must be an atomic vector", {
-    X <- NULL
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- list(1, 2, 3, 4)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- c(list(1, 2, 3, 4))
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- data.frame(1:4)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- data.frame(list(1:4))
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- logical(0)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- character(0)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- NA
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- NA_character_
-    expect_error(DLA(X), "The values of X must be numeric or complex")
+  X <- NULL
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- list(1, 2, 3, 4)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- c(list(1, 2, 3, 4))
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- data.frame(1:4)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- data.frame(list(1:4))
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- logical(0)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- character(0)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- NA
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- NA_character_
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 })
 
 test_that("DLA: X must have positive length", {
-    X <- integer(0)
-    expect_error(DLA(X), "X must have positive length")
-    
-    X <- double(0)
-    expect_error(DLA(X), "X must have positive length")
-    
-    X <- numeric(0)
-    expect_error(DLA(X), "X must have positive length")
-    
-    X <- complex(0)
-    expect_error(DLA(X), "X must have positive length")
+  X <- integer(0)
+  expect_error(DLA(X), "X must have positive length")
+
+  X <- double(0)
+  expect_error(DLA(X), "X must have positive length")
+
+  X <- numeric(0)
+  expect_error(DLA(X), "X must have positive length")
+
+  X <- complex(0)
+  expect_error(DLA(X), "X must have positive length")
 })
 
 test_that("DLA: X may not contain NAs", {
-    X <- NaN
-    expect_error(DLA(X), "X may not contain NAs")
-    
-    X <- NA_integer_
-    expect_error(DLA(X), "X may not contain NAs")
-    
-    X <- NA_real_
-    expect_error(DLA(X), "X may not contain NAs")
-    
-    X <- NA_complex_
-    expect_error(DLA(X), "X may not contain NAs")
-    
-    X <- c(1, 2, NA, 4, 5)
-    expect_error(DLA(X), "X may not contain NAs")
-    
-    X <- c(1, NA, NaN, NA_real_, 5)
-    expect_error(DLA(X), "X may not contain NAs")
+  X <- NaN
+  expect_error(DLA(X), "X may not contain NAs")
+
+  X <- NA_integer_
+  expect_error(DLA(X), "X may not contain NAs")
+
+  X <- NA_real_
+  expect_error(DLA(X), "X may not contain NAs")
+
+  X <- NA_complex_
+  expect_error(DLA(X), "X may not contain NAs")
+
+  X <- c(1, 2, NA, 4, 5)
+  expect_error(DLA(X), "X may not contain NAs")
+
+  X <- c(1, NA, NaN, NA_real_, 5)
+  expect_error(DLA(X), "X may not contain NAs")
 })
 
 test_that("DLA: X may not contain Inf or -Inf values", {
-    X <- Inf
-    expect_error(DLA(X), "X may not contain Inf or -Inf values")
-    
-    X <- -Inf
-    expect_error(DLA(X), "X may not contain Inf or -Inf values")
-    
-    X <- c(1, Inf, -Inf, 4, 5)
-    expect_error(DLA(X), "X may not contain Inf or -Inf values")
+  X <- Inf
+  expect_error(DLA(X), "X may not contain Inf or -Inf values")
+
+  X <- -Inf
+  expect_error(DLA(X), "X may not contain Inf or -Inf values")
+
+  X <- c(1, Inf, -Inf, 4, 5)
+  expect_error(DLA(X), "X may not contain Inf or -Inf values")
 })
 
 test_that("DLA: The values of X must be numeric or complex", {
-    X <- c(TRUE, FALSE)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- ""
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- "asdf"
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- "42"
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- c("a", "b", "c")
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- c(1L, 2, TRUE, "42", 5)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- c(-pi, -0.1, "0", 1, 2)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- c(1:100, "101")
-    expect_error(DLA(X), "The values of X must be numeric or complex")
-    
-    X <- raw(1)
-    expect_error(DLA(X), "The values of X must be numeric or complex")
+  X <- c(TRUE, FALSE)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- ""
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- "asdf"
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- "42"
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- c("a", "b", "c")
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- c(1L, 2, TRUE, "42", 5)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- c(-pi, -0.1, "0", 1, 2)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- c(1:100, "101")
+  expect_error(DLA(X), "The values of X must be numeric or complex")
+
+  X <- raw(1)
+  expect_error(DLA(X), "The values of X must be numeric or complex")
 })
 
 ## Test conditions for m
 
 test_that("DLA: m must be a value of length 1", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- NULL
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- logical(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- integer(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- double(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- numeric(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- complex(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- character(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- raw(0)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- c()
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- c(1, 2)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- c(1, 2, 3)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- seq(from = 0, to = 1, by = 0.1)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- list()
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- list(1, 2, 3)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- c(TRUE, FALSE)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- c("a", "b", "c")
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- matrix(1:10, 5, 2)
-    expect_error(pdl(m), "m must be a value of length 1")
-    
-    m <- raw(2)
-    expect_error(pdl(m), "m must be a value of length 1")
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- NULL
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- logical(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- integer(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- double(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- numeric(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- complex(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- character(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- raw(0)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- c()
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- c(1, 2)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- c(1, 2, 3)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- seq(from = 0, to = 1, by = 0.1)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- list()
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- list(1, 2, 3)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- c(TRUE, FALSE)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- c("a", "b", "c")
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- matrix(1:10, 5, 2)
+  expect_error(pdl(m), "m must be a value of length 1")
+
+  m <- raw(2)
+  expect_error(pdl(m), "m must be a value of length 1")
 })
 
 test_that("DLA: m must be numeric", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- "a"
-    expect_error(pdl(m), "m must be numeric")
-    
-    m <- TRUE
-    expect_error(pdl(m), "m must be numeric")
-    
-    m <- factor(1)
-    expect_error(pdl(m), "m must be numeric")
-    
-    m <- NA
-    expect_error(pdl(m), "m must be numeric")
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- "a"
+  expect_error(pdl(m), "m must be numeric")
+
+  m <- TRUE
+  expect_error(pdl(m), "m must be numeric")
+
+  m <- factor(1)
+  expect_error(pdl(m), "m must be numeric")
+
+  m <- NA
+  expect_error(pdl(m), "m must be numeric")
 })
 
 test_that("DLA: m must not be infinite", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- Inf
-    expect_error(pdl(m), "m must not be infinite")
-    
-    m <- -Inf
-    expect_error(pdl(m), "m must not be infinite")
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- Inf
+  expect_error(pdl(m), "m must not be infinite")
+
+  m <- -Inf
+  expect_error(pdl(m), "m must not be infinite")
 })
 
 test_that("DLA: m must not be NA", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- NA_integer_
-    expect_error(pdl(m), "m must not be NA")
-    
-    m <- NA_real_
-    expect_error(pdl(m), "m must not be NA")
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- NA_integer_
+  expect_error(pdl(m), "m must not be NA")
+
+  m <- NA_real_
+  expect_error(pdl(m), "m must not be NA")
 })
 
 test_that("DLA: m must be an integer", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- 2.5
-    expect_error(pdl(m), "m must be an integer")
-    
-    m <- pi
-    expect_error(pdl(m), "m must be an integer")
-    
-    m <- 10e-6
-    expect_error(pdl(m), "m must be an integer")
-    
-    m <- .Machine$double.eps
-    expect_error(pdl(m), "m must be an integer") 
-    
-    m <- 0.1
-    expect_error(pdl(m), "m must be an integer") 
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- 2.5
+  expect_error(pdl(m), "m must be an integer")
+
+  m <- pi
+  expect_error(pdl(m), "m must be an integer")
+
+  m <- 10e-6
+  expect_error(pdl(m), "m must be an integer")
+
+  m <- .Machine$double.eps
+  expect_error(pdl(m), "m must be an integer")
+
+  m <- 0.1
+  expect_error(pdl(m), "m must be an integer")
 })
 
 test_that("DLA: m must be between 0 and length of X", {
-    set.seed(1)
-    X <- rnorm(4, mean = 0, sd = 1)
-    pdl <- DLA(X)
-    
-    m <- -1
-    expect_error(pdl(m), "m must be between 0 and length of X")
-    
-    m <- 0
-    expect_error(pdl(m), "m must be between 0 and length of X")
-    
-    m <- 5
-    expect_error(pdl(m), "m must be between 0 and length of X")
-    
-    m <- 4
-    expect_error(pdl(m), "m must be between 0 and length of X")
+  set.seed(1)
+  X <- rnorm(4, mean = 0, sd = 1)
+  pdl <- DLA(X)
+
+  m <- -1
+  expect_error(pdl(m), "m must be between 0 and length of X")
+
+  m <- 0
+  expect_error(pdl(m), "m must be between 0 and length of X")
+
+  m <- 5
+  expect_error(pdl(m), "m must be between 0 and length of X")
+
+  m <- 4
+  expect_error(pdl(m), "m must be between 0 and length of X")
 })
 
 # Test on correctness
@@ -274,7 +274,7 @@ test_that("Test on return", {
   expect_true(all(names(result) %in% c("phi", "nu")))
   expect_equal(length(result$phi), 1)
   expect_equal(length(result$nu), 1)
-  
+
   # Additional Test for extreme m
   m <- length(X)
   expect_error(pdl(m), "m must be between 0 and length of X")

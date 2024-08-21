@@ -10,9 +10,7 @@
 #' where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is white noise with a mean of zero and variance of \eqn{\sigma^2}.
 #'
 #' @param t An integer specifying the desired length of the time series.
-#'
 #' @param theta A numeric or complex atomic vector of length `q` containing the coefficients of the MA(q) process.
-#'
 #' @param sigma A numeric value representing the standard deviation of the white noise, with a default value of 1.
 #'
 #' @returns A numeric atomic vector containing the generated MA(q) time series.

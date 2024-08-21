@@ -89,226 +89,218 @@ test_that("AR(1) Time Series", {
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })
 
-#Conditions for X
+# Conditions for X
 test_that("IA: X must be an atomic vector", {
-
   X <- NULL
   expect_error(IA(X), "X must be an atomic vector")
-  
+
   X <- list(1, 2, 3)
   expect_error(IA(X), "X must be an atomic vector")
-  
+
   X <- c(list(1, 2, 3))
   expect_error(IA(X), "X must be an atomic vector")
-  
-  X <- function(x) 2*x+1
+
+  X <- function(x) 2 * x + 1
   expect_error(IA(X), "X must be an atomic vector")
-  
-  X <- expression(c(2,4,5,7))
+
+  X <- expression(c(2, 4, 5, 7))
   expect_error(IA(X), "X must be an atomic vector")
-  
-  X <- data.frame(x=rnorm(100,0,1),y=rnorm(100,0,1))
+
+  X <- data.frame(x = rnorm(100, 0, 1), y = rnorm(100, 0, 1))
   expect_error(IA(X), "X must be an atomic vector")
 })
 
 test_that("IA: X must have more than two values", {
-
   X <- ""
   expect_error(IA(X), "X must have more than two values")
-  
+
   X <- integer(2)
   expect_error(IA(X), "X must have more than two values")
-  
+
   X <- double(2)
   expect_error(IA(X), "X must have more than two values")
-  
+
   X <- numeric(2)
   expect_error(IA(X), "X must have more than two values")
-  
+
   X <- complex(2)
   expect_error(IA(X), "X must have more than two values")
-
 })
 
 test_that("IA: X may not contain NAs", {
-  
-  X <- c(NA,NA,NA)
+  X <- c(NA, NA, NA)
   expect_error(IA(X), "X may not contain NAs")
-  
-  X <- c(NaN,NaN,NaN)
+
+  X <- c(NaN, NaN, NaN)
   expect_error(IA(X), "X may not contain NAs")
-  
-  X <- c(NA_integer_,NA_integer_,NA_integer_)
+
+  X <- c(NA_integer_, NA_integer_, NA_integer_)
   expect_error(IA(X), "X may not contain NAs")
-  
-  X <- c(NA_real_,NA_real_,NA_real_)
+
+  X <- c(NA_real_, NA_real_, NA_real_)
   expect_error(IA(X), "X may not contain NAs")
-  
-  X <- c(NA_complex_,NA_complex_,NA_complex_)
+
+  X <- c(NA_complex_, NA_complex_, NA_complex_)
   expect_error(IA(X), "X may not contain NAs")
-  
+
   X <- c(1, 2, NA, 4, 5)
   expect_error(IA(X), "X may not contain NAs")
-  
+
   X <- c(1, NA, NaN, NA_real_, 5)
   expect_error(IA(X), "X may not contain NAs")
-  
-  X <- c(NULL, NA, Inf,2)
+
+  X <- c(NULL, NA, Inf, 2)
   expect_error(IA(X), "X may not contain NAs")
 })
 
 test_that("IA: X may not contain Inf or -Inf values", {
-  
-  X <- c(1,2,Inf)
+  X <- c(1, 2, Inf)
   expect_error(IA(X), "X may not contain Inf or -Inf values")
-  
-  X <- c(0,-Inf,2)
+
+  X <- c(0, -Inf, 2)
   expect_error(IA(X), "X may not contain Inf or -Inf values")
-  
+
   X <- c(NULL, Inf, -Inf, 4, 5)
   expect_error(IA(X), "X may not contain Inf or -Inf values")
 })
 
 test_that("IA: X must only contain numeric or complex values", {
-  
-  X <- c(TRUE, FALSE,FALSE)
-  expect_error(IA(X),"X must only contain numeric or complex values")
-  
-  X <- c(1,"",2)
+  X <- c(TRUE, FALSE, FALSE)
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
-  X <- c(1,2,"asdf")
+
+  X <- c(1, "", 2)
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
-  X <- c(1,"42",2)
+
+  X <- c(1, 2, "asdf")
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
+
+  X <- c(1, "42", 2)
+  expect_error(IA(X), "X must only contain numeric or complex values")
+
   X <- c("a", "b", "c")
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
+
   X <- c(1L, 2, TRUE, "42", 5)
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
+
   X <- c(-pi, -0.1, "0", 1, 2)
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
-  X <- c(1:100, "101",0)
+
+  X <- c(1:100, "101", 0)
   expect_error(IA(X), "X must only contain numeric or complex values")
-  
+
   X <- raw(3)
   expect_error(IA(X), "X must only contain numeric or complex values")
 })
 
 # Conditions for max_lag
-test_that("max_lag cannot be smaller than 3",{
+test_that("max_lag cannot be smaller than 3", {
   set.seed(45)
   X <- rnorm(100, mean = 0, sd = 1)
-  
+
   max_lag <- 0
-  expect_error(IA(X, max_lag),"max_lag cannot be smaller than 3")
-  
+  expect_error(IA(X, max_lag), "max_lag cannot be smaller than 3")
+
   max_lag <- 1
-  expect_error(IA(X, max_lag),"max_lag cannot be smaller than 3")
-  
+  expect_error(IA(X, max_lag), "max_lag cannot be smaller than 3")
+
   max_lag <- 2
-  expect_error(IA(X, max_lag),"max_lag cannot be smaller than 3")
+  expect_error(IA(X, max_lag), "max_lag cannot be smaller than 3")
 })
 
-test_that("max_lag may not be NA",{
+test_that("max_lag may not be NA", {
   set.seed(46)
   X <- rnorm(100, mean = 0, sd = 1)
-  
+
   max_lag <- NA
-  expect_error(IA(X, max_lag),"max_lag may not be NA")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be NA")
+
   max_lag <- NaN
-  expect_error(IA(X, max_lag),"max_lag may not be NA")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be NA")
+
   max_lag <- NA_integer_
-  expect_error(IA(X, max_lag),"max_lag may not be NA")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be NA")
+
   max_lag <- NA_complex_
-  expect_error(IA(X, max_lag),"max_lag may not be NA")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be NA")
+
   max_lag <- NA_character_
-  expect_error(IA(X, max_lag),"max_lag may not be NA")
+  expect_error(IA(X, max_lag), "max_lag may not be NA")
 })
 
-test_that("max_lag may not be an Inf or -Inf value",{
+test_that("max_lag may not be an Inf or -Inf value", {
   set.seed(47)
   X <- rnorm(100, mean = 0, sd = 1)
-  
+
   max_lag <- Inf
-  expect_error(IA(X, max_lag),"max_lag may not be an Inf or -Inf value")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be an Inf or -Inf value")
+
   max_lag <- -Inf
-  expect_error(IA(X, max_lag),"max_lag may not be an Inf or -Inf value")
-  
+  expect_error(IA(X, max_lag), "max_lag may not be an Inf or -Inf value")
 })
 
 test_that("IA: max_lag must be numeric", {
   set.seed(42)
-  X <- rnorm(100,mean = 0,sd=1)
+  X <- rnorm(100, mean = 0, sd = 1)
 
   max_lag <- TRUE
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- F
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- ""
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- "pi"
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- "42"
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- 0i
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- 1i
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- 2 + 5i
   expect_error(IA(X, max_lag), "max_lag must be numeric")
-  
+
   max_lag <- raw(1)
   expect_error(IA(X, max_lag), "max_lag must be numeric")
 })
 
 test_that("IA: max_lag must be an integer", {
   set.seed(43)
-  X <- rnorm(100,mean = 0,sd=1)
-  
+  X <- rnorm(100, mean = 0, sd = 1)
+
   max_lag <- 2.5
   expect_error(IA(X, max_lag), "max_lag must be an integer")
-  
+
   max_lag <- .Machine$double.eps
   expect_error(IA(X, max_lag), "max_lag must be an integer")
-  
+
   max_lag <- 0.1
   expect_error(IA(X, max_lag), "max_lag must be an integer")
-  
+
   max_lag <- pi
   expect_error(IA(X, max_lag), "max_lag must be an integer")
-  
+
   max_lag <- 10e-8
   expect_error(IA(X, max_lag), "max_lag must be an integer")
 })
 
-test_that("IA: max_lag cannot exceed length\\(X\\)",{
+test_that("IA: max_lag cannot exceed length\\(X\\)", {
   set.seed(44)
   X <- rnorm(100, mean = 0, sd = 1)
-  
+
   max_lag <- 101
   expect_error(IA(X, max_lag), "max_lag cannot exceed length\\(X\\)")
-  
+
   max_lag <- 102
   expect_error(IA(X, max_lag), "max_lag cannot exceed length\\(X\\)")
-  
+
   max_lag <- 1001
   expect_error(IA(X, max_lag), "max_lag cannot exceed length\\(X\\)")
 })
-
