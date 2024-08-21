@@ -22,17 +22,17 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Basic Usage
+#' # Example 1: Basic Usage
 #' X <- c(1, 2, 3, 4, 5)
 #' h <- c(0, 1, 2)
 #' sample_ACVF(X, h)
 #'
-#' # Sample ACVF with a Single Lag
+#' # Example 2: Sample ACVF with a Single Lag
 #' X <- c(2, 4, 6, 8, 10)
 #' h <- 0
 #' sample_ACVF(X, h)
 #'
-#' # Sample ACVF with Random Data
+#' # Example 3: Sample ACVF with Random Data
 #' set.seed(123)
 #' X <- rnorm(100)
 #' h <- c(-2, 0, 2)

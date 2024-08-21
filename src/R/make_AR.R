@@ -22,25 +22,25 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Simple AR(1) model
+#' # Example 1: Simple AR(1) model
 #' ar_one <- make_AR(t = 10, phi = -0.7, sigma = 9, start = 7)
 #' zeitreihen::plot(ar_one, 100)
 #' sample_ACVF(ar_one)
 #'
-#' # Simple AR(4) model
-#' ar_four <- make_AR(t = 10, phi = c(0, 4, 1, 2), start = c(9, 5))
-#' zeitreihen::plot(ar_four, 100)
-#' sample_ACVF(ar_four)
-#'
-#' # Simple AR(3) model
-#' ar_three <- make_AR(t = 10, phi = c(6, 9, 1))
-#' zeitreihen::plot(ar_three, 100)
-#' sample_ACVF(ar_three)
-#'
-#' # Simple AR(2) model
+#' # Example 2: Simple AR(2) model
 #' ar_two <- make_AR(t = 10, phi = c(1 + 1i, 0))
 #' zeitreihen::plot(ar_two, 100)
 #' sample_ACVF(ar_two)
+#' 
+#' # Example 3: Simple AR(3) model
+#' ar_three <- make_AR(t = 10, phi = c(6, 9, 1))
+#' zeitreihen::plot(ar_three, 100)
+#' sample_ACVF(ar_three)
+#' 
+#' # Example 4: Simple AR(4) model
+#' ar_four <- make_AR(t = 10, phi = c(0, 4, 1, 2), start = c(9, 5))
+#' zeitreihen::plot(ar_four, 100)
+#' sample_ACVF(ar_four)
 #'
 #' @export
 make_AR <- function(t, phi, sigma = 1, start = numeric(length(phi))) {

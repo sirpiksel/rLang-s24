@@ -28,17 +28,17 @@ The \strong{sample autocovariance function} measures the covariance between valu
 \deqn{\hat{\gamma}(h) := n^{-1} \displaystyle{\sum_{t=1}^{n - |h|} (x_{t + |h|} - \bar{x}) \cdot (x_t - \bar{x})}, \quad -n < h < n.}
 }
 \examples{
-# Basic Usage
+# Example 1: Basic Usage
 X <- c(1, 2, 3, 4, 5)
 h <- c(0, 1, 2)
 sample_ACVF(X, h)
 
-# Sample ACVF with a Single Lag
+# Example 2: Sample ACVF with a Single Lag
 X <- c(2, 4, 6, 8, 10)
 h <- 0
 sample_ACVF(X, h)
 
-# Sample ACVF with Random Data
+# Example 3: Sample ACVF with Random Data
 set.seed(123)
 X <- rnorm(100)
 h <- c(-2, 0, 2)

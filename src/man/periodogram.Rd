@@ -28,17 +28,17 @@ Within the \code{\link{plot}} function, this function is used to calculate the p
 of a given time series for several lambda values in the interval \eqn{(-\pi, \pi]}.
 }
 \examples{
-# Periodogram for a simple sine curve
+# Example 1: Periodogram for a simple sine curve
 X <- sin(2 * pi * 1:100 / 100)
 lambda <- 2 * pi / 100
 periodogram(X, lambda)
 
-# Periodogram for a complex exponential curve
+# Example 2: Periodogram for a complex exponential curve
 X <- exp(2 * pi * 1i * 1:100 / 100)
 lambda <- 2 * pi / 100
 periodogram(X, lambda)
 
-# Periodogram for white noise
+# Example 3: Periodogram for white noise
 set.seed(123)
 X <- rnorm(100)
 lambda <- pi / 4

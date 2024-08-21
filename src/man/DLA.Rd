@@ -61,31 +61,25 @@ The function includes checks for numerical stability. If any of the calculated v
 autocovariance value \eqn{\gamma(0)} is too close to zero, the function terminates and returns an error to prevent numerical instability.
 }
 \examples{
-# Basic Usage
-
-data_two <- rnorm(100,mean = 0,sd = 1)
-
-model <- DLA(data_two)
+# Example 1: Basic Usage
+X <- rnorm(100)
+model <- DLA(X)
 result <- model(20)
 print(result)
 
-# make_AR Usage
-
+# Example 2: Usage for an AR(4) model
 t <- 100
-phi <- c(1,0,1,2)
-data_one <- make_AR(t,phi)
-
-model <- DLA(data_one)
+phi <- c(1, 0, 1, 2)
+data <- make_AR(t, phi)
+model <- DLA(data)
 result <- model(4)
 print(result)
 
-# make_MA Usage
-
+# Example 3: Usage for an MA(4) model
 t <- 100
-theta <- c(0,4,1,0)
-data_three <- make_MA(t,theta)
-
-model <- DLA(data_three)
+theta <- c(0, 4, 1, 0)
+data <- make_MA(t, theta)
+model <- DLA(data)
 result <- model(4)
 print(result)
 

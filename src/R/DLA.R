@@ -54,31 +54,25 @@
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
 #' @examples
-#' # Basic Usage
-#'
-#' data_two <- rnorm(100, mean = 0, sd = 1)
-#'
-#' model <- DLA(data_two)
+#' # Example 1: Basic Usage
+#' X <- rnorm(100)
+#' model <- DLA(X)
 #' result <- model(20)
 #' print(result)
 #'
-#' # make_AR Usage
-#'
+#' # Example 2: Usage for an AR(4) model
 #' t <- 100
 #' phi <- c(1, 0, 1, 2)
-#' data_one <- make_AR(t, phi)
-#'
-#' model <- DLA(data_one)
+#' data <- make_AR(t, phi)
+#' model <- DLA(data)
 #' result <- model(4)
 #' print(result)
 #'
-#' # make_MA Usage
-#'
+#' # Example 3: Usage for an MA(4) model
 #' t <- 100
 #' theta <- c(0, 4, 1, 0)
-#' data_three <- make_MA(t, theta)
-#'
-#' model <- DLA(data_three)
+#' data <- make_MA(t, theta)
+#' model <- DLA(data)
 #' result <- model(4)
 #' print(result)
 #'
