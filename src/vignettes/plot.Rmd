@@ -1,9 +1,9 @@
 ---
-title: "Using the Plotting function to Plot the estimated spectral density"
+title: "plot"
 output: rmarkdown::html_vignette
 author: "Philip Kastura-Sahl"
 vignette: >
-  %\VignetteIndexEntry{Using the Plotting function to Plot the estimated spectral density}
+  %\VignetteIndexEntry{plot}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,9 @@ knitr::opts_chunk$set(
 library(zeitreihen)
 ```
 
-## `plot()`-Function for Spectral Density Plotting
+## Using the Plotting function to Plot the estimated spectral density
+
+### `plot()`-Function for Spectral Density Plotting
 The [**periodogram**](#periodogram) of \(\{x_1, \dots, x_n\}\) is the function
 \[
   I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^{n} x_t e^{-it\lambda} \right|^2
@@ -33,8 +35,8 @@ X <- stats::rnorm(30)
 zeitreihen::plot(X, num_samples)
 ```
 
-## Adjusting the samples
-The plot takes `n`-samples from the interval of \((0, \pi]\) and evaluates the spectral density across it using the `periodogram()` function. To get a more detailed
+### Adjusting the samples
+By default, the plot takes `n`-samples from the interval of \((0, \pi]\) and evaluates the spectral density across it using the `periodogram()` function. To get a more detailed.
 ```{r, adjust sample size}
 set.seed(742)
 num_samples <- 250
@@ -42,7 +44,19 @@ X <- stats::rnorm(30)
 zeitreihen::plot(X, num_samples)
 ```
 
-## Requirements
+### Adjusting the interval
+The `plot()` function also allows you to adjust the interval over which the spectral density is calculated by modifying the `from` and `to` parameters. By default, the interval is \((0, \pi]\), but you can specify a different interval that best suits your analysis. \
+\
+For example, to evaluate the spectral density over the interval \((\pi/2, \pi]\):
+```{r, adjusting interval}
+set.seed(742)
+num_samples <- 250
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples, from = pi / 2, to = pi)
+```
+By adjusting the `from` and `to` parameters, you can hone in on specific regions of interest in the frequency spectrum, allowing for more detailed spectral density analysis.
+
+### Requirements
 - `X` should be a native vector consisting of either numeric (real numbers) or complex numbers. `X` should not include any values that are not finite such as `Inf`,`NaN` or `NA`.
 ```{r, Example error with X, error = TRUE}
 set.seed(742)
@@ -58,7 +72,7 @@ X <- stats::rnorm(30)
 zeitreihen::plot(X, num_samples)
 ```
 
-## References
+### References
 If you need more information, please refer to the package documentation or the following resources:
 
-- Introduction to Time Series and Forecasting: [Chapter 4.2 The Periodogram](https://link.springer.com/book/10.1007/978-3-319-29854-2)
+- [Introduction to Time Series and Forecasting](https://link.springer.com/book/10.1007/978-3-319-29854-2)
