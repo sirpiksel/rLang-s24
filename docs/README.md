@@ -24,7 +24,7 @@
 - [x] komfortable Plot-Funktionen zur Darstellung der Zeitreihen ihrer spektralen Dichten und der Schätzung letzterer (Philip)
 - [x] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle, parallel zur Entwicklung)
 - [ ] Vignette (Alle)
-- [ ] Zugriffsrechte für Betreuer freischalten
+- [x] Zugriffsrechte für Betreuer freischalten
 - [x] Zwischenbericht
 - [ ] Abschlussbericht
 - [ ] Abschlusspräsentation
