@@ -3,10 +3,12 @@
 #' @description `plot` computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(0, \pi]} and manages errors.
 #'
 #' @details
-#' The function computes periodogram values using the `periodogram` function from the `stats` package. It then generates a plot of the spectral density estimate with the `plot` function from the `graphics` package, including a legend to distinguish between observed and predicted values. By default the samples are evaluated at evenly spaced points over the interval \eqn{(0, \pi]}, the interval can be changed using the `from` and `to` parameters. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
+#' The function computes periodogram values using the `periodogram` function from the `stats` package. It then generates a plot of the spectral density estimate with the `plot` function from the `graphics` package, including a legend to distinguish between observed and predicted values. By default the samples are evaluated at evenly spaced points over the left-open interval \eqn{(0, \pi]}, the interval can be changed using the `from` and `to` parameters. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
 #'
 #' @param X A numeric vector representing the time series data, including the predictions.
 #' @param n an integer specifying the number of samples to evaluate the periodogram with.
+#' @param from startpoint for the half-open interval greater than `from`
+#' @param to endpoint for the half-open interval smaller than or equal to `to`
 #'
 #' @return A line plot displaying the spectral density estimate of the time series.
 #'
