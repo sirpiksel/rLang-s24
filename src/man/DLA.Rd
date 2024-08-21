@@ -11,7 +11,7 @@ DLA(X)
 The series should be stationary, meaning that its mean and variance do not change over time.}
 }
 \value{
-The output of this function is an anonymous function. The returned function takes the value m as a parameter. The value m means that we use the last m values of the time series to predict by the Durbin-Levinson-Algorithm the next time series value. This function calculates the DLA algorithm, which then returns
+The output of this function is an anonymous function. The returned function takes the value \code{m} as a parameter. The value \code{m} means that we use the last m values of the time series to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the Durbin-Levinson algorithm, which then returns
 a list with two components:
 \item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
 \item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors.}
