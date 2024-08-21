@@ -100,7 +100,7 @@ DLA <- function(X) {
     )
 
     gamma <- sapply(0:m, saf)
-    v <- numeric(m)
+    nu <- numeric(m)
     phi <- numeric(m)
 
 
@@ -108,23 +108,23 @@ DLA <- function(X) {
       gamma[1] <- epsilon
     }
 
-    v[1] <- gamma[1]
+    nu[1] <- gamma[1]
     phi[1] <- gamma[2] / (gamma[1])
 
     if (m == 1) {
-      return(list(phi = phi, v = v))
+      return(list(phi = phi, nu = nu))
     }
 
     for (i in 2:m) {
-      v[i] <- v[i - 1] * (1 - phi[i - 1]**2)
+      nu[i] <- nu[i - 1] * (1 - phi[i - 1]**2)
 
-      if (abs(v[i]) < epsilon) {
-        v[i] <- epsilon
+      if (abs(nu[i]) < epsilon) {
+        nu[i] <- epsilon
       }
 
-      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / v[i]
+      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu[i]
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
     }
-    return(list(phi = phi, v = v))
+    return(list(phi = phi, nu = nu))
   }
 }
