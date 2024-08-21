@@ -1,10 +1,9 @@
 ---
-title: "Durbin-Levinson Algorithm"
+title: "DLA"
 author: "Clemens Glomb"
-date: "2024-08-19"
 output: pdf_document
 vignette: >
-  %\VignetteIndexEntry{Durbin-Levinson Algorithm}
+  %\VignetteIndexEntry{DLA}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,12 +14,12 @@ load_all(".")
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction
+## Durbin-Levinson Algorithm
+### Introduction
 
 In this vignette the application of the function 'DLA' is presented. DLA stands for the Durbin-Levinson algorithm, which is used for the recursive calculation of coefficients for time series data. The Durbin-Levinson algorithm is generally used for AR(p) processes. It enables the coefficients of autoregressive models to be calculated efficiently. This function is useful for modeling time series in order to make predictions. It can be used to understand the movement of the series over time.
 
-# Theoretical Background
-
+### Theoretical Background
 The Durbin-Levinson algorithm works recursion-based and calculates the coefficients of an autoregressive (AR) model of a time series. It works as follows: For a given stationary time series \(\{x_1, \dots, x_n\}\), the algorithm calculates the coefficients \(\phi_{n1}, \dots, \phi_{nn}\) and the corresponding variances \(v_n\).
 
 The algorithm uses the following recursive steps to calculate the coefficient. At the beginning \(\phi_{11}\) will be computed with \(\frac{\gamma(1)}{\gamma(0)}\), while \(\gamma(n)\) is the autocovariance of the time series.
@@ -54,27 +53,23 @@ The algorithm uses the following recursive steps to calculate the coefficient. A
 v_n = v_{n-1} \left[1 - \phi_{nn}^2\right],
 \]
 
-# How the Function Works
-
-## Function Parameters
-
+### How the Function Works
+#### Function Parameters
 The `DLA` function takes the following inputs:
 
 - **X**: A numeric vector that represents the time series data. This time series should be stationary.
 
 - **m**: The number of coefficients to be calculated. This parameter is determined after calling `DLA`.
 
-## Function Output
-
+#### Function Output
 The function returns a list containing the following elements:
 
 - **phi**: A numeric vector of length `m`. It contains the calculated coefficients \(\phi_{n1}, \dots, \phi_{nn}\). Each element in `phi` represents the influence of previous values in the time series on the current value. For example, \(\phi_{n1}\) shows how much the first lag (previous value) affects the current value of the time series. These coefficients help to understand the dependency structure within the time series.
 
 - **v**: A numeric vector of length `m`. It contains the mean squared errors \(v_n\). These variances quantify the uncertainty or error associated with each prediction in the AR model. Lower values in `v` indicate that the model's predictions are more certain, while higher values suggest more uncertainty. Essentially, `v` helps in understanding the reliability of the model at each step.
 
-# Practical Application
-
-## **Simple Example**:
+### Practical Application
+#### **Simple Example**:
   
   We have a simple time series: `c(2, 4, 6, 8, 10)`. We use the DLA function from the zeitreihen package to calculate the coefficients `phi` and the mean squared errors `v` for this time series, focusing on `m = 2`, which means we're interested in the first two coefficients and their corresponding mean squared errors.
 
@@ -83,9 +78,8 @@ library(zeitreihen)
 DLA_data <- zeitreihen::DLA(c(2, 4, 6, 8, 10))
 DLA_data(2)
 ```
-### Output Interpretation:
-
-- `phi` (Coefficients): The output gives us two coefficients: `[1] 0.5238095 -0.3095238`. 
+##### Output Interpretation:
+- `phi` (Coefficients): The output gives us two coefficients: `[1] 0.5238095 -0.3095238`.
    - **0.5238095**: This is the first AR coefficient, \(\phi_{n1}\). It suggests that about 52% of the value of the time series at each point is influenced by the previous value (lag 1). 
    - **-0.3095238**: This is the second AR coefficient, \(\phi_{n2}\). It indicates that the value of the time series is negatively influenced (about -31%) by the value two steps back (lag 2). These coefficients help describe how past values in the series contribute to the current value.
 
@@ -95,8 +89,7 @@ DLA_data(2)
 
   - **6.72**: This is the mean squared error for the second step. It represents the uncertainty when predicting the time series at the second lag. The lower variance compared to the first step (6.72 vs. 8.00) suggests that the prediction at this step is slightly more reliable.
 
-## **Realistic Example**:
-
+#### **Realistic Example**:
   Let’s work with the following time series data:
 
 ```{r}
@@ -126,8 +119,7 @@ result <- model(2)
 
 6. **Results**: At the end, the algorithm returns two vectors: `phi`, containing the calculated coefficients, and `v`, containing the mean squared errors. These values are important for modeling and forecasting time series data.
 
-## **Heavy Example**:
-
+#### **Heavy Example**:
   Let’s work with the following time series data:
 
 ```{r}
@@ -149,38 +141,23 @@ print(result_new)
 ```
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
- 
+
 eiteres Beispiel, idealerweise aus einem anderen Kontext oder mit erweiterten Features.
   - Wiederhole den Prozess mit einem anderen Datensatz oder erweiterten Optionen.
 
-# Erweiterte Themen
-
+### Erweiterte Themen
 - **Erweiterte Verwendung**: Diskutiere fortgeschrittene Anwendungsfälle der Funktion.
 - **Vergleich mit anderen Methoden**: Vergleiche die Funktion mit alternativen Ansätzen oder Methoden.
 - **Tipps und Tricks**: Gebe nützliche Hinweise zur Optimierung und Vermeidung von Fehlern.
 
-# Zusammenfassung
-
+### Zusammenfassung
 - **Wiederholung der wichtigsten Punkte**: Fasse die Hauptpunkte der Vignette zusammen.
 - **Schlussfolgerung**: Erläutere, wie die Funktion in der Praxis am besten genutzt werden kann.
 
-# Referenzen
-
+### Referenzen
 - **Literatur**: Liste die referenzierte Literatur und Quellen auf.
 - **Weiterführende Ressourcen**: Verweise auf zusätzliche Vignetten oder externe Ressourcen.
 
-# Anhang (optional)
-
+### Anhang (optional)
 - **Zusätzliche Informationen**: Füge gegebenenfalls zusätzliche Details, erweiterte Beispiele oder technische Hinweise hinzu.
 - **Weitere Code-Beispiele**: Zeige weitere Code-Snippets oder Beispielskripte.

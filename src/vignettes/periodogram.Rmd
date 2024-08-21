@@ -1,21 +1,22 @@
 ---
-title: "Showcasing periodogram(): estimate the spectral density of a time series"
+title: "periodogram"
 author: "Alexander Klaus"
 output: pdf_document
 vignette: >
-%\VignetteIndexEntry{Showcasing periodogram(): estimate the spectral density of a time series}
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{periodogram}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Showcasing periodogram(): estimate the spectral density of a time series
+
 The spectral density of a stationary process shows how the variance of the time series is distributed over different frequencies. As a fundamental tool of time series analysis, the `periodogram` function is used to estimate the spectral density of a stationary time series.
 
-## Example 1: Basic Usage of the Function
-
+### Example 1: Basic Usage of the Function
 First, generate some random time series data to work with:
 
 ```{r, message=FALSE}
@@ -45,8 +46,7 @@ What is happening inside the function:
 - The absolute value of this sum is calculated and raised to the power of 2.
 - The result is divided by the length of the time series $n$ and returned as the periodogram value.
 
-## Example 2: Periodogram for a Simple Sine Curve
-
+### Example 2: Periodogram for a Simple Sine Curve
 Create a simple sine curve sample:
 
 ```{r}
@@ -65,7 +65,7 @@ Compute the periodogram:
 periodogram(X, lambda)
 ```
 
-## Example 3: Periodogram for a Complex Exponential Curve
+### Example 3: Periodogram for a Complex Exponential Curve
 
 Generate a complex exponential curve sample:
 
@@ -85,7 +85,7 @@ Compute the periodogram:
 periodogram(X, lambda)
 ```
 
-## Example 4: Incorrect inputs
+### Example 4: Incorrect inputs
 
 If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled:
 

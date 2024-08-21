@@ -1,20 +1,22 @@
 ---
 title: "MA(q)"
+author: "Sebastian Meier"
 output: pdf_document
-date: "2024-08-19"
+vignette: >
+  %\VignetteIndexEntry{make_MA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## Moving Average (MA)
 
+The function `make_MA` generates synthetic time series based on MA(q) (Moving Average of order q) model. By Providing the MA coefficients and white noise variance to the `make_MA` function, data for a time series can be created.
 
-# MA(q)
-
-The function `make_MA` generates synthetic time series based on MA(q) (MeanAverage of order q) model. By Providing the MA coefficients and white noise variance to the `make_MA` function, data for a time series can be created.
-
-## Example 1: First example
+### Example 1: First example
 
 First, specify the length of the time series `t`. Next, specify `theta`, which contains the MA coefficients, where `t` must be bigger than sum of all $theta_i$ in `theta`. At last, specify white noise variance as `sigma`, where `sigma` must be bigger than 0.
 
@@ -43,7 +45,7 @@ Required Format:
 * `theta` must be non-empty numeric/complex vector, where `t` has to be bigger than the length of `theta` and `theta` is not allowed to contain NA, INF or NaN values.
 * `sigma` must be is a non-zero and positive numeric vector of length equal to 1, where NA, Inf or NaN are not allowed.
 
-## Example 2: medium example
+### Example 2: medium example
 
 ```{r}
 t <- 10
@@ -55,7 +57,7 @@ zeitreihen::make_MA(t, theta, sigma)
 
 Hint: `make_MA` supports numeric/complex vector for `theta`.
 
-## Example 3: big example
+### Example 3: big example
 
 ```{r}
 t <- 40
@@ -67,7 +69,7 @@ zeitreihen::make_MA(t, theta, sigma)
 
 Calling the `make_MA`, where `sigma` is omitted is allowed. Within `make_MA` we use the `1` as a value for `sigma`. Hint: The Output will get big so mind to generate only the number of observation that are needed.
 
-## Example 4: Incorrect Inputs
+### Example 4: Incorrect Inputs
 
 ```{r, error = TRUE}
 t <- 10

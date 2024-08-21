@@ -1,23 +1,26 @@
 ---
-title: "Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()"
-output: pdf_document
+title: "IA"
 author: "Daniela Stängle"
+output: pdf_document
 vignette: >
-%\VignetteIndexEntry{Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()}
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteEncoding{UTF-8}
+  %\VignetteIndexEntry{IA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
 ```{r setup, include=FALSE}
 library(devtools)
 load_all(".")
 knitr::opts_chunk$set(tidy = TRUE, echo = TRUE)
 ```
-## Introduction
+
+## Calculating Coefficients of the one-step predictors with the Innovations Algorithm IA()
+### Introduction
 The Innovations Algorithm is a recursive algorithm that can be applied to stationary time series \(\{X_t\}\) with
 zero-mean and finite second moments. The algorithm gives the coefficients of the one-step predictors \(\hat{X}_1,\hat{X}_2\dots\), which can be calculated recursively once the coefficients have been determined.
 Additionally the algorithm calculates the mean squared errors \(\nu_i\).  
 
-## Example 1: Basic Usage 
+### Example 1: Basic Usage 
 To apply the algorithm to a time series X, we call the function `IA()` with parameter X
 ```{r}
 X <- stats::rnorm(5, mean = 0, sd = 1)
@@ -43,7 +46,7 @@ which can be used to calculate the one-step predictor \(\hat{X}_{n+1}\) via \(\n
 \(\hat{X}_{n+1}=\begin{cases} 0,& \text{if } n= 0,\\ \sum\limits_{j=1}^n\theta_{nj}\left(X_{n+1-j}-\hat{X}_{n+1-j}\right),& \text{if } n= 1,2,\dots,\end{cases}.\newline\)
 For example the coefficient \(\theta_{41}\) is the coefficient before the difference of the value of the time series \(\{X_t\}\) at time \(t=4\) and its predictor \(\hat{X_4}\). 
 
-## Example 2: Using the optional parameter `max_lag`
+### Example 2: Using the optional parameter `max_lag`
 Additionally, the parameter `max_lag` (per default the length of the time series) can be set, to indicate till where the \(\theta\) 's should be calculated.
 ```{r}
 X <- stats::rnorm(100, mean = 0, sd = 1)
@@ -52,7 +55,7 @@ out$nu
 out$theta
 ```
 
-## Example 3: Using incorrect values
+### Example 3: Using incorrect values
 There are several inputs which are not allowed and give the following warnings:\(\newline\)
 1. If the time series contains values which are `NaN` or `Inf`:
 ```{r,error=TRUE}

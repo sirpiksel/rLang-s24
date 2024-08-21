@@ -1,20 +1,22 @@
 ---
-title: "Sample Autocovariance Function"
+title: "sample_ACVF"
+author: "Sebastian Meier"
 output: pdf_document
-date: "2024-08-19"
+vignette: >
+  %\VignetteIndexEntry{sample_ACVF}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
-# Sample Autocovariance Function
+## Sample Autocovariance Function
 
 The sample autocovariance function is a important tool in time series analysis. It measure the covariance between values of a time series across different lags. The function `sample_ACVF` is an implementation of sample autocovariance function.
 
-## Example 1: small example
+### Example 1: small example
 
 `X` represent a time series and `h` is a integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
 
@@ -41,7 +43,7 @@ Required Format:
 
 * `h` must be is a numeric vector with unique values in interval `(-n,n)`, where `n` is the length of the time series `X` and NA, Inf or NaN are not allowed.
 
-## Example 2: medium example
+### Example 2: medium example
 
 ```{r}
 X <- c(2 + 1i, 2 + 4i, 6, 8i, 10)
@@ -52,7 +54,7 @@ zeitreihen::sample_ACVF(X, h)
 
 Hint: `sample_ACVF` doesn't return the values sorted on `h`. It returns the values in the order of `h`.
 
-## Example 3: big example
+### Example 3: big example
 
 ```{r}
 X <- c(0:10, 20:30, 40:50, 50:58)
@@ -62,7 +64,7 @@ zeitreihen::sample_ACVF(X)
 
 Calling the `sample_ACVF`, where `h` is omitted is allowed. Within `sample_ACVF` we use the [0,n-1] for `h`. Hint: The Output will get big so mind to get only the $h_i$ that are needed.
 
-## Example 4: Incorrect Inputs
+### Example 4: Incorrect Inputs
 
 ```{r, error = TRUE}
 X <- list(2, 4, 6, 8, 10)
