@@ -1,22 +1,22 @@
 # Statistics
-(20.08.24)
+(21.08.24)
 > Git Statistiken; noch unklar ob die Statistiken für die Bewertung auch so gewertet werden.
 
 Angenommen jeder Commit würde gleich viel Aufwand enthalten, dann müsste jedes Mitglied **20%** der Commits des Projekts beitragen. \
 In der Praxis gilt das nur als grobe Orientierung, dementsprechend ausschlaggebend sind die Statistiken.
 
-Gesamtzahl an hinzugefügten Zeilen `7079` \
-Gesamtzahl an Commits `86`
+Gesamtzahl an hinzugefügten Zeilen `8404` \
+Gesamtzahl an Commits `113`
 
 ---
 
 <details>
   <summary>Daniela Stängle</summary>
 
-  \# lines added: `565` \
-  \# commits: `10` \
-  % lines: `7.98%` \
-  % commits: `11.63%`
+  \# lines added: `589` \
+  \# commits: `13` \
+  % lines: `7.01%` \
+  % commits: `11.50%`
 </details>
 
 ---
@@ -26,8 +26,8 @@ Gesamtzahl an Commits `86`
 
   \# lines added: `1078` \
   \# commits: `16` \
-  % lines: `15.23%` \
-  % commits: `18.60%`
+  % lines: `12.83%` \
+  % commits: `14.16%`
 </details>
 
 ---
@@ -35,10 +35,10 @@ Gesamtzahl an Commits `86`
 <details>
   <summary>Sebastian Meier</summary>
 
-  \# lines added: `1183` \
-  \# commits: `7` \
-  % lines: `16.71%` \
-  % commits: `8.14%`
+  \# lines added: `1878` \
+  \# commits: `11` \
+  % lines: `22.35%` \
+  % commits: `9.73%`
 </details>
 
 ---
@@ -46,10 +46,10 @@ Gesamtzahl an Commits `86`
 <details>
   <summary>Clemens Glomb</summary>
 
-  \# lines added: `80` \
-  \# commits: `2` \
-  % lines: `1.13%` \
-  % commits: `2.33%`
+  \# lines added: `329` \
+  \# commits: `6` \
+  % lines: `3.91%` \
+  % commits: `5.31%`
 </details>
 
 ---
@@ -57,8 +57,8 @@ Gesamtzahl an Commits `86`
 <details>
   <summary>Philip Kastura-Sahl</summary>
 
-  \# lines added: `4048` \
-  \# commits: `45` \
-  % lines: `57.18%` \
-  % commits: `52.33%`
+  \# lines added: `4185` \
+  \# commits: `58` \
+  % lines: `49.80%` \
+  % commits: `51.33%`
 </details>
