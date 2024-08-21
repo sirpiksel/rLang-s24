@@ -19,10 +19,10 @@ The sample autocovariance function is a important tool in time series analysis. 
 `X` represent a time series and `h` is a integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
 
 ```{r}
-X <- c(2,4,6,8,10)
+X <- c(2, 4, 6, 8, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X,h)
+zeitreihen::sample_ACVF(X, h)
 ```
 
 The Output is the value `-0.8`, which is the computation of the `sample_ACVF` on `X` with `h`, and has named attribute `2`, which is the corresponding lag `h`.  
@@ -45,9 +45,9 @@ Required Format:
 
 ```{r}
 X <- c(2 + 1i, 2 + 4i, 6, 8i, 10)
-h <- c(0,3,1)
+h <- c(0, 3, 1)
 
-zeitreihen::sample_ACVF(X,h)
+zeitreihen::sample_ACVF(X, h)
 ```
 
 Hint: `sample_ACVF` doesn't return the values sorted on `h`. It returns the values in the order of `h`.
@@ -65,22 +65,22 @@ Calling the `sample_ACVF`, where `h` is omitted is allowed. Within `sample_ACVF`
 ## Example 4: Incorrect Inputs
 
 ```{r, error = TRUE}
-X <- list(2,4,6,8,10)
+X <- list(2, 4, 6, 8, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X,h)
+zeitreihen::sample_ACVF(X, h)
 ```
 
 ```{r, error = TRUE}
-X <- c(2,4,6,NA,10)
+X <- c(2, 4, 6, NA, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X,h)
+zeitreihen::sample_ACVF(X, h)
 ```
 
 ```{r, error = TRUE}
-X <- c(2,4,6,8,10)
+X <- c(2, 4, 6, 8, 10)
 h <- 5
 
-zeitreihen::sample_ACVF(X,h)
+zeitreihen::sample_ACVF(X, h)
 ```
