@@ -12,7 +12,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Showcasing periodogram(): estimate the spectral density of a time series
+## Estimate the Spectral Density of a Time Series using periodogram()
 
 The spectral density of a stationary process shows how the variance of the time series is distributed over different frequencies. As a fundamental tool of time series analysis, the `periodogram` function is used to estimate the spectral density of a stationary time series.
 
