@@ -44,9 +44,10 @@ What is happening inside the function:
 * An atomic vector $X$ of length `t` is created. If a vector `start` is passed, `X` contains this vector as values of the first `length(start)` entries.
 * `t` normally distributed values with mean 0 and standard deviation `sigma` are generated.
 * Iterative calculation of $X$ from `p + 1` to `t` with loop variable i:
-    * 
-    *
-    *
+    * Consider the vector, which stores the values from $X_{i - 1}$ ... $X_{i - q}$.
+    * The dot product of the vector mentioned above and the vector phi is then calculated.
+    * $Z[i]$ is added to the dot product.
+    * And the previous calculation is stored in X[i].
 * Finally, the values are returned.
 
 ## Example 2:

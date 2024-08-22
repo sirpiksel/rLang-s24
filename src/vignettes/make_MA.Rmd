@@ -38,9 +38,9 @@ What is happening inside the function:
 * By providing `sigma`, we allocate `t + q` instances of white noise in `Z`.
 * Computation of $X$ iteratively from $q + 1$ to $t + q$ with loop variable i:
   * Consider the vector, which stores the values from $Z_{i - 1}$ ... $Z_{i - q}$.
-  * Then the dot product of the vectors theta and vector is computed .
-  * $Z_i$ is added to dot product.
-  * At last, in $X_{i - q}$ the prior computation is stored.
+  * The dot product of the vector mentioned above and the vector theta is then calculated.
+  * $Z_i$ is added to the dot product.
+  * And the previous calculation is stored in $X[i - q]$.
 * At last, the values are returned.
 
 Required Format:
