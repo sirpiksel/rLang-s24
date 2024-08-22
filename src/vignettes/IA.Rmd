@@ -68,7 +68,7 @@ out <- zeitreihen::IA(X)
 \(\newline\)
 2. If the time series contains values which are not numeric or complex values:
 ```{r, error=TRUE}
-X <- c("2.01",1,0)
+X <- c("2.01", 1, 0)
 out <- zeitreihen::IA(X)
 ```
 \(\newline\)

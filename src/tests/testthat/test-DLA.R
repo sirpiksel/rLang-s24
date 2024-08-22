@@ -41,16 +41,16 @@ test_that("DLA: X must have more than one value", {
 
   X <- complex(0)
   expect_error(DLA(X), "X must have more than one value")
-  
+
   X <- integer(1)
   expect_error(DLA(X), "X must have more than one value")
-  
+
   X <- double(1)
   expect_error(DLA(X), "X must have more than one value")
-  
+
   X <- numeric(1)
   expect_error(DLA(X), "X must have more than one value")
-  
+
   X <- complex(1)
   expect_error(DLA(X), "X must have more than one value")
 })
@@ -90,7 +90,7 @@ test_that("DLA: The values of X must be numeric or complex", {
   X <- c(TRUE, FALSE)
   expect_error(DLA(X), "The values of X must be numeric or complex")
 
-  X <- c("","")
+  X <- c("", "")
   expect_error(DLA(X), "The values of X must be numeric or complex")
 
   X <- c("asdf", "ghjk")

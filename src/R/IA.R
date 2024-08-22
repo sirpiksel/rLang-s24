@@ -74,8 +74,8 @@ IA <- function(X, max_lag = length(X)) {
   theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)
   theta_mat[2, 1] <- 1 / nu[1] * autocov[2]
   nu[2] <- autocov[1] - theta_mat[2, 1]^2 * nu[1]
-  
-  if(max_lag == 2){
+
+  if (max_lag == 2) {
     coeffs <- theta_mat[max_lag, max_lag - 1]
     return(list(coeffs = coeffs, nu = nu, theta = theta_mat))
   }
