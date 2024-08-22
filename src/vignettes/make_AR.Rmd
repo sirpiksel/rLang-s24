@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The `make_AR()` function generates a synthetic time series following an AR(p) (AutoRegressive of order p) model. This function allows you to create time series data based on specified AR coefficients and white noise variance.
 
-## Example 1: Basic Usage of the Function
+### Example 1: Basic Usage of the Function
 
 First, specify how long the time series should be:
 
@@ -49,6 +49,30 @@ What is happening inside the function:
     * $Z[i]$ is added to the dot product.
     * And the previous calculation is stored in X[i].
 * Finally, the values are returned.
+
+### Example 2: Medium Example
+
+```{r}
+t <- 10
+phi <- complex(real = 1, imaginary = 2)
+sigma <- 1
+
+zeitreihen::make_AR(t, phi, sigma)
+```
+
+Hint: `make_AR` supports numeric or complex atomic vectors for `phi`.
+
+### Example 3: Big Example
+
+```{r}
+t <- 40
+phi <- 3
+sigma <- 1
+
+zeitreihen::make_AR(t, phi, sigma)
+```
+
+Calling the `make_AR`, where `sigma` is omitted is allowed. Within `make_AR` we use `1` as default value for `sigma`. Hint: The Output will get big so mind to generate only the number of observation that are needed.
 
 ### Example 4: Incorrect Inputs
 
