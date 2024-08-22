@@ -55,7 +55,8 @@ and
 where \eqn{\phi_{11} = \gamma(1)/\gamma(0)} and \eqn{\nu_0 = \gamma(0)}.
 
 The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes
-and can be used as inputs of the \code{\link{make_AR}} function.
+and can be used to calculate the one-step predictor \eqn{P_n X_{n+1}} given by the formula
+\eqn{P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1}
 }
 \examples{
 # Example 1: Basic Usage
