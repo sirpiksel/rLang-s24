@@ -87,7 +87,7 @@ periodogram(X, lambda)
 
 ### Example 4: Incorrect inputs
 
-If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled:
+If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled.
 
 The time series data must be passed in an atomic vector:
 

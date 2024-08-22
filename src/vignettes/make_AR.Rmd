@@ -50,4 +50,46 @@ What is happening inside the function:
     * And the previous calculation is stored in X[i].
 * Finally, the values are returned.
 
-## Example 2:
+### Example 4: Incorrect Inputs
+
+If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled.
+
+The values of phi must be passed in an atomic vector:
+
+```{r, error = TRUE}
+t <- 10
+phi <- list(1, 2, 3, 4, 5)
+sigma <- 1
+
+zeitreihen::make_AR(t, phi, sigma)
+```
+
+The values of this atomic vector must be numeric or complex:
+
+```{r, error = TRUE}
+t <- 10
+phi <- "L"
+sigma <- 1
+
+zeitreihen::make_AR(t, phi, sigma)
+```
+
+The integer `t` must be greater than the length of phi:
+
+```{r, error = TRUE}
+t <- 2
+theta <- c(1, 2)
+sigma <- 1
+
+zeitreihen::make_MA(t, theta, sigma)
+```
+
+Sigma must be a positive numeric value:
+
+```{r, error = TRUE}
+t <- 10
+phi <- 1
+sigma <- 0
+
+zeitreihen::make_AR(t, phi, sigma)
+```
