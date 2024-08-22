@@ -25,8 +25,8 @@ jobs:
         if: ${{ inputs.ignoreLock }}
         run: rm flake.lock
 
-      - name: format code
-        run: nix develop -c build
+      - name: build release
+        run: nix develop -c release
 
       - name: release & publish
         shell: sh
