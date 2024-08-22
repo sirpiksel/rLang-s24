@@ -31,17 +31,17 @@
           packages = with pkgs; [ R rWrapper pandoc qpdf texLive ];
           commands = [
             {
-              name = "run";
-              command = ''
-                Rscript
-              '';
-              help = "run script";
-            }
-            {
               name = "build";
               command = ''
                 Rscript -e 'devtools::document(pkg = "src/")'
                 Rscript -e 'devtools::build_vignettes(pkg = "src/")'
+              '';
+              help = "build the package";
+            }
+            {
+              name = "release";
+              command = ''
+                R CMD build src/
               '';
               help = "build the package tarball";
             }

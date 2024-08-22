@@ -1,0 +1,43 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      ignoreLock:
+        description: 'Ignore flake.lock'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  relase:
+    name: release
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v27
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: delete Lockfile
+        if: ${{ inputs.ignoreLock }}
+        run: rm flake.lock
+
+      - name: format code
+        run: nix develop -c build
+
+      - name: release & publish
+        shell: sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.ZEITREIHEN_RELEASE_TOKEN }}
+        run: |
+          NAME="$(cat src/DESCRIPTION | grep "Package: " | awk '{print $2}')"
+          VERSION="$(cat src/DESCRIPTION | grep "Version: " | awk '{print $2}')"
+          RELEASE_DATE="$(date +'the '%d.%m.%y' at '%R:%S' GMT')"
+          git rev-parse v${VERSION} >/dev/null 2>&1 || git tag v${VERSION}
+          gh release create v${VERSION} ${NAME}_${VERSION}.tar.gz -t "zeitreihen-${VERSION}" -n "All commits: [log](https://github.com/sirpiksel/rLang-s24/commits/main)
+
+          Release created: ${RELEASE_DATE}
+          You can find the package and full source code below."
