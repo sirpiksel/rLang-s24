@@ -82,7 +82,7 @@ DLA <- function(X) {
   stopifnot(
     "X must not be empty" = !missing(X),
     "The values of X must be numeric or complex" = is.atomic(X) & (is.numeric(X) | is.complex(X)),
-    "X must have more than one values" = length(X) > 1,
+    "X must have more than one value" = length(X) > 1,
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
