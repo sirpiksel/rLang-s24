@@ -8,16 +8,16 @@ DLA(X)
 }
 \arguments{
 \item{X}{A numeric or complex atomic vector representing the time series data.
-The series should be stationary, meaning that its mean and variance do not change over time.}
+The time series should be stationary, meaning that its mean and covariance function are independent of time.}
 }
 \value{
 The output of this function is an anonymous function. The returned function takes the value \code{m} as a parameter. The value \code{m} means that we use the last m values of the time series to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the Durbin-Levinson algorithm, which then returns
 a list with two components:
-\item{phi}{A numeric atomic vector representing the calculated AR coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
+\item{phi}{A numeric atomic vector representing the calculated coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
 \item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors.}
 }
 \description{
-\code{DLA} can be used to perform the Durbin-Levinson recursion on time series data.
+\code{DLA} can be used to perform the Durbin-Levinson algorithm on stationary time series data.
 }
 \details{
 The \strong{Durbin-Levinson Algorithm} is used to recursively calculate the coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}
@@ -56,10 +56,6 @@ where \eqn{\phi_{11} = \gamma(1)/\gamma(0)} and \eqn{\nu_0 = \gamma(0)}.
 
 The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes
 and can be used as inputs of the \code{\link{make_AR}} function.
-}
-\note{
-The function includes checks for numerical stability. If any of the calculated variances \eqn{\nu_n} or the initial
-autocovariance value \eqn{\gamma(0)} is too close to zero, the function terminates and returns an error to prevent numerical instability.
 }
 \examples{
 # Example 1: Basic Usage
