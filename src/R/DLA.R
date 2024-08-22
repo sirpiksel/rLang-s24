@@ -86,9 +86,9 @@ DLA <- function(X) {
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
-  
+
   warning("Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
-  
+
   n <- length(X)
   saf <- fabric_sample_ACVF(X)
 
@@ -118,7 +118,7 @@ DLA <- function(X) {
       phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu[i]
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
     }
-    
+
     return(list(phi = phi, nu = nu))
   }
 }

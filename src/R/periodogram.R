@@ -48,7 +48,7 @@ periodogram <- function(X, lambda) {
     "lambda must be numeric" = is.numeric(lambda),
     "lambda must be from the interval (-pi, pi]" = (-pi < lambda & lambda <= pi)
   )
-    
+
   warning("Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
 
   n <- length(X)
