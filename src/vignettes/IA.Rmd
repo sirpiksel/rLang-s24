@@ -56,11 +56,6 @@ out$theta
 ```
 
 
-```{r}
-X <- stats::rnorm(5, mean = 0, sd = 1)
-IA(X)
-```
-
 ### Example 3: Using incorrect values
 There are several inputs which are not allowed. Here are a few examples of the error messages:\(\newline\)
 1. If the time series contains values which are `NaN` or `Inf`:

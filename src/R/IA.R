@@ -18,7 +18,8 @@
 #' \deqn{\nu_n = \kappa(n+1, n+1) - \displaystyle{\sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j}.}
 #'
 #' The algorithm iteratively calculates these coefficients, which are essential for the analysis of moving average processes
-#' and can be used as inputs of the \code{\link{make_MA}} function.
+#' and can be used to calculate the one-step predictor \eqn{\hat{X}_{n+1}} given by the formula
+#' \deqn{\hat{X}_{n+1}=\begin{cases}0&\text{ if }n=0\\ \sum\limits_{j=1}^{n}\theta_{nj}\left(X_{n+1-j}-\hat{X}_{n+1-j}\right)& \text{ if }n=1,2,\dots\end{cases}}
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.
