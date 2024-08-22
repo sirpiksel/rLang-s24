@@ -82,7 +82,7 @@ DLA <- function(X) {
   stopifnot(
     "X must not be empty" = !missing(X),
     "The values of X must be numeric or complex" = is.atomic(X) & (is.numeric(X) | is.complex(X)),
-    "X must have positive length" = length(X) > 0,
+    "X must have more than one values" = length(X) > 1,
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
@@ -103,20 +103,21 @@ DLA <- function(X) {
     )
 
     gamma <- sapply(0:m, saf)
-    nu <- numeric(m)
+    nu <- numeric(m + 1)
     phi <- numeric(m)
 
     nu[1] <- gamma[1]
     phi[1] <- gamma[2] / (gamma[1])
+    nu[2] <- nu[1] * (1 - phi[1]**2)
 
     if (m == 1) {
       return(list(phi = phi, nu = nu))
     }
 
     for (i in 2:m) {
-      nu[i] <- nu[i - 1] * (1 - phi[i - 1]**2)
       phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu[i]
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
+      nu[i + 1] <- nu[i] * (1 - phi[i]**2)
     }
 
     return(list(phi = phi, nu = nu))
