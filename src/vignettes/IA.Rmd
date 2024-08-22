@@ -21,19 +21,18 @@ zero-mean and finite second moments. The algorithm gives the coefficients of the
 Additionally the algorithm calculates the mean squared errors \(\nu_i\).  
 
 ### Example 1: Basic Usage 
-To apply the algorithm to a time series X, we call the function `IA()` with parameter X
+To apply the algorithm to a time series X, we call the function `IA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
 ```{r }
 X <- stats::rnorm(5, mean = 0, sd = 1)
-out <- zeitreihen::IA(X)
+out <- IA(X)
 ```
 We obtain as output the vector `nu`, which contains the mean squared errors, 
 ```{r}
 out$nu
 ```
 
-the matrix \(\Theta_n=\begin{pmatrix}0&0&0&0&0\\ \theta_{11}&0&0&0&0\\ \theta_{22}&\theta_{21}&0&0&0\\
-\theta_{33}&\theta_{32}&\theta_{31}&0&0 \\ \theta_{44}&\theta_{43}&\theta_{42}&\theta_{41}&0\\\end{pmatrix}\),
-\(\\\)
+the matrix \begin{equation*}\Theta_5=\begin{pmatrix}0&0&0&0&0\\ \theta_{11}&0&0&0&0\\ \theta_{22}&\theta_{21}&0&0&0\\
+\theta_{33}&\theta_{32}&\theta_{31}&0&0 \\ \theta_{44}&\theta_{43}&\theta_{42}&\theta_{41}&0\\\end{pmatrix},\end{equation*}
 
 ```{r}
 out$theta
@@ -42,9 +41,25 @@ and the vector of coefficients, `coeffs` =  \(\begin{pmatrix}\theta_{41}&\theta_
 ```{r}
 out$coeffs
 ```
-which can be used to calculate the one-step predictor \(\hat{X}_{n+1}\) via \(\newline\)
-\(\hat{X}_{n+1}=\begin{cases} 0,& \text{if } n= 0,\\ \sum\limits_{j=1}^n\theta_{nj}\left(X_{n+1-j}-\hat{X}_{n+1-j}\right),& \text{if } n= 1,2,\dots,\end{cases}.\newline\)
+which can be used to calculate the one-step predictor \(\hat{X}_{5}\) via \(\newline\)
+\begin{equation*}\hat{X}_{n}=\begin{cases} 0,& \text{if } n= 1,\\ \sum\limits_{j=1}^{n-1}\theta_{n-1,j}\left(X_{n-j}-\hat{X}_{n-j}\right),& \text{if } n= 2,3,4,5\end{cases} \end{equation*}
 For example the coefficient \(\theta_{41}\) is the coefficient before the difference of the value of the time series \(\{X_t\}\) at time \(t=4\) and its predictor \(\hat{X_4}\). 
+
+What happens:
+
+* It is checked if `X` and `max_lag` have the required format.
+* Allocation of a numeric vector `nu` of length `max_lag` to store the mean square errors $v_0,\dots,v_{max\_lag-1}$.
+* Computation of the autocovariances ($\kappa(i,j)$ is equal to the autocovariance of X with $h=i-j$) of the time series with `sample_ACVF(X,h)` for `h` from 0 to the biggest difference `max_lag`-1.
+* Initializing by assigning $v_0$ the autocovariance for `h` equal zero and allocating a numeric matrix with `max_lag` rows and columns.
+* Calculating the coefficient $\theta_{11}$ and the mean squared error $v_1$ separately. Afterwards recursively calculating the coefficients $\theta_{n,n-k}$ and $v_k$ from $k=0$ to $n-1$ using the equation \begin{equation*}\theta_{n, n-k} = \nu_k^{-1} \left( \kappa(n+1, k+1) - \displaystyle{\sum_{j=0}^{k-1} \theta_{k, k-j} \theta_{n, n-j} \nu_j} \right), \quad 0 \leq k < n\end{equation*}
+and \begin{equation*}\nu_n = \kappa(n+1, n+1) - \displaystyle{\sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j}.\end{equation*}
+
+
+Required Format:
+
+* `X` is an atomic vector of length bigger one, which has numeric or complex values and can't contain NA, Inf or NaN values.
+* `max_lag` must be an integer bigger one, can't be NA, Inf or NaN and can't be bigger than the length of `X`.
+
 
 ### Example 2: Using the optional parameter `max_lag`
 Additionally, the parameter `max_lag` (per default the length of the time series) can be set, to indicate till where the \(\theta\) 's should be calculated.
@@ -78,10 +93,10 @@ X <- list(m = matrix(1, nrow = 10, ncol = 5), "test")
 out <- IA(X)
 ```
 \(\newline\)
-4. If the `max_lag` is smaller than 3, not an integer or bigger than the length of the time series:
+4. If the `max_lag` is smaller than 2, not an integer or bigger than the length of the time series:
 ```{r,error=TRUE}
 X <- stats::rnorm(10, 0, 1)
-out <- zeitreihen::IA(X, 2)
+out <- zeitreihen::IA(X, 1)
 zeitreihen::IA(X, 3.14)
 zeitreihen::IA(X, 51)
 ```
