@@ -139,25 +139,73 @@ Then we can have a look on the coefficients
 ```{r}
 print(result_new)
 ```
-  
-  
 
-eiteres Beispiel, idealerweise aus einem anderen Kontext oder mit erweiterten Features.
-  - Wiederhole den Prozess mit einem anderen Datensatz oder erweiterten Optionen.
+### Example 4: Incorrect inputs
+
+If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled:
+
+The time series data X must be passed in an atomic vector:
+
+```{r error=TRUE}
+X <- list(1, 2, 3, 4, 5)
+model <- DLA(X)
+```
+
+Also, the values of X must be numeric or complex:
+
+```{r, error=TRUE}
+X <- c(1, 2, "3", 4, "5i")
+model <- DLA(X)
+```
+
+In addition, the atomic vector may not contain any NAs:
+
+```{r, error=TRUE}
+X <- c(1, NA, 2, 3, 4)
+model <- DLA(X)
+```
+
+The atomic vector may not contain Inf or -Inf values:
+
+```{r, error=TRUE}
+X <- c(1, 2, Inf, 3, 4)
+model <- DLA(X)
+```
+
+The m paramter must be a value of length 1:
+
+```{r, error=TRUE, warning=FALSE}
+X <- rnorm(100)
+model <- DLA(X)
+result <- model(c(1,2))
+```
+
+The m parameter must be an integer value between 0 and the length of X:
+
+```{r, error=TRUE, warning=FALSE}
+X <- rnorm(100)
+model <- DLA(X)
+result <- model(101)
+```
+
+### References
+If you need more information, please refer to the package documentation or the following resources:
+
+- [Introduction to Time Series and Forecasting](https://link.springer.com/book/10.1007/978-3-319-29854-2)
+
+
+
+
+
+
+
+
+
+
+
 
 ### Erweiterte Themen
 - **Erweiterte Verwendung**: Diskutiere fortgeschrittene Anwendungsfälle der Funktion.
 - **Vergleich mit anderen Methoden**: Vergleiche die Funktion mit alternativen Ansätzen oder Methoden.
 - **Tipps und Tricks**: Gebe nützliche Hinweise zur Optimierung und Vermeidung von Fehlern.
 
-### Zusammenfassung
-- **Wiederholung der wichtigsten Punkte**: Fasse die Hauptpunkte der Vignette zusammen.
-- **Schlussfolgerung**: Erläutere, wie die Funktion in der Praxis am besten genutzt werden kann.
-
-### Referenzen
-- **Literatur**: Liste die referenzierte Literatur und Quellen auf.
-- **Weiterführende Ressourcen**: Verweise auf zusätzliche Vignetten oder externe Ressourcen.
-
-### Anhang (optional)
-- **Zusätzliche Informationen**: Füge gegebenenfalls zusätzliche Details, erweiterte Beispiele oder technische Hinweise hinzu.
-- **Weitere Code-Beispiele**: Zeige weitere Code-Snippets oder Beispielskripte.

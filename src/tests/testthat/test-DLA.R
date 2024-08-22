@@ -1,32 +1,59 @@
 # Test conditions for X
 
-test_that("DLA: X must be an atomic vector", {
+test_that("DLA: X must be numeric or complex atomic vector", {
   X <- NULL
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- list(1, 2, 3, 4)
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- c(list(1, 2, 3, 4))
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- data.frame(1:4)
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- data.frame(list(1:4))
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- logical(0)
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- character(0)
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- NA
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 
   X <- NA_character_
-  expect_error(DLA(X), "The values of X must be numeric or complex")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c(TRUE, FALSE)
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c("","")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c("asdf", "ghjk")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c("42", "87")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c("a", "b", "c")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c(1L, 2, TRUE, "42", 5)
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c(-pi, -0.1, "0", 1, 2)
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- c(1:100, "101")
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
+  
+  X <- raw(1)
+  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 })
 
 test_that("DLA: X must have more than one value", {
@@ -86,6 +113,7 @@ test_that("DLA: X may not contain Inf or -Inf values", {
   expect_error(DLA(X), "X may not contain Inf or -Inf values")
 })
 
+<<<<<<< Updated upstream
 test_that("DLA: The values of X must be numeric or complex", {
   X <- c(TRUE, FALSE)
   expect_error(DLA(X), "The values of X must be numeric or complex")
@@ -115,6 +143,8 @@ test_that("DLA: The values of X must be numeric or complex", {
   expect_error(DLA(X), "The values of X must be numeric or complex")
 })
 
+=======
+>>>>>>> Stashed changes
 ## Test conditions for m
 
 test_that("DLA: m must be a value of length 1", {
