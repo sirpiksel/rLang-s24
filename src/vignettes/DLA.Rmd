@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Durbin-Levinson Algorithm
 ### Introduction
 
-The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of autoregressive coefficients in AR(p) processes. The algorithm provides the coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\) and can be computed recursively. Additionally, it allows for modeling time series to make predictions and understand the series' movement over time.
+The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\). 
 
 ### Practical Application
 #### **Simple Example**:
@@ -31,22 +31,20 @@ cat("The time series: ", X, "\n")
 model <- DLA(X)
 ```
   
-We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `v` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the number of past values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `v` (the mean squared errors).
+We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the number of last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared errors).
 
 
 ```{r}
-model(2)
+m <- 2
+model(m)
 ```
 
-##### Output Interpretation:
-- **Coefficients (`phi`)**: `[1] -0.30716625  0.06567492`
-   - **-0.30716625**: First AR coefficient \(\phi_{11}\), indicating a -0.307 influence from the previous value.
-   - **0.06567492**: Second AR coefficient \(\phi_{12}\), indicating a 0.065 influence from the value two steps back.
+These coefficients can be used to calculate the one-step predictor: 
 
-- **Mean Squared Errors (`v`)**: `[1] 0.7388774 0.6590185 0.65617601`
-   - **0.7388774**: Mean squared error at step 1, indicating prediction uncertainty.
-   - **0.6590185**: Mean squared error at step 2, suggesting slightly more reliable predictions compared to step 1.
-   - **0.65617601**: Mean squared error at step 3, showing that prediction errors continue to decrease and stabilize.
+\[
+P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1
+\]
+
 
 Here’s what happens step by step:
 
@@ -54,11 +52,11 @@ Here’s what happens step by step:
 
 2. **Recursive Calculation**: For each step \(n\), the algorithm calculates the coefficient \(\phi_{nn}\) by adjusting the autocovariance \(\gamma(n)\). This adjustment is based on the previous coefficients \(\phi_{n-1,j}\) and the autocovariances \(\gamma(n-j)\).
 
-3. **Matrix Update**: The coefficients \(\phi_{n-1,1}\) through \(\phi_{n-1,n-1}\) are updated, and the new value \(\phi_{nn}\) is added. This is necessary to compute the next set of coefficients.
+3. **Phi Computation**: The coefficients \(\phi_{n,1}\) to \(\phi_{n,n-1}\) are computed through the previous \(\phi_{n-1,1}\) to \(\phi_{n-1,n-1}\) and \(\phi_{n,n}\).
 
 4. **Mean Squared Errors**: The mean squared error \(v_n\) is calculated at each step to capture the uncertainty in the estimates. This variance is based on the previous variance \(v_{n-1}\) and the current coefficient \(\phi_{nn}\).
 
-5. **Results**: At the end, the algorithm returns two vectors: `phi`, containing the calculated coefficients, and `v`, containing the mean squared errors. These values are important for modeling and forecasting time series data.
+5. **Results**: At the end, the algorithm returns a list with two named vectors: `phi`, containing the calculated coefficients, and `nu`, containing the mean squared errors. These values are important for forecasting time series data.
 
 
 #### Example 2: Big Example:
