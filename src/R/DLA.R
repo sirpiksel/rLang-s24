@@ -39,7 +39,7 @@
 #'
 #' The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes
 #' and can be used to calculate the one-step predictor \eqn{P_n X_{n+1}} given by the formula
-#' \eqn{P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1}
+#' \eqn{P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1}.
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
 #' The time series should be stationary, meaning that its mean and covariance function are independent of time.

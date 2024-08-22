@@ -7,19 +7,19 @@
 plot(X, n, from = 0, to = pi)
 }
 \arguments{
-\item{X}{A numeric vector representing the time series data, including the predictions.}
+\item{X}{A numeric or complex atomic vector representing the time series data, including the predictions.}
 
-\item{n}{an integer specifying the number of samples to evaluate the periodogram with.}
+\item{n}{An integer specifying the number of samples to evaluate the periodogram with.}
 
-\item{from}{startpoint for the half-open interval greater than \code{from}}
+\item{from}{Startpoint for the half-open interval greater than \code{from}.}
 
-\item{to}{endpoint for the half-open interval smaller than or equal to \code{to}}
+\item{to}{Endpoint for the half-open interval less than or equal to \code{to}.}
 }
 \value{
 A line plot displaying the spectral density estimate of the time series.
 }
 \description{
-\code{plot} computes periodogram values, plots the spectral density, and includes a legend. It samples over \eqn{(0, \pi]} and manages errors.
+\code{plot} computes periodogram values, plots the spectral density and contains a legend. Samples over \eqn{(0, \pi]} are selected and errors are managed.
 }
 \details{
 The function computes periodogram values using the \code{periodogram} function from the \code{stats} package. It then generates a plot of the spectral density estimate with the \code{plot} function from the \code{graphics} package, including a legend to distinguish between observed and predicted values. By default the samples are evaluated at evenly spaced points over the left-open interval \eqn{(0, \pi]}, the interval can be changed using the \code{from} and \code{to} parameters. Additionally, the function incorporates error handling to manage issues such as invalid inputs or missing packages.
