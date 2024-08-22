@@ -20,6 +20,6 @@ tempDE_df <- data.frame(year = year, temperature = temperature)
 
 tempDE_ts <- ts(data = temperature, year)
 
-usethis::use_data(tempDE_df)
-usethis::use_data(tempDE_ts)
+usethis::use_data(tempDE_df, overwrite = TRUE)
+usethis::use_data(tempDE_ts, overwrite = TRUE)
 

@@ -3,21 +3,40 @@
 \docType{data}
 \name{DAX}
 \alias{DAX}
-\alias{date}
+\alias{Date}
 \alias{DAX_df}
 \alias{DAX_ts}
 \title{Financial Data: German Stock Index (DAX)}
 \format{
 \code{DAX_df} is a data frame with 661 entries (rows) and 2 variables (columns)
-named \code{data} and \code{value}.
+named \code{Date} and \code{Close}. The \code{Date} column lists the trading days, while the
+\code{Close} column shows the adjusted closing price of the DAX for that date.
+
+\code{DAX_ts} is a time series that shows the adjusted closing price of the DAX
+for each trading day.
+}
+\source{
+\href{https://www.finanzen.net/}{Finanzen.net}
 }
 \usage{
 DAX_df
 DAX_ts
 }
 \description{
-This file contains the stock prices of the German stock index (DAX) for the
-period from January 2022 to July 2024. The data is provided both in the form
-of a data frame and as a time series.
+This dataset contains the stock prices of the German stock index (DAX) for
+the period from the beginning of January 2022 to the end of July 2024. The
+data is provided both in the form of a data frame and as a time series.
 }
-\keyword{datasets}
+\examples{
+# Load the DAX dataset
+data(DAX_df)
+
+# Display the first few rows of the dataset
+head(DAX_df)
+
+# Plot the stock price
+base::plot(DAX_df$Date, DAX_df$Close, col = "blue", type = "l",
+main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
+
+}
+\keyword{datset}

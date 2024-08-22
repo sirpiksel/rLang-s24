@@ -1,22 +1,42 @@
 #' @title Financial Data: German Stock Index (DAX)
 #' 
 #' @description
-#' This file contains the stock prices of the German stock index (DAX) for the
-#' period from January 2022 to July 2024. The data is provided both in the form
-#' of a data frame and as a time series.
+#' This dataset contains the stock prices of the German stock index (DAX) for
+#' the period from the beginning of January 2022 to the end of July 2024. The
+#' data is provided both in the form of a data frame and as a time series.
 #' 
 #' @usage DAX_df
 #' DAX_ts
 #' 
 #' @format
 #' `DAX_df` is a data frame with 661 entries (rows) and 2 variables (columns)
-#' named `data` and `value`.
+#' named `Date` and `Close`. The `Date` column lists the trading days, while the
+#' `Close` column shows the adjusted closing price of the DAX for that date.
 #' 
+#' `DAX_ts` is a time series that shows the adjusted closing price of the DAX
+#' for each trading day.
+#'  
 #' @name DAX
+#' 
 #' @aliases DAX_df DAX_ts
 #' 
-
-date <- as.Date(c(
+#' @source [Finanzen.net](https://www.finanzen.net/)
+#' 
+#' @examples
+#' # Load the DAX dataset
+#' data(DAX_df)
+#' 
+#' # Display the first few rows of the dataset
+#' head(DAX_df)
+#' 
+#' # Plot the stock price
+#' base::plot(DAX_df$Date, DAX_df$Close, col = "blue", type = "l",
+#' main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
+#' 
+#' @keywords datset
+#' 
+#' 
+Date <- as.Date(c(
   "2022-01-03", "2022-01-04", "2022-01-05", "2022-01-06", "2022-01-07",
   "2022-01-10", "2022-01-11", "2022-01-12", "2022-01-13", "2022-01-14",
   "2022-01-17", "2022-01-18", "2022-01-19", "2022-01-20", "2022-01-21",
@@ -152,7 +172,7 @@ date <- as.Date(c(
   "2024-07-31"
 ))
 
-value <- as.numeric(c(
+Close <- as.numeric(c(
   16020.73, 16152.61, 16271.75, 16052.03, 15947.74, 15768.26, 15941.80,
   16010.32, 16031.58, 15883.24, 15933.71, 15772.55, 15809.71, 15912.33,
   15603.87, 15011.12, 15123.87, 15459.38, 15524.26, 15318.95, 15471.20,
@@ -251,9 +271,9 @@ value <- as.numeric(c(
 ))
 
 
-DAX_df <- data.frame(date = date, value = value)
+DAX_df <- data.frame(Date = Date, Close = Close)
 
-DAX_ts <- ts(data = value, date)
+DAX_ts <- ts(data = Close, Date)
 
-usethis::use_data(DAX_df)
-usethis::use_data(DAX_ts)
+usethis::use_data(DAX_df, overwrite = TRUE)
+usethis::use_data(DAX_ts, overwrite = TRUE)
