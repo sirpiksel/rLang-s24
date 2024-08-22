@@ -14,3 +14,4 @@ src/doc/
 src/inst/doc
 src/vignettes/*.R
 src/vignettes/*.html
+src/vignettes/*.pdf
