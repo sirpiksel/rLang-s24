@@ -8,91 +8,98 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, sample_ACVF() setup, include = FALSE}
+library(zeitreihen)
+
+set.seed(742)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  fig.height = 6,
+  fig.width = 6,
+  tidy = TRUE
+)
 ```
 
-## Sample Autocovariance Function
-
-The sample autocovariance function is a important tool in time series analysis. It measure the covariance between values of a time series across different lags. The function `sample_ACVF` is an implementation of sample autocovariance function.
+## Sample Autocovariance Function `sample_ACVF()`
+The sample autocovariance function is an important tool in time series analysis. It measures the covariance between values of a time series across different lags. The function `sample_ACVF` is an implementation of sample autocovariance function.
 
 The output of the sample autocovariance function is dependent on the considered time series and lag:
 
-* If the output value is near zero then we can assume that there is weak relation between the points $X_t$ and $X_{t + h}$. 
-* If the output value is big and positive then we can assume that there is a strong relation between the points $X_t$ and $X_{t + h}$. 
-* If the output value is big and negative then we can assume that there is a strong relation between the points $X_{t + h}$ and $X_{t}$.
+* If the output value is near zero, then we can assume a weak relation between the points \(X_t\) and \(X_{t + h}$.
+* If the output value is big and positive, then we can assume a strong relation between the points \(X_t\) and \(X_{t + h}\).
+* If the output value is big and negative, then we can assume a strong relation between the points \(X_{t + h}\) and \(X_{t}\).
 
-### Example 1: small example
+### Basic usage
+`X` represent a time series and `h` is an integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
 
-`X` represent a time series and `h` is a integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
-
-```{r}
+```{r, sample_ACVF() basic usage}
 X <- c(2, 4, 6, 8, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X, h)
+sample_ACVF(X, h)
 ```
-
-The Output is the value `-0.8`, which is the computation of the `sample_ACVF` on `X` for `h`, and has named attribute `2`, which is the corresponding lag `h`. 
-
+The computation of the `sample_ACVF` on `X` for `h` is `-0.8` and has named the attribute `2`, the corresponding lag `h`. \
+\
 What happens:
 
 * Within the function, It is checked if `X` and `h` have the required format.
-* The mean of `X`, which is $\bar{x}$, is computed.
-* The length of `X`, which is $n$, is extracted from `X`.
-* For each $h_i$ $\in$ `h`: we compute $n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
-  * We considered the vector, which is stores the last $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
-  * We considered the vector, which is stores the first $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
+* \(\bar{x}\), the mean of `X`, is computed.
+* \(n\), the length of `X`, is extracted from `X`.
+* For each \(h_i \in\) `h`: we compute \(n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
+  * The last \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
+  * The first \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
   * We compute the dot product of the vectors.
-  * Last step, we divide the dot product of the vectors by $n$.
+  * Last step, we divide the dot product of the vectors by \(n\).
 * At last, The values are returned where the *names* attribute is assigned `h`.
+\
 
 Required Format:
 
 * `X` must be an atomic vector of positive length and only allows either numeric or complex values also NA, Inf or NaN aren't allowed.
-
 * `h` must be is a numeric vector with unique values in interval `(-n,n)`, where `n` is the length of the time series `X` and NA, Inf or NaN are not allowed.
 
-### Example 2: medium example
-
-```{r}
+### Using complex numbers
+```{r, sample_ACVF() complex numbers}
 X <- c(2 + 1i, 2 + 4i, 6, 8i, 10)
 h <- c(0, 3, 1)
 
-zeitreihen::sample_ACVF(X, h)
+sample_ACVF(X, h)
 ```
-
 Hint: `sample_ACVF` doesn't return the values sorted on `h`. It returns the values in the order of `h`.
 
-### Example 3: big example
-
-```{r}
+### Generating large output
+Calling the `sample_ACVF`, where `h` is omitted, is allowed. Within `sample_ACVF` we use the `[0,n-1]` for `h`. Hint: The Output will get big, so mind to get only the \(h_i\) that are needed.
+```{r, sample_ACVF() large output}
 X <- c(0:10, 20:30, 40:50, 50:58)
 
-zeitreihen::sample_ACVF(X)
+sample_ACVF(X)
 ```
 
-Calling the `sample_ACVF`, where `h` is omitted is allowed. Within `sample_ACVF` we use the `[0,n-1]` for `h`. Hint: The Output will get big so mind to get only the $h_i$ that are needed.
-
-### Example 4: Incorrect Inputs
-
-```{r, error = TRUE}
+### Requirements
+Several inputs are not allowed. Here are a few examples of the error messages: \
+\
+If the time series is not an atomic vector:
+```{r, sample_ACVF() time series error (format), error = TRUE}
 X <- list(2, 4, 6, 8, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X, h)
+sample_ACVF(X, h)
 ```
 
-```{r, error = TRUE}
+If the time series contains values, which are `NaN` or `Inf`:
+```{r, sample_ACVF() time series error (value), error = TRUE}
 X <- c(2, 4, 6, NA, 10)
 h <- 2
 
-zeitreihen::sample_ACVF(X, h)
+sample_ACVF(X, h)
 ```
 
-```{r, error = TRUE}
+If `h` is to large it will return an error:
+```{r, sample_ACVF() max_lag error (range), error = TRUE}
 X <- c(2, 4, 6, 8, 10)
 h <- 5
 
-zeitreihen::sample_ACVF(X, h)
+sample_ACVF(X, h)
 ```

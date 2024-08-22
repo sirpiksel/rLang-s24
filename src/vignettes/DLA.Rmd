@@ -8,112 +8,93 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include=FALSE}
-library(devtools)
-load_all(".")
-knitr::opts_chunk$set(echo = TRUE)
+```{r, DLA() setup, include = FALSE}
+library(zeitreihen)
+
+set.seed(742)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  fig.height = 6,
+  fig.width = 6,
+  tidy = TRUE
+)
 ```
 
 ## Durbin-Levinson Algorithm
-### Introduction
+The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\).
 
-The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\). 
-
-### Practical Application
-#### **Simple Example**:
-  
-  To apply the algorithm to a time series X, we call the function `DLA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
-  
-```{r}
-set.seed(1)
+### Basic Usage
+To apply the algorithm to a time series X, we call the function `DLA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
+```{r, DLA() basic usage}
 X <- stats::rnorm(5, mean = 0, sd = 1)
-cat("The time series: ", X, "\n")
-model <- DLA(X)
-```
-  
-We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the number of last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared errors).
-
-
-```{r}
 m <- 2
+model <- DLA(X)
 model(m)
 ```
-
-These coefficients can be used to calculate the one-step predictor: 
-
+We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the amount last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared errors).
+These coefficients can be used to calculate the one-step predictor:
 \[
 P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1
 \]
 
-
-Here’s what happens step by step:
+Here's what happens step-by-step:
 
 1. **Start**: The algorithm begins by calculating the first coefficient \(\phi_{11}\). This is computed as \(\gamma(1) / \gamma(0)\), where \(\gamma(1)\) is the autocovariance at lag 1, and \(\gamma(0)\) is the variance of the time series.
-
 2. **Recursive Calculation**: For each step \(n\), the algorithm calculates the coefficient \(\phi_{nn}\) by adjusting the autocovariance \(\gamma(n)\). This adjustment is based on the previous coefficients \(\phi_{n-1,j}\) and the autocovariances \(\gamma(n-j)\).
-
-3. **Phi Computation**: The coefficients \(\phi_{n,1}\) to \(\phi_{n,n-1}\) are computed through the previous \(\phi_{n-1,1}\) to \(\phi_{n-1,n-1}\) and \(\phi_{n,n}\).
-
+3. **Phi Computation**: The coefficients \(\phi_{n,1}\) to \(\phi_{n,n-1}\) are computed through the previous \(\phi_{n-1,1}\) to \(\phi_{n-1,n-1}\) and \(\phi_{n, n}\).
 4. **Mean Squared Errors**: The mean squared error \(v_n\) is calculated at each step to capture the uncertainty in the estimates. This variance is based on the previous variance \(v_{n-1}\) and the current coefficient \(\phi_{nn}\).
-
 5. **Results**: At the end, the algorithm returns a list with two named vectors: `phi`, containing the calculated coefficients, and `nu`, containing the mean squared errors. These values are important for forecasting time series data.
 
 
-#### Example 2: Big Example:
-  Let’s work with the following time series data:
+### Large Output
+Let's work with the following time series data:
 
-```{r}
-set.seed(2)
+```{r, DLA() DLA() large output}
 X <- stats::rnorm(100, mean = 0, sd = 1)
 model <- DLA(X)
 result <- model(5)
 print(result)
 ```
 
-### Example 3: Incorrect inputs
-
-If the input do not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled:
-
+### Requirements
+If the input does not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled: \
+\
 The time series data X must be passed in an atomic vector:
-
-```{r error=TRUE}
+```{r, DLA() time series error (format), error = TRUE}
 X <- list(1, 2, 3, 4, 5)
 model <- DLA(X)
 ```
 
 Also, the values of X must be numeric or complex:
-
-```{r, error=TRUE}
+```{r, DLA() time series error (value format), error = TRUE}
 X <- c(1, 2, "3", 4, "5i")
 model <- DLA(X)
 ```
 
-In addition, the atomic vector may not contain any NAs:
-
-```{r, error=TRUE}
+Similarly, the atomic vector may not contain any NAs:
+```{r, DLA() time series error (value NA), error = TRUE}
 X <- c(1, NA, 2, 3, 4)
 model <- DLA(X)
 ```
 
 The atomic vector may not contain Inf or -Inf values:
-
-```{r, error=TRUE}
+```{r, DLA() time series error (value Inf), error = TRUE}
 X <- c(1, 2, Inf, 3, 4)
 model <- DLA(X)
 ```
 
-The m paramter must be a value of length 1:
-
-```{r, error=TRUE, warning=FALSE}
-X <- rnorm(100)
+The m parameter must be a value of length 1:
+```{r, DLA() paremeter error length 1, error = TRUE, warning = FALSE}
+X <- stats::rnorm(100)
 model <- DLA(X)
 result <- model(c(1, 2))
 ```
 
 The m parameter must be an integer value between 0 and the length of X:
-
-```{r, error=TRUE, warning=FALSE}
-X <- rnorm(100)
+```{r, DLA() parameter integer value error, error = TRUE, warning = FALSE}
+X <- stats::rnorm(100)
 model <- DLA(X)
 result <- model(101)
 ```
