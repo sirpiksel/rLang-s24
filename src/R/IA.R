@@ -22,6 +22,7 @@
 #' \deqn{\hat{X}_{n}=\begin{cases}0,&\text{ if } n=1, \\ \sum\limits_{j=1}^{n-1}\theta_{n-1,j}\left(X_{n-j}-\hat{X}_{n-j}\right),& \text{ if }n=2,3,\dots\end{cases}}
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
+#' The time series should be stationary,  meaning its mean and covariance function should be independent of time.
 #' @param max_lag An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.
 #'
 #' @returns A list with three components:

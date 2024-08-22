@@ -42,7 +42,7 @@
 #' \eqn{P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1}.
 #'
 #' @param X A numeric or complex atomic vector representing the time series data.
-#' The time series should be stationary, meaning that its mean and covariance function are independent of time.
+#' The time series should be stationary,  meaning its mean and covariance function should be independent of time.
 #'
 #' @returns The output of this function is an anonymous function. The returned function takes the value `m` as a parameter. The value `m` means that we use the last `m` values of the time series to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the Durbin-Levinson algorithm, which then returns
 #' a list with two components:

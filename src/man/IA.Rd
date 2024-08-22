@@ -7,7 +7,8 @@
 IA(X, max_lag = length(X))
 }
 \arguments{
-\item{X}{A numeric or complex atomic vector representing the time series data.}
+\item{X}{A numeric or complex atomic vector representing the time series data.
+The time series should be stationary,  meaning its mean and covariance function should be independent of time.}
 
 \item{max_lag}{An integer specifying the maximum number of lags to be checked. By default, it is set to the length of the time series.}
 }

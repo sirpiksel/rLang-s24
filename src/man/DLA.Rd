@@ -8,7 +8,7 @@ DLA(X)
 }
 \arguments{
 \item{X}{A numeric or complex atomic vector representing the time series data.
-The time series should be stationary, meaning that its mean and covariance function are independent of time.}
+The time series should be stationary,  meaning its mean and covariance function should be independent of time.}
 }
 \value{
 The output of this function is an anonymous function. The returned function takes the value \code{m} as a parameter. The value \code{m} means that we use the last \code{m} values of the time series to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the Durbin-Levinson algorithm, which then returns

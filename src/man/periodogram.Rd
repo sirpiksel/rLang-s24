@@ -7,7 +7,8 @@
 periodogram(X, lambda)
 }
 \arguments{
-\item{X}{A numeric or complex atomic vector representing the time series data. The series should be stationary, meaning that its mean and variance do not change over time.}
+\item{X}{A numeric or complex atomic vector representing the time series data.
+The time series should be stationary,  meaning its mean and covariance function should be independent of time.}
 
 \item{lambda}{A numeric value from the interval \eqn{(- \pi, \pi]} that represents the frequency at which the periodogram is evaluated.}
 }

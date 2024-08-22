@@ -12,7 +12,8 @@
 #' Within the \code{\link{plot}} function, this function is used to calculate the periodogram
 #' of a given time series for several lambda values in the interval \eqn{(-\pi, \pi]}.
 #'
-#' @param X A numeric or complex atomic vector representing the time series data. The series should be stationary, meaning that its mean and variance do not change over time.
+#' @param X A numeric or complex atomic vector representing the time series data.
+#' The time series should be stationary,  meaning its mean and covariance function should be independent of time.
 #' @param lambda A numeric value from the interval \eqn{(- \pi, \pi]} that represents the frequency at which the periodogram is evaluated.
 #'
 #' @returns A numeric value representing the periodogram.
