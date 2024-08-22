@@ -45,9 +45,11 @@ plot <- function(X, n, from = 0, to = pi) {
 
   lambda <- seq(from = from, to = to, length.out = n + 1)[-1]
 
+  options(warn=-1)
   samples <- sapply(lambda, \(i) {
     periodogram(X, i)
   })
+  options(warn=0)
 
   graphics::plot(lambda, samples, type = "l", col = "blue", xlab = "Sample", ylab = "Estimate", main = "The spectral density estimate of X")
 }
