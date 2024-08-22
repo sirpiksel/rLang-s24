@@ -50,7 +50,7 @@
 IA <- function(X, max_lag = length(X)) {
   stopifnot(
     "X must be an atomic vector" = is.atomic(X),
-    "X must have more than one values" = length(X) > 1,
+    "X must have more than one value" = length(X) > 1,
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
     "X must only contain numeric or complex values" = (is.numeric(X) | is.complex(X)),

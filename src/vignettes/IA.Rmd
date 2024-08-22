@@ -22,7 +22,7 @@ Additionally the algorithm calculates the mean squared errors \(\nu_i\).
 
 ### Example 1: Basic Usage 
 To apply the algorithm to a time series X, we call the function `IA()` with parameter X
-```{r}
+```{r }
 X <- stats::rnorm(5, mean = 0, sd = 1)
 out <- zeitreihen::IA(X)
 ```
@@ -48,15 +48,21 @@ For example the coefficient \(\theta_{41}\) is the coefficient before the differ
 
 ### Example 2: Using the optional parameter `max_lag`
 Additionally, the parameter `max_lag` (per default the length of the time series) can be set, to indicate till where the \(\theta\) 's should be calculated.
-```{r}
+```{r warning=FALSE}
 X <- stats::rnorm(100, mean = 0, sd = 1)
 out <- zeitreihen::IA(X, max_lag = 6)
 out$nu
 out$theta
 ```
 
+
+```{r}
+X <- stats::rnorm(5, mean = 0, sd = 1)
+IA(X)
+```
+
 ### Example 3: Using incorrect values
-There are several inputs which are not allowed and give the following warnings:\(\newline\)
+There are several inputs which are not allowed. Here are a few examples of the error messages:\(\newline\)
 1. If the time series contains values which are `NaN` or `Inf`:
 ```{r,error=TRUE}
 X <- NaN + stats::rnorm(10, mean = 0, sd = 1)
@@ -67,7 +73,7 @@ out <- zeitreihen::IA(X)
 \(\newline\)
 2. If the time series contains values which are not numeric or complex values:
 ```{r, error=TRUE}
-X <- "2.01"
+X <- c("2.01",1,0)
 out <- zeitreihen::IA(X)
 ```
 \(\newline\)
