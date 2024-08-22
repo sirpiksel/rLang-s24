@@ -14,7 +14,7 @@
 #' @param sigma A numeric value representing the standard deviation of the white noise, with a default value of 1.
 #' @param start A numeric atomic vector containing the first `p` observations, which are 0 by default.
 #'
-#' @returns An atomic numeric vector containing the generated AR(p) time series.
+#' @returns A numeric atomic vector containing the generated AR(p) time series.
 #'
 #' @references Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.
 #'
