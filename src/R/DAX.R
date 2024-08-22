@@ -1,4 +1,20 @@
-# DAX Chart
+#' @title Financial Data: German Stock Index (DAX)
+#' 
+#' @description
+#' This file contains the stock prices of the German stock index (DAX) for the
+#' period from January 2022 to July 2024. The data is provided both in the form
+#' of a data frame and as a time series.
+#' 
+#' @usage DAX_df
+#' DAX_ts
+#' 
+#' @format
+#' `DAX_df` is a data frame with 661 entries (rows) and 2 variables (columns)
+#' named `data` and `value`.
+#' 
+#' @name DAX
+#' @aliases DAX_df DAX_ts
+#' 
 
 date <- as.Date(c(
   "2022-01-03", "2022-01-04", "2022-01-05", "2022-01-06", "2022-01-07",
@@ -239,5 +255,5 @@ DAX_df <- data.frame(date = date, value = value)
 
 DAX_ts <- ts(data = value, date)
 
-usethis::use_data(DAX_df, overwrite = TRUE)
-usethis::use_data(DAX_ts, overwrite = TRUE)
+usethis::use_data(DAX_df)
+usethis::use_data(DAX_ts)
