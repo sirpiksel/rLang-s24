@@ -113,7 +113,6 @@ test_that("DLA: X may not contain Inf or -Inf values", {
   expect_error(DLA(X), "X may not contain Inf or -Inf values")
 })
 
-<<<<<<< Updated upstream
 test_that("DLA: The values of X must be numeric or complex", {
   X <- c(TRUE, FALSE)
   expect_error(DLA(X), "The values of X must be numeric or complex")
@@ -143,8 +142,6 @@ test_that("DLA: The values of X must be numeric or complex", {
   expect_error(DLA(X), "The values of X must be numeric or complex")
 })
 
-=======
->>>>>>> Stashed changes
 ## Test conditions for m
 
 test_that("DLA: m must be a value of length 1", {
