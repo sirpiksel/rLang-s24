@@ -50,7 +50,7 @@
 IA <- function(X, max_lag = length(X)) {
   stopifnot(
     "X must be an atomic vector" = is.atomic(X),
-    "X must have more than two values" = length(X) > 2,
+    "X must have more than one values" = length(X) > 1,
     "X may not contain NAs" = !any(is.na(X)),
     "X may not contain Inf or -Inf values" = !any(is.infinite(X)),
     "X must only contain numeric or complex values" = (is.numeric(X) | is.complex(X)),
@@ -59,7 +59,7 @@ IA <- function(X, max_lag = length(X)) {
     "max_lag must be numeric" = is.numeric(max_lag),
     "max_lag must be an integer" = max_lag %% 1 == 0 & length(max_lag) == 1,
     "max_lag cannot exceed length(X)" = max_lag <= length(X),
-    "max_lag cannot be smaller than 3" = 3 <= max_lag
+    "max_lag cannot be smaller than 2" = 2 <= max_lag
   )
   warning("Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
 
@@ -73,6 +73,11 @@ IA <- function(X, max_lag = length(X)) {
   theta_mat <- matrix(0, ncol = max_lag, nrow = max_lag)
   theta_mat[2, 1] <- 1 / nu[1] * autocov[2]
   nu[2] <- autocov[1] - theta_mat[2, 1]^2 * nu[1]
+  
+  if(max_lag == 2){
+    coeffs <- theta_mat[max_lag, max_lag - 1]
+    return(list(coeffs = coeffs, nu = nu, theta = theta_mat))
+  }
 
   # calculate theta_mat,n-k n rows
   for (i in 2:(max_lag - 1)) {
