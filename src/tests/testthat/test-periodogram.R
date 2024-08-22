@@ -350,67 +350,86 @@ test_that("periodogram: correct values for X", {
   lambda <- pi / 2
 
   X <- -20:-1
-  expect_equal(periodogram(X, lambda), 10, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 10, tolerance = 1e-6)
 
   X <- -20:0
-  expect_equal(periodogram(X, lambda), 9.52381, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 9.52381, tolerance = 1e-6)
 
   X <- -20:50
-  expect_equal(periodogram(X, lambda), 21.42254, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 21.42254, tolerance = 1e-6)
 
   X <- 1:100
-  expect_equal(periodogram(X, lambda), 50, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 50, tolerance = 1e-6)
 
   X <- 1:1000
-  expect_equal(periodogram(X, lambda), 500, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 500, tolerance = 1e-6)
 
   X <- seq(from = -5, to = 0, by = 0.05)
-  expect_equal(periodogram(X, lambda), 0.1237624, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 0.1237624, tolerance = 1e-6)
 
   X <- seq(from = -10, to = 10, by = 0.25)
-  expect_equal(periodogram(X, lambda), 1.234568, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 1.234568, tolerance = 1e-6)
 
   X <- seq(from = 0, to = 20, by = 0.25)
-  expect_equal(periodogram(X, lambda), 2.469136, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 2.469136, tolerance = 1e-6)
 
   X <- seq(from = 0, to = 10, by = 0.1)
-  expect_equal(periodogram(X, lambda), 0.4950495, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 0.4950495, tolerance = 1e-6)
 
   X <- seq(from = 0, to = 100, by = 2.5)
-  expect_equal(periodogram(X, lambda), 121.9512, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 121.9512, tolerance = 1e-6)
 
   X <- c(1L, 2.5, pi, 4i, 42L)
-  expect_equal(periodogram(X, lambda), 258.4151, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 258.4151, tolerance = 1e-6)
 
   X <- c(-0.75, 0.222, 4.681, 15.32, 1042)
-  expect_equal(periodogram(X, lambda), 214940.6, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 214940.6, tolerance = 1e-6)
 
   X <- c(-42L, -21i, 0, pi, 563)
-  expect_equal(periodogram(X, lambda), 50001.97, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 50001.97, tolerance = 1e-6)
 
   X <- c(-10i, -5i + 2, pi, exp(5), log(100))
-  expect_equal(periodogram(X, lambda), 3724.211, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 3724.211, tolerance = 1e-6)
 
   X <- c(-10i, -5i + 2, pi, log(100), exp(5))
-  expect_equal(periodogram(X, lambda), 3946.159, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 3946.159, tolerance = 1e-6)
 
   set.seed(123)
   X <- rnorm(100)
   lambda <- pi / 4
-  expect_equal(periodogram(X, lambda), 1.392404, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 1.392404, tolerance = 1e-6)
 
   set.seed(123)
   X <- runif(100)
   lambda <- pi / 4
-  expect_equal(periodogram(X, lambda), 0.0346715, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 0.0346715, tolerance = 1e-6)
 
   X <- sin(2 * pi * 1:100 / 100)
   lambda <- 2 * pi / 100
-  expect_equal(periodogram(X, lambda), 25, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 25, tolerance = 1e-6)
 
   X <- exp(2 * pi * 1i * 1:100 / 100)
   lambda <- 2 * pi / 100
-  expect_equal(periodogram(X, lambda), 100, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 100, tolerance = 1e-6)
 })
 
 
@@ -419,38 +438,50 @@ test_that("periodogram: correct values for lambda", {
   X <- 1:10
 
   lambda <- -3.1415
-  expect_equal(periodogram(X, lambda), 2.5, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 2.5, tolerance = 1e-6)
 
   lambda <- -pi / 2
-  expect_equal(periodogram(X, lambda), 6.1, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 6.1, tolerance = 1e-6)
 
   lambda <- -pi / 4
-  expect_equal(periodogram(X, lambda), 15.2397, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 15.2397, tolerance = 1e-6)
 
   lambda <- 0
-  expect_equal(periodogram(X, lambda), 302.5, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 302.5, tolerance = 1e-6)
 
   lambda <- pi / 4
-  expect_equal(periodogram(X, lambda), 15.2397, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 15.2397, tolerance = 1e-6)
 
   lambda <- pi / 2
-  expect_equal(periodogram(X, lambda), 6.1, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 6.1, tolerance = 1e-6)
 
   lambda <- pi
-  expect_equal(periodogram(X, lambda), 2.5, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 2.5, tolerance = 1e-6)
 
   lambda <- exp(1)
-  expect_equal(periodogram(X, lambda), 2.967701, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 2.967701, tolerance = 1e-6)
 
   lambda <- log(1)
-  expect_equal(periodogram(X, lambda), 302.5, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 302.5, tolerance = 1e-6)
 
   lambda <- log(pi)
-  expect_equal(periodogram(X, lambda), 10.27419, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 10.27419, tolerance = 1e-6)
 
   lambda <- pi / 100
-  expect_equal(periodogram(X, lambda), 300.7134, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 300.7134, tolerance = 1e-6)
 
   lambda <- 2 * pi / 100
-  expect_equal(periodogram(X, lambda), 295.4101, tolerance = 1e-6)
+  expect_warning(out <- periodogram(X, lambda), "Please note: This function works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_equal(out, 295.4101, tolerance = 1e-6)
 })
