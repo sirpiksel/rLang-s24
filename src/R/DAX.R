@@ -1,39 +1,41 @@
 #' @title Financial Data: German Stock Index (DAX)
-#' 
+#'
 #' @description
 #' This dataset contains the stock prices of the German stock index (DAX) for
 #' the period from the beginning of January 2022 to the end of July 2024. The
 #' data is provided both in the form of a data frame (`DAX_df`) and as a time
 #' series object (`DAX_ts`).
-#' 
+#'
 #' @usage DAX_df
 #' DAX_ts
-#' 
+#'
 #' @format
 #' `DAX_df` is a data frame with 661 entries (rows) and 2 variables (columns)
 #' named `Date` and `Close`. The `Date` column lists the trading days, while the
 #' `Close` column shows the adjusted closing price of the DAX for that date.
-#' 
+#'
 #' `DAX_ts` is a time series that shows the adjusted closing price of the DAX
 #' for each trading day.
-#'  
+#'
 #' @name DAX
-#' 
+#'
 #' @aliases DAX_df DAX_ts
-#' 
+#'
 #' @source [Finanzen.net](https://www.finanzen.net/)
-#' 
+#'
 #' @examples
 #' # Display the first few rows of the data frame
 #' head(DAX_df)
-#' 
+#'
 #' # Plot the stock price
-#' base::plot(DAX_df$Date, DAX_df$Close, type = "l", col = "blue",
-#'     main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
-#' 
+#' base::plot(DAX_df$Date, DAX_df$Close,
+#'   type = "l", col = "blue",
+#'   main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price"
+#' )
+#'
 #' @keywords dataset
-#' 
-#' 
+#'
+#'
 Date <- as.Date(c(
   "2022-01-03", "2022-01-04", "2022-01-05", "2022-01-06", "2022-01-07",
   "2022-01-10", "2022-01-11", "2022-01-12", "2022-01-13", "2022-01-14",

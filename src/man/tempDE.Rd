@@ -33,9 +33,11 @@ series object (\code{tempDE_ts}).
 head(tempDE_df)
 
 # Plot the temperature
-base::plot(tempDE_df$Year, tempDE_df$Temperature, type = "p", col = "blue",
-    main = "Average Annual Temperature in Germany (1881-2023)",
-    xlab = "Year", ylab = "Temperature (°C)")
+base::plot(tempDE_df$Year, tempDE_df$Temperature,
+  type = "p", col = "blue",
+  main = "Average Annual Temperature in Germany (1881-2023)",
+  xlab = "Year", ylab = "Temperature (°C)"
+)
 lines(tempDE_df$Year, tempDE_df$Temperature, col = "red")
 
 }

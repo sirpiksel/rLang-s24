@@ -91,6 +91,6 @@ IA <- function(X, max_lag = length(X)) {
     nu[i + 1] <- autocov[1] - sum(theta_mat[i + 1, 1:i]^2 * nu[1:i])
   }
   coeffs <- theta_mat[max_lag, (max_lag - 1):1]
-  
+
   return(list(coeffs = coeffs, nu = nu, theta = theta_mat))
 }

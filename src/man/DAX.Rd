@@ -33,8 +33,10 @@ series object (\code{DAX_ts}).
 head(DAX_df)
 
 # Plot the stock price
-base::plot(DAX_df$Date, DAX_df$Close, type = "l", col = "blue",
-    main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
+base::plot(DAX_df$Date, DAX_df$Close,
+  type = "l", col = "blue",
+  main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price"
+)
 
 }
 \keyword{dataset}

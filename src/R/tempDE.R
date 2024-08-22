@@ -1,40 +1,42 @@
 #' @title Weather Data: Average Annual Temperature in Germany
-#' 
+#'
 #' @description
 #' This dataset contains the average annual temperatures in Germany from 1881 to
 #' 2023. The data is provided both as a data frame (`tempDE_df`) and as a time
 #' series object (`tempDE_ts`).
-#' 
+#'
 #' @usage tempDE_df
 #' tempDE_ts
-#' 
+#'
 #' @format
 #' `tempDE_df` is a data frame with 143 entries (rows) and 2 variables (columns)
 #' named `Year` and `Temperature`. The `Year` column contains the respective
 #' years, while the `Temperature` column gives the average annual temperature in
 #' the whole of Germany.
-#' 
+#'
 #' `tempDE_ts` is a time series that shows the average annual temperature in
 #' Germany for each year.
-#' 
+#'
 #' @name tempDE
-#' 
+#'
 #' @aliases tempDE_df tempDE_ts
-#' 
+#'
 #' @source [Deutscher Wetterdienst](https://www.dwd.de/)
-#' 
+#'
 #' @examples
 #' # Display the first few rows of the data frame
 #' head(tempDE_df)
-#' 
+#'
 #' # Plot the temperature
-#' base::plot(tempDE_df$Year, tempDE_df$Temperature, type = "p", col = "blue",
-#'     main = "Average Annual Temperature in Germany (1881-2023)",
-#'     xlab = "Year", ylab = "Temperature (°C)")
+#' base::plot(tempDE_df$Year, tempDE_df$Temperature,
+#'   type = "p", col = "blue",
+#'   main = "Average Annual Temperature in Germany (1881-2023)",
+#'   xlab = "Year", ylab = "Temperature (°C)"
+#' )
 #' lines(tempDE_df$Year, tempDE_df$Temperature, col = "red")
-#' 
+#'
 #' @keywords dataset
-#' 
+#'
 Year <- 1881:2023
 
 Temperature <- as.numeric(c(

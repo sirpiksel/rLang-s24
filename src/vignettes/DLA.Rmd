@@ -107,7 +107,7 @@ The m paramter must be a value of length 1:
 ```{r, error=TRUE, warning=FALSE}
 X <- rnorm(100)
 model <- DLA(X)
-result <- model(c(1,2))
+result <- model(c(1, 2))
 ```
 
 The m parameter must be an integer value between 0 and the length of X:
