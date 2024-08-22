@@ -25,18 +25,16 @@ DAX_ts
 \description{
 This dataset contains the stock prices of the German stock index (DAX) for
 the period from the beginning of January 2022 to the end of July 2024. The
-data is provided both in the form of a data frame and as a time series.
+data is provided both in the form of a data frame (\code{DAX_df}) and as a time
+series object (\code{DAX_ts}).
 }
 \examples{
-# Load the DAX dataset
-data(DAX_df)
-
-# Display the first few rows of the dataset
+# Display the first few rows of the data frame
 head(DAX_df)
 
 # Plot the stock price
-base::plot(DAX_df$Date, DAX_df$Close, col = "blue", type = "l",
-main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
+base::plot(DAX_df$Date, DAX_df$Close, type = "l", col = "blue",
+    main = "DAX Performance", xlab = "Date", ylab = "Adjusted Closing Price")
 
 }
-\keyword{datset}
+\keyword{dataset}

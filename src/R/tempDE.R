@@ -1,8 +1,43 @@
-# Germany Temperature
+#' @title Weather Data: Average Annual Temperature in Germany
+#' 
+#' @description
+#' This dataset contains the average annual temperatures in Germany from 1881 to
+#' 2023. The data is provided both as a data frame (`tempDE_df`) and as a time
+#' series object (`tempDE_ts`).
+#' 
+#' @usage tempDE_df
+#' tempDE_ts
+#' 
+#' @format
+#' `tempDE_df` is a data frame with 143 entries (rows) and 2 variables (columns)
+#' named `Year` and `Temperature`. The `Year` column contains the respective
+#' years, while the `Temperature` column gives the average annual temperature in
+#' the whole of Germany.
+#' 
+#' `tempDE_ts` is a time series that shows the average annual temperature in
+#' Germany for each year.
+#' 
+#' @name tempDE
+#' 
+#' @aliases tempDE_df tempDE_ts
+#' 
+#' @source [Deutscher Wetterdienst](https://www.dwd.de/)
+#' 
+#' @examples
+#' # Display the first few rows of the data frame
+#' head(tempDE_df)
+#' 
+#' # Plot the temperature
+#' base::plot(tempDE_df$Year, tempDE_df$Temperature, type = "p", col = "blue",
+#'     main = "Average Annual Temperature in Germany (1881-2023)",
+#'     xlab = "Year", ylab = "Temperature (°C)")
+#' lines(tempDE_df$Year, tempDE_df$Temperature, col = "red")
+#' 
+#' @keywords dataset
+#' 
+Year <- 1881:2023
 
-year <- 1881:2023
-
-temperature <- as.numeric(c(
+Temperature <- as.numeric(c(
   7.3, 8.3, 7.9, 8.6, 7.7, 8.0, 7.0, 6.9, 7.4, 7.3, 7.4, 7.5, 7.9, 8.1, 7.3,
   7.6, 7.9, 8.5, 8.1, 8.4, 7.6, 7.2, 8.4, 8.4, 8.0, 8.3, 7.8, 7.5, 7.4, 8.4,
   9.0, 7.9, 8.5, 8.5, 7.9, 8.4, 7.5, 8.5, 7.3, 8.6, 9.0, 7.2, 8.0, 7.5, 8.3,
@@ -16,10 +51,9 @@ temperature <- as.numeric(c(
 ))
 
 
-tempDE_df <- data.frame(year = year, temperature = temperature)
+tempDE_df <- data.frame(Year = Year, Temperature = Temperature)
 
-tempDE_ts <- ts(data = temperature, year)
+tempDE_ts <- ts(data = Temperature, Year)
 
 usethis::use_data(tempDE_df, overwrite = TRUE)
 usethis::use_data(tempDE_ts, overwrite = TRUE)
-
