@@ -16,6 +16,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The sample autocovariance function is a important tool in time series analysis. It measure the covariance between values of a time series across different lags. The function `sample_ACVF` is an implementation of sample autocovariance function.
 
+The output of the sample autocovariance function is dependent on the considered time series and lag:
+
+* If the output value is near zero then we can assume that there is weak relation between the points $X_t$ and $X_{t + h}$. 
+* If the output value is big and positive then we can assume that there is a strong relation between the points $X_t$ and $X_{t + h}$. 
+* If the output value is big and negative then we can assume that there is a strong relation between the points $X_{t + h}$ and $X_{t}$.
+
 ### Example 1: small example
 
 `X` represent a time series and `h` is a integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
@@ -27,14 +33,18 @@ h <- 2
 zeitreihen::sample_ACVF(X, h)
 ```
 
-The Output is the value `-0.8`, which is the computation of the `sample_ACVF` on `X` with `h`, and has named attribute `2`, which is the corresponding lag `h`.  
+The Output is the value `-0.8`, which is the computation of the `sample_ACVF` on `X` for `h`, and has named attribute `2`, which is the corresponding lag `h`. 
 
 What happens:
 
 * Within the function, It is checked if `X` and `h` have the required format.
 * The mean of `X`, which is $\bar{x}$, is computed.
-* `n` is extracted from `X`
-* For each $h_i$ $\in$ `h` we compute $n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
+* The length of `X`, which is $n$, is extracted from `X`.
+* For each $h_i$ $\in$ `h`: we compute $n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
+  * We considered the vector, which is formed by the last $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
+  * We considered the vector, which is formed by the first $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
+  * We compute the dot product of the vectors
+  * Last step, we divide the dot product of the vectors by $n$
 * At last, The values are returned where the *names* attribute is assigned `h`.
 
 Required Format:
@@ -62,7 +72,7 @@ X <- c(0:10, 20:30, 40:50, 50:58)
 zeitreihen::sample_ACVF(X)
 ```
 
-Calling the `sample_ACVF`, where `h` is omitted is allowed. Within `sample_ACVF` we use the [0,n-1] for `h`. Hint: The Output will get big so mind to get only the $h_i$ that are needed.
+Calling the `sample_ACVF`, where `h` is omitted is allowed. Within `sample_ACVF` we use the `[0,n-1]` for `h`. Hint: The Output will get big so mind to get only the $h_i$ that are needed.
 
 ### Example 4: Incorrect Inputs
 
