@@ -37,7 +37,7 @@ and
 
 The algorithm iteratively calculates these coefficients, which are essential for the analysis of moving average processes
 and can be used to calculate the one-step predictor \eqn{\hat{X}_{n}} given by the formula
-\deqn{\hat{X}_{n}=\begin{cases}0&\text{ if }n=1\\ \sum\limits_{j=1}^{n-1}\theta_{n-1,j}\left(X_{n-j}-\hat{X}_{n-j}\right)& \text{ if }n=2,3,\dots\end{cases}}
+\deqn{\hat{X}_{n}=\begin{cases}0,&\text{ if } n=1, \\ \sum\limits_{j=1}^{n-1}\theta_{n-1,j}\left(X_{n-j}-\hat{X}_{n-j}\right),& \text{ if }n=2,3,\dots\end{cases}}
 }
 \examples{
 # Example 1: Basic Usage
