@@ -41,10 +41,10 @@ What happens:
 * The mean of `X`, which is $\bar{x}$, is computed.
 * The length of `X`, which is $n$, is extracted from `X`.
 * For each $h_i$ $\in$ `h`: we compute $n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
-  * We considered the vector, which is formed by the last $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
-  * We considered the vector, which is formed by the first $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
-  * We compute the dot product of the vectors
-  * Last step, we divide the dot product of the vectors by $n$
+  * We considered the vector, which is stores the last $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
+  * We considered the vector, which is stores the first $n$ - `h` values from `X`, and subtract component wise the mean of `X` form it.
+  * We compute the dot product of the vectors.
+  * Last step, we divide the dot product of the vectors by $n$.
 * At last, The values are returned where the *names* attribute is assigned `h`.
 
 Required Format:

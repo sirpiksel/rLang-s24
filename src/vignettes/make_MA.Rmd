@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Moving Average (MA)
 
-The function `make_MA` generates synthetic time series based on MA(q) (Moving Average of order q) model. By Providing the MA coefficients and white noise variance to the `make_MA` function, data for a time series can be created.
+The function `make_MA` generates synthetic time series based on MA(q) (Moving Average of order q) model. By Providing the MA coefficients and white noise standard deviation to the `make_MA` function, data for a time series can be created.
 
 ### Example 1: First example
 
@@ -32,12 +32,16 @@ The output is a numeric/complex vector of length `t`, which contains data genera
 
 What happens:
 
-* Within the function, It is checked if `t`, `theta` and `sigma` have the required format.
-* `q` is derived by the length of `theta`.
-* Allocation of a numeric vector of length `t`to store the time series data
-* By providing `sigma`, we allocate t+q instances of White noise in `Z`.
-* Computation of $X_i$ iterativly by using the definition of $X_i$ = $Z_t$ + $Z_{t-1}\theta_{1}$ + ... + $Z_{t-q}\theta_{q}$.
-* At last, The values are returned.
+* Within the function, it is checked if `t`, `theta` and `sigma` have the required format.
+* $q$ is derived by the length of `theta`.
+* Allocation of a numeric vector $X$ of length `t` to store the time series data.
+* By providing `sigma`, we allocate `t + q` instances of white noise in `Z`.
+* Computation of $X$ iteratively from $q + 1$ till $t + q$ with loop variable i:
+  * Consider the vector, which stores the values from $Z_{i - 1}$ ... $Z_{i - q}$.
+  * Then the dot product of the vectors theta and vector is computed .
+  * $Z_i$ is added to dot product.
+  * At last, in $X_{i - q}$ the prior computation is stored.
+* At last, the values are returned.
 
 Required Format:
 
@@ -67,7 +71,7 @@ sigma <- 1
 zeitreihen::make_MA(t, theta, sigma)
 ```
 
-Calling the `make_MA`, where `sigma` is omitted is allowed. Within `make_MA` we use the `1` as a value for `sigma`. Hint: The Output will get big so mind to generate only the number of observation that are needed.
+Calling the `make_MA`, where `sigma` is omitted is allowed. Within `make_MA` we use `1` as a value for `sigma`. Hint: The Output will get big so mind to generate only the number of observation that are needed.
 
 ### Example 4: Incorrect Inputs
 
