@@ -43,16 +43,6 @@ X <- rnorm(100)
 lambda <- pi / 4
 periodogram(X, lambda)
 
-# Example 4: Periodogram for tempDE time series
-X <- tempDE
-lambda <- pi / 4
-periodogram(X, lambda)
-
-# Example 5: Periodogram for DAX time series
-X <- DAX_df / 1000
-lambda <- pi / 2
-periodogram(X, lambda)
-
 }
 \references{
 Brockwell, P.J., Davis, R.A. (2016) \emph{Introduction to Time Series and Forecasting}. Springer.

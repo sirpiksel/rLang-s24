@@ -16,7 +16,7 @@ make_AR(t, phi, sigma = 1, start = numeric(length(phi)))
 \item{start}{A numeric atomic vector containing the first \code{p} observations, which are 0 by default.}
 }
 \value{
-An atomic numeric vector containing the generated AR(p) time series.
+A numeric atomic vector containing the generated AR(p) time series.
 }
 \description{
 \code{make_AR} generates a synthetic time series that follows an AR(p) model.
