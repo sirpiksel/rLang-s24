@@ -31,7 +31,6 @@
 #' sample_ACVF(X, h)
 #'
 #' # Example 3: Sample ACVF with Random Data
-#' set.seed(123)
 #' X <- rnorm(100)
 #' h <- c(-2, 0, 2)
 #' sample_ACVF(X, h)
