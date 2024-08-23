@@ -8,7 +8,7 @@ test_that("Basic Usage with Default Parameters", {
 
   expected_coeffs <- c(0.077761985, -0.083173544, 0.097914982, -0.181342325, 0.049198785, 0.034279188, 0.010777677, -0.086303806, -0.028017420, -0.036051456, -0.013916840, -0.169079294, -0.115098260, 0.103059537, -0.130072580, 0.024796811, 0.162661639, -0.138568498, -0.012313025, -0.055154191, 0.057241615, 0.082870862, -0.157867042, 0.105083171, 0.048212635, -0.097504077, -0.124880791, 0.130717352, -0.036303637, -0.116537925, 0.092941624, -0.041735016, -0.002055763, -0.005133371, -0.021443057, -0.122754786, 0.111013386, 0.013209334, 0.176018999, -0.070251181, -0.003138291, 0.090056696, 0.057757028, -0.113312364, -0.042997851, 0.008025368, -0.055174648, 0.003507653, -0.010095779, -0.032862008, 0.012294498, -0.026230916, 0.136855663, 0.119566419, -0.016210406, -0.026764704, 0.083876758, -0.062079246, -0.049504623, 0.053362984, -0.125150882, -0.053831261, 0.115122063, 0.043396604, -0.053215401, -0.102720650, 0.005448317, -0.037230326, -0.170178362, 0.032062648, 0.006101200, -0.121565339, -0.016663432, -0.008601710, -0.041479086, 0.041831065, -0.064874474, -0.000225391, 0.033702626, -0.026852568, 0.071035785, 0.037448083, -0.051060737, 0.039675683, 0.021293653, 0.041344029, 0.005488643, -0.026605899, -0.053144205, -0.009513968, 0.046604346, 0.068903525, -0.020049641, 0.009304000, 0.019805555, -0.029580444, -0.029189439, 0.007143714, 0.008812238)
 
-  expect_warning(out <- IA(X), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })
@@ -21,7 +21,7 @@ test_that("Specify a Maximum Lag `q`", {
 
   expected_coeffs <- c(0.107842841, -0.028194840, 0.055568229, -0.130441608, 0.009838843, -0.045904750, 0.149146835, -0.122966296, 0.022835186)
 
-  expect_warning(out <- IA(X, max_lag = 10), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X, max_lag = 10), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })
@@ -38,7 +38,7 @@ test_that("Check the Theta Matrix", {
 
   expected_coeffs <- c(-0.374892000, -0.055091812, -0.089044103, -0.109115057, 0.154418680, -0.071291456, 0.212967400, -0.433694014, 0.103939814, 0.003494813, -0.041895002, 0.101342336, -0.118638618, 0.311068412, -0.211946220, 0.045593723, -0.147922484, 0.182974825, 0.071927728, -0.184708371, 0.091661902, -0.147375040, 0.178091615, -0.073076220, 0.018564352, -0.060210290, -0.154164155, 0.060835445, 0.006310183)
 
-  expect_warning(out <- IA(X), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$theta, expected_theta, tolerance = 1e-6)
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
@@ -53,7 +53,7 @@ test_that("Time Series with Trend", {
 
   expected_coeffs <- c(0.962560915, 0.953283158, 0.892911983, 0.857428829, 0.832456183, 0.796748870, 0.783870324, 0.747189147, 0.746688462, 0.711286400, 0.703007567, 0.651471237, 0.655998246, 0.622995613, 0.577767050, 0.574216467, 0.537762894, 0.536065644, 0.548591557, 0.488218500, 0.461728267, 0.431560406, 0.448760763, 0.390657619, 0.387615678, 0.356699802, 0.361151219, 0.341304091, 0.326313736, 0.290226603, 0.280175945, 0.249201252, 0.264222766, 0.216114273, 0.226471059, 0.203231086, 0.164387780, 0.172231096, 0.153086524, 0.124727146, 0.120499945, 0.142119387, 0.100459267, 0.084534574, 0.077527012, 0.034060920, 0.056262447, 0.032178156, 0.022051111, 0.005734850, -0.001981690, -0.034524692, -0.004733516, -0.043435448, -0.044506568, -0.059692012, -0.102553011, -0.087592672, -0.083332032, -0.096219771, -0.117015948, -0.105606536, -0.126675012, -0.153646759, -0.140255289, -0.178265623, -0.161407740, -0.180997364, -0.177680311, -0.205000606, -0.215358996, -0.231127236, -0.224290916, -0.237687946, -0.224439865, -0.276737540, -0.259398544, -0.268626644, -0.272016197, -0.326370636, -0.322643860, -0.308087998, -0.332834910, -0.315105615, -0.345991188, -0.367430554, -0.357957279, -0.384432562, -0.388129242, -0.414464741, -0.398342857, -0.420153827, -0.418903169, -0.437184166, -0.443239635, -0.446189105, -0.495310913, -0.480881796, -0.028947751)
 
-  expect_warning(out <- IA(X), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })
@@ -66,7 +66,7 @@ test_that("Short Time Series", {
 
   expected_coeffs <- c(-0.23088608, -0.18149611, -0.37103524, -0.05012469, 0.06048621, -0.04411553, 0.21307827, -0.06384881, -0.10828997)
 
-  expect_warning(out <- IA(X), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })
@@ -79,7 +79,7 @@ test_that("AR(1) Time Series", {
 
   expected_coeffs <- c(0.7144073340, 0.4756573917, 0.2880066873, 0.2592731927, 0.4032241813, 0.2175407826, 0.0704650687, 0.0536634089, 0.1414700772, 0.0715855444, 0.0132637803, 0.0613206174, -0.0589264150, -0.1074637319, -0.1402921891, -0.1979378227, -0.2079696811, -0.1795137776, -0.2422103888, -0.2482064482, -0.3065510386, -0.4005119891, -0.1982476409, -0.1828638074, -0.1834417885, -0.2288993835, -0.3792348111, -0.3480550534, -0.2625755295, -0.1166748655, -0.0743149127, -0.0278791340, -0.0144082266, -0.1077698475, -0.1591566257, -0.0545419575, -0.1718574857, -0.0292734663, -0.0374868207, -0.0007674317, 0.1302340064, 0.0570085674, 0.1107970743, 0.1048608414, 0.0438839475, 0.0568753728, 0.0292090481, 0.1446495121, 0.1497920806, 0.0032162959, 0.0160621749, -0.0260455954, 0.1197426008, 0.1843530993, 0.1728196950, 0.0934652960, -0.0176744053, 0.0859890885, 0.0011779518, -0.0075658051, -0.0254551038, 0.0036278241, 0.0073930392, 0.0361291591, 0.0190181750, 0.0857326790, 0.1664439863, 0.0464605992, -0.0091950604, 0.0302131006, -0.0268126102, -0.0257080956, -0.0669919437, -0.0639039337, -0.0684894930, -0.0899484123, -0.0868372958, -0.0546012081, 0.0067357287, -0.0192097028, -0.0088098860, -0.0858906787, -0.0021236421, 0.0741519876, 0.0652698891, 0.0418874278, 0.0436962167, -0.0092235251, -0.0113175546, -0.0037995379, -0.0251593572, -0.0343302647, -0.0055382567, 0.0020537652, -0.0190258041, -0.0288997405, 0.0067332011, 0.0362189961, 0.0117241591)
 
-  expect_warning(out <- IA(X), "Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  expect_warning(out <- IA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   expect_equal(out$nu, expected_nu, tolerance = 1e-6)
   expect_equal(out$coeffs, expected_coeffs, tolerance = 1e-6)
 })

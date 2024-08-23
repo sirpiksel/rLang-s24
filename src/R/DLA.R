@@ -84,7 +84,7 @@ DLA <- function(X) {
     "X may not contain Inf or -Inf values" = !any(is.infinite(X))
   )
 
-  warning("Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  warning("This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
 
   n <- length(X)
   saf <- fabric_sample_ACVF(X)

@@ -63,7 +63,7 @@ IA <- function(X, max_lag = length(X)) {
     "max_lag cannot exceed length(X)" = max_lag <= length(X),
     "max_lag cannot be smaller than 2" = 2 <= max_lag
   )
-  warning("Please note: This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
+  warning("This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
 
   nu <- numeric(max_lag)
 
