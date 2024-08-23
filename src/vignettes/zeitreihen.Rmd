@@ -747,15 +747,15 @@ zeitreihen::plot(X, num_samples)
 
 
 ## Appendix
-| Funktion      | Argumente              | Ausgabewerte                                         | Beschreibung / Verwendung                              |
-|---------------|------------------------|------------------------------------------------------|--------------------------------------------------------|
-| `make_AR`     | `t, phi, sigma, start` | Zeitreihe (`X`)                                      | Erzeugt eine AR(p)-Zeitreihe                           |
-| `make_MA`     | `t, theta, sigma`      | Zeitreihe (`X`)                                      | Erzeugt eine MA(q)-Zeitreihe                           |
-| `sample_ACVF` | `X, h`                 | Autokovarianz (`gamma`)                              | Berechnet Autokovarianz für verschiedene Lags          |
-| `periodogram` | `X, lambda`            | Periodogramm (`I_n`)                                 | Schätzt spektrale Dichte einer Zeitreihe               |
-| `DLA`         | `X`                    | AR-Koeffizienten (`phi`), Innovationsvarianzen (`v`) | Berechnet Koeffizienten für ein                        |
-| `IA`          | `X, max_lag`           | Innovationskoeffizienten (`theta`), Varianzen (`nu`) | Berechnet Koeffizienten und Varianzen für ARMA-Modelle |
-| `plot`        | `X, h`                 | - (Erzeugt Plot)                                     | Visualisiert Zeitreihe                                 |
+| Function           | Arguments              | Return                                               | Usage                                           |
+|--------------------|------------------------|------------------------------------------------------|-------------------------------------------------|
+| `make_AR`          | `t, phi, sigma, start` | time series (`X`)                                    | Erzeugt eine AR(p) time series                  |
+| `make_MA`          | `t, theta, sigma`      | time series (`X`)                                    | Erzeugt eine MA(q) time series                  |
+| `sample_ACVF`      | `X, h`                 | Autocovariance (`gamma`)                             | calculates the autocovariance for lags          |
+| `periodogram`      | `X, lambda`            | Periodogram (`I_n`)                                  | estimates the spectral density of a time series |
+| `DLA`              | `X`                    | AR-Coefficients (`phi`), Innovations-variances (`v`) | calculates the coefficients for a given model   |
+| `IA`               | `X, max_lag`           | Innovations-coefficients (`theta`), Variances (`nu`) | calculates the coefficients for a given model   |
+| `zeitreihen::plot` | `X, h`                 | - (generates a plot)                                 | visualizes the spectral density estimate        |
 
 ---
 
