@@ -2,10 +2,6 @@
 #'
 #' @description `DLA` can be used to perform the Durbin-Levinson algorithm on stationary time series data.
 #'
-#' @usage 
-#' model <- DLA(X)
-#' model(m)
-#'
 #' @details
 #' The \strong{Durbin-Levinson Algorithm} is used to recursively calculate the coefficients \eqn{\phi_{m1}, \dots, \phi_{mm}}
 #' for a given time series \eqn{\{x_1, \dots, x_n\}}. The recursion can be expressed as follows:

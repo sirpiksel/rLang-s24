@@ -4,8 +4,7 @@
 \alias{DLA}
 \title{Recursive Calculation of Coefficients using the Durbin-Levinson Algorithm}
 \usage{
-model <- DLA(X)
-model(m)
+DLA(X)
 }
 \arguments{
 \item{X}{A numeric or complex atomic vector representing the time series data.

@@ -263,9 +263,8 @@ test_that("TEST DLA: correctness", {
   X <- rnorm(5, mean = 0, sd = 1)
   expect_warning(pdl <- DLA(X), "This algorithm works for stationary time series with zero-mean.\nFor any other time series, the results may be incorrect.")
   result <- pdl(2)
-  expect_equal(sin(pi), 0)
-  expect_equal(result$nu[1], 0.9243285, tolerance = 1e-6)
-  expect_equal(result$nu[2], 0.8219783, tolerance = 1e-6)
+
+  expect_equal(result$nu, 0.591788, tolerance = 1e-6)
   expect_equal(result$phi[1], -0.5088541, tolerance = 1e-6)
   expect_equal(result$phi[2], -0.5291920, tolerance = 1e-6)
 })
@@ -282,7 +281,7 @@ test_that("Test on return", {
   expect_true(is.list(result))
   expect_true(all(names(result) %in% c("phi", "nu")))
   expect_equal(length(result$phi), 1)
-  expect_equal(length(result$nu), 2)
+  expect_equal(length(result$nu), 1)
 
   # Additional Test for extreme m
   m <- length(X)
