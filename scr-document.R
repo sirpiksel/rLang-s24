@@ -1,8 +1,9 @@
 #
-# *roxygenize*
+# *document*
 # apply as needed.
 #
 
-# if(!require(roxygen2)) install.packages("roxygen2", repos = "https://cloud.r-project.org")
+library(devtools)
 library(roxygen2)
+build_vignettes(pkg = "src/")
 roxygenize(package.dir = "src/", roclets = NULL, load_code = NULL, clean = FALSE)
