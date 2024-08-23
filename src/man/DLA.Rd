@@ -4,7 +4,8 @@
 \alias{DLA}
 \title{Recursive Calculation of Coefficients using the Durbin-Levinson Algorithm}
 \usage{
-DLA(X)
+model <- DLA(X)
+model(m)
 }
 \arguments{
 \item{X}{A numeric or complex atomic vector representing the time series data.
@@ -13,50 +14,50 @@ The time series should be stationary,  meaning its mean and covariance function 
 \value{
 The output of this function is an anonymous function. The returned function takes the value \code{m} as a parameter. The value \code{m} means that we use the last \code{m} values of the time series to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the Durbin-Levinson algorithm, which then returns
 a list with two components:
-\item{phi}{A numeric atomic vector representing the calculated coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}.}
-\item{nu}{A numeric atomic vector representing the mean squared error of the one-step predictors.}
+\item{phi}{A numeric atomic vector representing the calculated coefficients \eqn{\phi_{m1}, \dots, \phi_{mm}}.}
+\item{nu}{A numeric value representing the mean squared error \eqn{\nu_m} of the one-step predictor.}
 }
 \description{
 \code{DLA} can be used to perform the Durbin-Levinson algorithm on stationary time series data.
 }
 \details{
-The \strong{Durbin-Levinson Algorithm} is used to recursively calculate the coefficients \eqn{\phi_{n1}, \dots, \phi_{nn}}
+The \strong{Durbin-Levinson Algorithm} is used to recursively calculate the coefficients \eqn{\phi_{m1}, \dots, \phi_{mm}}
 for a given time series \eqn{\{x_1, \dots, x_n\}}. The recursion can be expressed as follows:
 
-\deqn{\phi_{nn} = \left[ \gamma(n) - \displaystyle{\sum_{j=1}^{n-1} \phi_{n-1, j} \gamma(n-j)} \right] \nu_{n-1}^{-1},}
+\deqn{\phi_{mm} = \left[ \gamma(m) - \displaystyle{\sum_{j=1}^{m-1} \phi_{m-1, j} \gamma(m-j)} \right] \nu_{m-1}^{-1},}
 
 \deqn{
 \left[ \begin{array}{c}
-       \phi_{n1} \\
+       \phi_{m1} \\
        \vdots \\
-       \phi_{n, n-1}
+       \phi_{m, m-1}
        \end{array}
 \right]
 =
 \left[ \begin{array}{c}
-       \phi_{n-1,1} \\
+       \phi_{m-1,1} \\
        \vdots \\
-       \phi_{n-1,n-1}
+       \phi_{m-1,m-1}
        \end{array}
 \right]
 -
-\phi_{nn}
+\phi_{mm}
 \left[ \begin{array}{c}
-       \phi_{n-1,n-1} \\
+       \phi_{m-1,m-1} \\
        \vdots \\
-       \phi_{n-1,1}
+       \phi_{m-1,1}
        \end{array}
 \right]}
 
 and
 
-\deqn{\nu_n = \nu_{n-1} \left[1 - \phi_{nn}^2\right],}
+\deqn{\nu_m = \nu_{m-1} \left[1 - \phi_{mm}^2\right],}
 
 where \eqn{\phi_{11} = \gamma(1)/\gamma(0)} and \eqn{\nu_0 = \gamma(0)}.
 
 The algorithm iteratively calculates these coefficients, which are essential for the analysis of autoregressive processes
-and can be used to calculate the one-step predictor \eqn{P_n X_{n+1}} given by the formula
-\eqn{P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1}.
+and can be used to calculate the one-step predictor \eqn{P_m X_{m+1}} given by the formula
+\eqn{P_m X_{m+1} = \phi_{m1} X_m + \cdots + \phi_{mm} X_1}.
 }
 \examples{
 # Example 1: Basic Usage
