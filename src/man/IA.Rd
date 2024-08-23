@@ -42,17 +42,17 @@ and can be used to calculate the one-step predictor \eqn{\hat{X}_{n}} given by t
 }
 \examples{
 # Example 1: Basic Usage
-X <- rnorm(100)
+X <- rnorm(10)
 out <- IA(X)
 print(out)
 
 # Example 2: Usage for an AR(2) model
-X <- make_AR(100, phi = c(0.1, 0.2))
+X <- make_AR(10, phi = c(0.1, 0.2))
 out <- IA(X)
 print(out)
 
 # Example 3: Usage for an MA(3) model
-X <- make_MA(100, theta = c(0.2, 0.25, -0.3))
+X <- make_MA(10, theta = c(0.2, 0.25, -0.3))
 out <- IA(X)
 print(out)
 
