@@ -64,6 +64,7 @@ For example, the coefficient \( \theta_{41} \) is the coefficient before the dif
 \
 
 What happens:
+
 * It is checked if `X` and `max_lag` have the required format.
 * Allocation of a numeric vector `nu` of length `max_lag` to store the mean square errors \(v_0,\dots, v_{max\_lag-1}\).
 * Computation of the Autocovariances (\(\kappa(i,j)\) is equal to the Autocovariance of X with \(h=i-j\)) of the time series with `sample_ACVF(X,h)` for `h` from 0 to the biggest difference `max_lag`-1.
@@ -74,8 +75,10 @@ What happens:
 and \[
   \nu_n = \kappa(n+1, n+1) - \sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j
 \]
+\
 
 Required Format:
+
 * `X` is an atomic vector of length bigger one, which has numeric or complex values and can't contain NA, Inf or NaN values.
 * `max_lag` must be an integer bigger one, can't be NA, Inf or NaN and can't be bigger than the length of `X`.
 

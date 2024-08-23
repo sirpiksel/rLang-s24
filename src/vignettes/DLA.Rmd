@@ -50,7 +50,6 @@ Here's what happens step-by-step:
 
 ### Large Output
 Let's work with the following time series data:
-
 ```{r, DLA() DLA() large output}
 X <- stats::rnorm(100, mean = 0, sd = 1)
 model <- DLA(X)

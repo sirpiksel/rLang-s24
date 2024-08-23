@@ -29,7 +29,7 @@ The `make_AR()` function generates a synthetic time series following an AR(p) (A
 Specify the length of the desired time series using `t`, set the coefficients of the AR(p) process as `phi`.
 ```{r, make_AR() basic usage}
 library(zeitreihen)
-t <- 100
+t <- 10
 phi <- 0.5
 
 make_AR(t, phi)
@@ -69,9 +69,9 @@ make_AR(t, phi, sigma)
 ```
 Note: `make_AR` supports numeric or complex atomic vectors for `phi`.
 
-### Using large Output
+### Using larger Output
 ```{r, make_AR() large output}
-t <- 40
+t <- 100
 phi <- 3
 sigma <- 1
 
