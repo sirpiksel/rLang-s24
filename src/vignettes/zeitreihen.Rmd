@@ -1,0 +1,758 @@
+---
+title: "`zeitreihen` Package"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: false
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{zeitreihen}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, setup, include = FALSE}
+set.seed(742)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = TRUE,
+  fig.height = 6,
+  fig.width = 6,
+  tidy = TRUE
+)
+
+DAX_similar <- c(
+  16020.68, 16153.28, 16274.46, 16052.56, 15948.22, 15768.82, 15942.48,
+  16010.25, 16033.12, 15884.32, 15933.98, 15774.08, 15809.58, 15913.59,
+  15604.34, 15010.69, 15125.77, 15461.93, 15524.45, 15321.43, 15469.93,
+  15621.00, 15613.90, 15370.99, 15102.76, 15209.87, 15245.61, 15485.30,
+  15490.50, 15424.93, 15116.32, 15412.79, 15399.48, 15270.56, 15045.66,
+  14731.93, 14696.65, 14630.81, 14051.78, 14569.44, 14461.28, 13907.42,
+  14002.98, 13697.44, 13100.72, 12839.33, 12835.30, 13855.15, 13440.29,
+  13631.41, 13932.70, 13916.10, 14442.32, 14389.94, 14414.88, 14327.91,
+  14474.21, 14283.98, 14279.13, 14307.24, 14420.32, 14822.48, 14608.73,
+  14415.22, 14447.22, 14520.75, 14427.81, 14153.52, 14079.33, 14283.99,
+  14194.83, 14126.51, 14078.42, 14162.79, 14153.87, 14360.57, 14503.84,
+  14149.32, 13923.11, 13754.77, 13797.94, 13982.50, 14100.10, 13938.08,
+  14040.49, 13971.98, 13900.47, 13672.67, 13386.89, 13530.92, 13828.58,
+  13741.04, 14029.80, 13962.56, 14188.43, 14010.79, 13886.83, 13982.92,
+  14177.54, 13918.60, 14010.83, 14229.18, 14462.04, 14576.62, 14390.00,
+  14343.26, 14487.11, 14461.10, 14654.47, 14560.70, 14447.13, 14196.90,
+  13764.86, 13430.40, 13314.67, 13483.41, 13038.14, 13125.44, 13261.35,
+  13285.83, 13142.77, 12914.21, 13117.74, 13185.41, 13241.93, 13000.63,
+  12793.36, 12824.00, 12791.28, 12407.27, 12603.55, 12843.33, 13014.40,
+  12835.49, 12907.73, 12747.00, 12516.67, 12861.98, 12962.63, 13315.48,
+  13282.88, 13250.79, 13257.23, 13218.48, 13101.20, 13162.58, 13282.91,
+  13481.70, 13480.81, 13453.01, 13581.41, 13662.52, 13577.58, 13686.28,
+  13530.96, 13702.69, 13696.66, 13798.96, 13816.28, 13912.91, 13626.98,
+  13697.24, 13549.38, 13241.68, 13187.04, 13220.43, 13262.62, 12970.04,
+  12895.15, 12963.20, 12839.39, 12638.49, 13040.49, 12747.89, 12871.03,
+  12914.88, 12907.50, 13099.20, 13408.77, 13185.99, 13016.96, 12952.66,
+  12722.50, 12818.65, 12671.82, 12769.60, 12519.06, 12275.54, 12244.06,
+  12109.59, 12205.93, 11982.46, 12104.53, 12240.38, 12671.75, 12516.17,
+  12465.47, 12272.33, 12272.32, 12242.53, 12174.52, 12344.92, 12439.62,
+  12646.35, 12769.29, 12722.53, 12769.65, 12720.25, 12930.19, 13056.95,
+  13187.36, 13218.66, 13245.09, 13257.25, 13343.99, 13257.85, 13132.05,
+  13458.17, 13530.67, 13686.49, 13664.29, 14150.12, 14225.33, 14312.34,
+  14382.20, 14230.81, 14266.80, 14431.86, 14382.49, 14421.31, 14429.86,
+  14540.78, 14543.91, 14384.86, 14358.15, 14395.88, 14493.24, 14530.87,
+  14447.78, 14347.39, 14261.63, 14266.01, 14373.36, 14307.42, 14499.70,
+  14461.12, 13984.36, 13892.81, 13945.25, 13887.30, 14100.09, 13914.50,
+  13938.87, 13999.57, 13928.43, 14072.76, 13922.93, 14070.43, 14179.92,
+  14494.45, 14437.07, 14610.80, 14791.56, 14774.20, 14949.69, 15057.87,
+  15087.19, 15134.93, 15188.08, 15185.59, 14920.65, 15034.70, 15104.12,
+  15092.70, 15082.71, 15133.70, 15153.21, 15129.67, 15131.10, 15185.38,
+  15511.10, 15473.76, 15346.79, 15322.03, 15412.65, 15524.28, 15310.60,
+  15399.95, 15382.00, 15509.36, 15533.50, 15485.30, 15478.15, 15400.01,
+  15400.46, 15473.61, 15212.19, 15383.60, 15366.65, 15307.24, 15327.36,
+  15578.10, 15656.35, 15560.98, 15634.47, 15634.90, 15432.26, 14961.85,
+  15234.93, 14734.87, 14968.10, 14770.05, 14936.48, 15195.51, 15218.30,
+  15212.56, 14959.82, 15130.98, 15139.15, 15332.51, 15524.08, 15629.77,
+  15581.58, 15603.91, 15520.80, 15598.26, 15656.92, 15708.15, 15736.09,
+  15809.14, 15792.65, 15884.21, 15896.59, 15797.48, 15882.67, 15864.14,
+  15872.22, 15797.44, 15800.77, 15922.91, 15726.96, 15819.59, 15738.22,
+  15962.98, 15955.00, 15956.90, 15897.13, 15835.63, 15915.03, 15919.38,
+  15897.47, 15953.58, 16166.14, 16276.72, 16225.01, 16153.33, 15845.93,
+  15797.05, 15985.59, 15954.98, 15910.66, 15665.73, 15855.35, 16052.40,
+  15965.31, 15993.73, 15962.89, 15992.18, 15951.73, 16099.99, 16232.01,
+  16310.70, 16291.17, 16359.35, 16203.18, 16112.84, 16025.28, 15988.92,
+  15830.02, 15815.02, 15848.22, 15949.69, 15948.02, 16151.69, 16082.57,
+  16043.41, 15938.10, 15532.48, 15603.90, 15673.83, 15793.07, 16024.04,
+  16141.04, 16106.38, 16070.54, 16126.09, 16107.95, 16206.51, 16178.95,
+  16190.57, 16214.56, 16132.80, 16406.52, 16468.77, 16448.77, 16241.51,
+  16020.53, 15895.88, 15953.69, 15952.32, 15776.78, 15853.87, 15998.54,
+  15830.47, 15905.85, 15768.62, 15792.63, 15678.97, 15576.55, 15603.88,
+  15708.74, 15733.95, 15623.03, 15634.46, 15794.52, 15931.71, 15893.86,
+  15948.09, 15845.36, 15826.44, 15772.31, 15742.50, 15716.09, 15741.86,
+  15800.88, 15715.01, 15656.44, 15808.69, 15895.91, 15726.99, 15665.82,
+  15783.09, 15573.21, 15560.53, 15406.74, 15256.28, 15218.72, 15322.56,
+  15389.02, 15248.02, 15086.42, 15102.83, 15071.62, 15232.57, 15131.07,
+  15422.91, 15462.05, 15424.91, 15187.93, 15237.84, 15254.08, 15098.60,
+  15046.90, 14800.93, 14801.38, 14882.68, 14895.21, 14731.92, 14688.73,
+  14715.40, 14815.32, 14924.46, 15148.46, 15190.78, 15136.07, 15153.73,
+  15232.53, 15353.97, 15237.05, 15345.84, 15614.03, 15748.59, 15786.98,
+  15920.18, 15902.87, 15902.30, 15957.93, 15995.28, 16027.72, 15966.85,
+  15993.77, 16166.76, 16216.92, 16398.26, 16405.80, 16532.96, 16657.06,
+  16629.06, 16759.36, 16793.44, 16792.90, 16769.71, 16756.83, 16756.43,
+  16654.94, 16744.98, 16734.67, 16688.36, 16707.65, 16744.51, 16705.92,
+  16756.47, 16770.37, 16541.30, 16616.73, 16593.95, 16716.73, 16689.72,
+  16690.01, 16547.61, 16706.52, 16624.78, 16574.28, 16434.41, 16568.24,
+  16557.13, 16685.00, 16628.68, 16892.00, 16909.83, 16960.88, 16939.93,
+  16975.27, 16908.78, 16856.06, 16914.45, 16908.85, 17031.98, 16926.11,
+  16964.99, 16933.35, 17032.80, 16881.93, 16946.04, 17037.09, 17122.13,
+  17092.86, 17073.85, 17122.26, 17375.46, 17421.60, 17422.38, 17549.78,
+  17599.91, 17674.58, 17737.62, 17712.71, 17709.16, 17712.82, 17840.93,
+  17814.88, 17755.32, 17971.90, 17961.54, 17949.29, 17938.61, 17937.81,
+  17993.98, 18019.14, 18162.67, 18168.00, 18295.57, 18389.57, 18484.03,
+  18505.71, 18299.94, 18366.16, 18406.75, 18161.82, 18314.02, 18078.58,
+  18095.82, 17951.78, 17927.73, 18027.35, 17764.70, 17768.50, 17839.84,
+  17738.07, 17861.16, 18137.71, 18091.88, 17920.75, 18150.70, 18120.75,
+  17937.71, 17897.85, 17999.63, 18161.86, 18418.85, 18506.88, 18691.36,
+  18763.26, 18740.33, 18719.53, 18877.07, 18739.64, 18707.14, 18762.49,
+  18733.82, 18687.84, 18692.30, 18694.95, 18763.64, 18687.37, 18483.27,
+  18506.56, 18506.79, 18635.60, 18407.25, 18557.98, 18680.09, 18518.66,
+  18506.19, 18366.61, 18675.73, 18296.45, 18002.80, 18067.26, 18134.02,
+  18067.20, 18265.02, 18159.52, 18328.70, 18162.34, 18149.54, 18198.05,
+  18261.28, 18303.75, 18159.63, 18387.60, 18441.53, 18483.70, 18483.03,
+  18261.42, 18407.57, 18514.12, 18751.50, 18560.97, 18510.81, 18420.30,
+  18363.57, 18161.20, 18407.54, 18518.75, 18390.19, 18305.36, 18409.64,
+  18314.36, 18408.36, 18508.94
+)
+```
+
+
+## Installation
+To install `zeitreihen`, **eventually** you will be able to install it from CRAN:
+```{r, install from CRAN, eval = FALSE}
+install.packages("zeitreihen", repos = "https://cloud.r-project.org")
+```
+
+Or directly from GitHub (for the latest development version):
+```{r, install from Github, eval = FALSE}
+library(devtools)
+devtools::install_github("sirpiksel/rLang-s24/src")
+```
+
+Then, to begin using `zeitreihen` call the library or start using the namespace with its functions: e.g `zeitreihen::sample_ACVF()`
+```{r, library call}
+library(zeitreihen)
+```
+In this vignette we will generally be omitting the namespace qualifiers except `zeitreihen::plot()` to avoid confusion with `graphics::plot`.
+
+---
+
+
+## Autoregressive process `make_AR()`
+The `make_AR()` function generates a synthetic time series following an AR(p) (Autoregressive of order p) model. This function allows you to create time series data based on specified AR coefficients and white noise variance.
+
+### Basic Usage
+Specify the length of the desired time series using `t`, set the coefficients of the AR(p) process as `phi`.
+```{r, make_AR() basic usage}
+library(zeitreihen)
+t <- 10
+phi <- 0.5
+
+make_AR(t, phi)
+```
+The output, is time series that follows the AR(p) model. \
+The output is a numeric or complex atomic vector of length `t` containing data generated by the AR model with hand over parameter. The output values corresponds to the sequential observations from 1 to `t`.
+\
+
+What is happening inside the function:
+
+* It is checked within the function whether the inputs are in the correct format.
+* An atomic vector \(X\) of length `t` is created. If a vector `start` is passed, `X` contains this vector as values of the first `length(start)` entries.
+* `t` normally distributed values with mean 0 and standard deviation `sigma` are generated.
+* Iterative calculation of \(X\) from `p + 1` to `t` with loop variable i:
+    * Consider the vector, which stores the values from \(X_{i - 1} \dots X_{i - q}\).
+    * The dot product of the vector mentioned above, and the vector phi is then calculated.
+    * \(Z[i]\) is added to the dot product.
+    * And the previous calculation is stored in X[i].
+* Finally, the values are returned.
+\
+
+Required Format:
+
+* `t` must be a positive integer of length 1, where NA, Inf or NaN aren't allowed.
+* `t` has to be bigger than the length of `phi`
+* `phi` must a be non-empty numeric/complex vector
+* `phi` is not allowed to contain NA, INF or NaN values.
+* `sigma` must be a non-zero and positive numeric vector of length equal to 1, where NA, Inf or NaN are not allowed.
+
+### Using complex numbers
+```{r, make_AR() complex numbers}
+t <- 10
+phi <- complex(real = 1, imaginary = 2)
+sigma <- 1
+
+make_AR(t, phi, sigma)
+```
+Note: `make_AR` supports numeric or complex atomic vectors for `phi`.
+
+### Generating larger output
+```{r, make_AR() large output}
+t <- 100
+phi <- 3
+sigma <- 1
+
+make_AR(t, phi, sigma)
+```
+Calling the `make_AR`, where `sigma` is omitted is allowed. Within `make_AR` we use `1` as default value for `sigma`. \
+Note: The Output will get big so mind to generate only the number of observation that are needed.
+
+### Requirements
+If the input does not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled. \
+The values of phi must be passed in an atomic vector:
+```{r, make_AR() phi error (format), error = TRUE}
+t <- 10
+phi <- list(1, 2, 3, 4, 5)
+sigma <- 1
+
+make_AR(t, phi, sigma)
+```
+
+The values of this atomic vector must be numeric or complex:
+```{r, make_AR() phi error (value format), error = TRUE}
+t <- 10
+phi <- "L"
+sigma <- 1
+
+make_AR(t, phi, sigma)
+```
+
+The integer `t` must be greater than the length of phi:
+```{r, make_AR() phi error (length), error = TRUE}
+t <- 2
+phi <- c(1, 2)
+sigma <- 1
+
+make_AR(t, phi, sigma)
+```
+
+Sigma must be a positive numeric value:
+```{r, make_AR() sigma error (value), error = TRUE}
+t <- 10
+phi <- 1
+sigma <- 0
+
+make_AR(t, phi, sigma)
+```
+
+---
+
+
+## Moving-average process `make_MA()`
+The function `make_MA` generates synthetic time series based on MA(q) (Moving-average of order q) model. By Providing the MA coefficients and white noise standard deviation to the `make_MA` function, data for a time series can be created.
+
+### Basic usage
+First, specify the length of the time series `t`. Next, specify `theta`, which contains the MA coefficients, where `t` must be bigger than the sum of all \(theta_i\) in `theta`.
+```{r, make_MA() basic usage}
+t <- 10
+theta <- 1
+
+make_MA(t, theta)
+```
+The output, is time series that follows the MA(q) model. \
+The output is a numeric or complex atomic vector of length `t` containing data generated by the MA model with hand over parameter. The output values corresponds to the sequential observations from 1 to `t`.
+\
+
+What is happening inside the function:
+
+* Within the function, it is checked if `t`, `theta` and `sigma` have the required format.
+* \(q\) is derived by the length of `theta`.
+* Allocation of a numeric vector \(X\) of length `t` to store the time series data.
+* By providing `sigma`, we allocate `t + q` instances of white noise in `Z`.
+* Computation of \(X\) iteratively from \(q + 1\) to \(t + q\) with loop variable i:
+  * Consider the vector, which stores the values from \(Z_{i - 1} \dots Z_{i - q}\).
+  * The dot product of the vector mentioned above, and the vector theta is then calculated.
+  * \(Z_i\) is added to the dot product.
+  * And the previous calculation is stored in \(X[i - q]\).
+* Finally, the values are returned.
+\
+
+Required Format:
+
+* `t` must be a positive integer of length 1, where NA, Inf or NaN aren't allowed.
+* `t` has to be bigger than the length of `theta`
+* `theta` must a be non-empty numeric/complex vector
+* `theta` is not allowed to contain NA, INF or NaN values.
+* `sigma` must be a non-zero and positive numeric vector of length equal to 1, where NA, Inf or NaN are not allowed.
+
+### Using complex numbers
+```{r, make_MA() complex numbers}
+t <- 10
+theta <- complex(real = 1, imaginary = 2)
+sigma <- 1
+
+make_MA(t, theta, sigma)
+```
+Note: `make_MA` supports numeric or complex vector for `theta`.
+
+### Generating larger output
+```{r, make_MA() large output}
+t <- 100
+theta <- 3
+sigma <- 1
+
+make_MA(t, theta, sigma)
+```
+Calling the `make_MA`, where `sigma` is omitted, is allowed. Within `make_MA` we use `1` as a value for `sigma`. \
+Note: The Output will get big, so mind to generate only the amount observation that are needed.
+
+### Requirements
+If the input does not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled. \
+The values of theta must be passed in an atomic vector:
+```{r, make_MA() theta error (format), error = TRUE}
+t <- 10
+theta <- list(1, 2, 3, 4, 5)
+sigma <- 0
+
+make_MA(t, theta, sigma)
+```
+
+The values of this atomic vector must be numeric or complex:
+```{r, make_MA() theta error (value format), error = TRUE}
+t <- 10
+theta <- "L"
+sigma <- 1
+
+make_MA(t, theta, sigma)
+```
+
+The integer `t` must be greater than the length of phi:
+```{r, make_MA() theta error (length), error = TRUE}
+t <- 2
+theta <- c(1, 2)
+sigma <- 1
+
+make_MA(t, theta, sigma)
+```
+
+Sigma must be a positive numeric value:
+```{r, make_MA() sigma error (value), error = TRUE}
+t <- 2
+theta <- 1
+sigma <- 1
+
+make_MA(t, theta, sigma)
+```
+
+---
+
+
+## Sample Autocovariance Function `sample_ACVF()`
+The sample autocovariance function is an important tool in time series analysis. It measures the covariance between values of a time series across different lags. The function `sample_ACVF` is an implementation of sample autocovariance function.
+
+The output of the sample autocovariance function is dependent on the considered time series and lag:
+
+* If the output value is near zero, then we can assume a weak relation between the points \(X_t\) and \(X_{t + h}\).
+* If the output value is big and positive, then we can assume a strong relation between the points \(X_t\) and \(X_{t + h}\).
+* If the output value is big and negative, then we can assume a strong relation between the points \(X_{t + h}\) and \(X_{t}\).
+
+### Basic usage
+`X` represent a time series and `h` is an integer subset of `(-n,n)`, where `n` represents the length of `X`. By calling `sample_ACVF(X,h)` the sample autocovariance function on X for h is computed.
+
+```{r, sample_ACVF() basic usage}
+X <- c(2, 4, 6, 8, 10)
+h <- 2
+
+sample_ACVF(X, h)
+```
+The computation of the `sample_ACVF` on `X` for `h` is `-0.8` and has named the attribute `2`, the corresponding lag `h`. \
+\
+What happens:
+
+* Within the function, It is checked if `X` and `h` have the required format.
+* \(\bar{x}\), the mean of `X`, is computed.
+* \(n\), the length of `X`, is extracted from `X`.
+* For each \(h_i \in\) `h`: we compute \(n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})\)
+  * The last \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
+  * The first \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
+  * We compute the dot product of the vectors.
+  * Last step, we divide the dot product of the vectors by \(n\).
+* At last, The values are returned where the *names* attribute is assigned `h`.
+\
+
+Required Format:
+
+* `X` must be an atomic vector of positive length and only allows either numeric or complex values also NA, Inf or NaN aren't allowed.
+* `h` must be is a numeric vector with unique values in interval `(-n,n)`, where `n` is the length of the time series `X` and NA, Inf or NaN are not allowed.
+
+### Using complex numbers
+```{r, sample_ACVF() complex numbers}
+X <- c(2 + 1i, 2 + 4i, 6, 8i, 10)
+h <- c(0, 3, 1)
+
+sample_ACVF(X, h)
+```
+Hint: `sample_ACVF` doesn't return the values sorted on `h`. It returns the values in the order of `h`.
+
+### Generating larger output
+Calling the `sample_ACVF`, where `h` is omitted, is allowed. Within `sample_ACVF` we use the `[0,n-1]` for `h`. Hint: The Output will get big, so mind to get only the \(h_i\) that are needed.
+```{r, sample_ACVF() large output}
+X <- c(0:10, 20:30, 40:50, 50:58)
+
+sample_ACVF(X)
+```
+
+### Requirements
+Several inputs are not allowed. Here are a few examples of the error messages: \
+\
+If the time series is not an atomic vector:
+```{r, sample_ACVF() time series error (format), error = TRUE}
+X <- list(2, 4, 6, 8, 10)
+h <- 2
+
+sample_ACVF(X, h)
+```
+
+If the time series contains values, which are `NaN` or `Inf`:
+```{r, sample_ACVF() time series error (value), error = TRUE}
+X <- c(2, 4, 6, NA, 10)
+h <- 2
+
+sample_ACVF(X, h)
+```
+
+If `h` is to large it will return an error:
+```{r, sample_ACVF() max_lag error (range), error = TRUE}
+X <- c(2, 4, 6, 8, 10)
+h <- 5
+
+sample_ACVF(X, h)
+```
+
+---
+
+
+## Durbin-Levinson Algorithm
+The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\).
+
+### Basic usage
+To apply the algorithm to a time series X, we call the function `DLA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
+```{r, DLA() basic usage}
+X <- stats::rnorm(5, mean = 0, sd = 1)
+m <- 2
+model <- DLA(X)
+model(m)
+```
+We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the amount last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared errors).
+These coefficients can be used to calculate the one-step predictor:
+\[
+P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1
+\]
+
+Here's what happens step-by-step:
+
+1. **Start**: The algorithm begins by calculating the first coefficient \(\phi_{11}\). This is computed as \(\gamma(1) / \gamma(0)\), where \(\gamma(1)\) is the autocovariance at lag 1, and \(\gamma(0)\) is the variance of the time series.
+2. **Recursive Calculation**: For each step \(n\), the algorithm calculates the coefficient \(\phi_{nn}\) by adjusting the autocovariance \(\gamma(n)\). This adjustment is based on the previous coefficients \(\phi_{n-1,j}\) and the autocovariances \(\gamma(n-j)\).
+3. **Phi Computation**: The coefficients \(\phi_{n,1}\) to \(\phi_{n,n-1}\) are computed through the previous \(\phi_{n-1,1}\) to \(\phi_{n-1,n-1}\) and \(\phi_{n, n}\).
+4. **Mean Squared Errors**: The mean squared error \(v_n\) is calculated at each step to capture the uncertainty in the estimates. This variance is based on the previous variance \(v_{n-1}\) and the current coefficient \(\phi_{nn}\).
+5. **Results**: At the end, the algorithm returns a list with two named vectors: `phi`, containing the calculated coefficients, and `nu`, containing the mean squared errors. These values are important for forecasting time series data.
+
+
+### Generating larger output
+Let's work with the following time series data:
+```{r, DLA() large output}
+X <- stats::rnorm(100, mean = 0, sd = 1)
+model <- DLA(X)
+result <- model(5)
+print(result)
+```
+
+### Requirements
+If the input does not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled: \
+\
+The time series data X must be passed in an atomic vector:
+```{r, DLA() time series error (format), error = TRUE}
+X <- list(1, 2, 3, 4, 5)
+model <- DLA(X)
+```
+
+Also, the values of X must be numeric or complex:
+```{r, DLA() time series error (value format), error = TRUE}
+X <- c(1, 2, "3", 4, "5i")
+model <- DLA(X)
+```
+
+Similarly, the atomic vector may not contain any NAs:
+```{r, DLA() time series error (value NA), error = TRUE}
+X <- c(1, NA, 2, 3, 4)
+model <- DLA(X)
+```
+
+The atomic vector may not contain Inf or -Inf values:
+```{r, DLA() time series error (value Inf), error = TRUE}
+X <- c(1, 2, Inf, 3, 4)
+model <- DLA(X)
+```
+
+The m parameter must be a value of length 1:
+```{r, DLA() paremeter error length 1, error = TRUE, warning = FALSE}
+X <- stats::rnorm(100)
+model <- DLA(X)
+result <- model(c(1, 2))
+```
+
+The m parameter must be an integer value between 0 and the length of X:
+```{r, DLA() parameter integer value error, error = TRUE, warning = FALSE}
+X <- stats::rnorm(100)
+model <- DLA(X)
+result <- model(101)
+```
+
+---
+
+
+## The Innovations Algorithm `IA()`
+The Innovations Algorithm is a recursive algorithm that can be applied to stationary time series \( \{X_t\} \) with
+zero-mean and finite second moments. The algorithm gives the coefficients of the one-step predictors \( \hat{X}_1, \hat{X}_2 \dots \), which can be calculated recursively once the coefficients have been determined.
+Additionally, the algorithm calculates the mean squared errors \( \nu_i \).
+
+### Basic usage
+To apply the algorithm to a time series X, we call the function `IA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
+```{r, IA() basic usage}
+X <- stats::rnorm(5, mean = 0, sd = 1)
+out <- IA(X)
+```
+
+As output, we get the vector `nu`, which contains the mean squared errors,
+```{r, IA() nu output}
+out$nu
+```
+
+the matrix \[
+  \Theta_5 = \begin{pmatrix}
+    0           & 0           & 0           & 0           & 0 \\
+    \theta_{11} & 0           & 0           & 0           & 0 \\
+    \theta_{22} & \theta_{21} & 0           & 0           & 0 \\
+    \theta_{33} & \theta_{32} & \theta_{31} & 0           & 0 \\
+    \theta_{44} & \theta_{43} & \theta_{42} & \theta_{41} & 0
+  \end{pmatrix}
+\]
+```{r, IA() theta matrix outout}
+out$theta
+```
+
+And the vector of coefficients, `coeffs` = \( \begin{pmatrix} \theta_{41} & \theta_{42} & \theta_{43} & \theta_{44} \end{pmatrix} \),
+```{r, IA() coeffs output}
+out$coeffs
+```
+Which can be used to calculate the one-step predictor \( \hat{X}_{5} \) via \
+\[
+  \hat{X}_{n} = \begin{cases} 0, & \text{if} n = 1, \\
+  \sum\limits_{j=1}^{n-1} \theta_{n-1,j} (X_{n-j}-\hat{X}_{n-j}), & \text{if} n = 2, 3, 4, 5 \end{cases}
+\]
+For example, the coefficient \( \theta_{41} \) is the coefficient before the difference of the value of the time series \( \{X_t\} \) at time \( t = 4 \) and its predictor \( \hat{X_4} \).
+\
+
+What happens:
+
+* It is checked if `X` and `max_lag` have the required format.
+* Allocation of a numeric vector `nu` of length `max_lag` to store the mean square errors \(v_0,\dots, v_{max\_lag-1}\).
+* Computation of the Autocovariances (\(\kappa(i,j)\) is equal to the Autocovariance of X with \(h=i-j\)) of the time series with `sample_ACVF(X,h)` for `h` from 0 to the biggest difference `max_lag`-1.
+* Initializing by assigning \(v_0\) the Autocovariance for `h` equal zero and allocating a numeric matrix with `max_lag` rows and columns.
+* Calculating the coefficient \(\theta_{11}\) and the mean squared error \(v_1\) separately. Afterward recursively calculating the coefficients \(\theta_{n, n - k}\) and \(v_k\) from \(k = 0\) to \(n - 1\) using the equation \[
+  \theta_{n, n-k} = \nu_k^{-1} (\kappa(n+1, k+1) - \sum_{j=0}^{k-1} \theta_{k, k-j} \theta_{n, n-j} \nu_j), \quad 0 \leq k < n
+\]
+and \[
+  \nu_n = \kappa(n+1, n+1) - \sum_{j=0}^{n-1} \theta_{n, n-j}^2 \nu_j
+\]
+\
+
+Required Format:
+
+* `X` is an atomic vector of length bigger one, which has numeric or complex values and can't contain NA, Inf or NaN values.
+* `max_lag` must be an integer bigger one, can't be NA, Inf or NaN and can't be bigger than the length of `X`.
+
+
+### Using the optional parameter `max_lag`
+Additionally, the parameter `max_lag` (per default the length of the time series) can be set, to indicate till where the \( \theta \) 's should be calculated.
+```{r, IA() parameter max_lag, warning = FALSE}
+X <- stats::rnorm(100, mean = 0, sd = 1)
+out <- IA(X, max_lag = 6)
+out$nu
+out$theta
+```
+
+
+### Requirements
+Several inputs are not allowed. Here are a few examples of the error messages: \
+\
+If the time series contains values, which are `NaN` or `Inf`:
+```{r, IA() time series error (value), error = TRUE}
+X <- NaN + stats::rnorm(10, mean = 0, sd = 1)
+Y <- c(0, 0, 0, Inf)
+out <- IA(Y)
+out <- IA(X)
+```
+\
+If the time series contains values, which are not numeric or complex values:
+```{r, IA() time series error (value format), error = TRUE}
+X <- c("2.01", 1, 0)
+out <- IA(X)
+```
+\
+If the time series is not an atomic vector:
+```{r, IA() time series error (format), error = TRUE}
+X <- list(m = matrix(1, nrow = 10, ncol = 5), "test")
+out <- IA(X)
+```
+\
+If `max_lag` is smaller than 2, not an integer or bigger than the length of the time series:
+```{r, IA() max_lag error, error = TRUE}
+X <- stats::rnorm(10, 0, 1)
+out <- IA(X, 1)
+IA(X, 3.14)
+IA(X, 51)
+```
+
+---
+
+
+## The spectral density periodogram `periodogram()`
+The spectral density of a stationary process shows how the variance of the time series is distributed over different frequencies. As a fundamental tool of time series analysis, the `periodogram` function is used to estimate the spectral density of a stationary time series.
+
+### Basic usage
+Use rnorm to generate a random time series, then calculate the periodogram for the specified time series at \(\lambda = \frac{\pi}{4}\). Note: lambda has to be within \((-\pi, \pi]\)
+```{r, periodogram() basic usage}
+X <- stats::rnorm(100)
+lambda <- pi / 4
+periodogram(X, lambda)
+```
+
+What is happening inside the function:
+
+- *Input Validation*: The function checks whether the time series \(X\) has been passed in the correct format and lambda is a numerical value from the interval \((-\pi, \pi]\) .
+- Each value \(X_t\) of the time series \(X\) is multiplied by \(e^{-it\lambda}\) , where \(t\) is the time index.
+- The sum of these products is computed.
+- The absolute value of this sum is calculated and raised to the power of 2.
+- The result is divided by the length of the time series \(n\) and returned as the periodogram value.
+
+### Periodogram for a simple sine curve
+Create a simple sine curve sample:
+```{r, periodogram() sin}
+X <- sin(2 * pi * 1:100 / 100)
+lambda <- 2 * pi / 100
+periodogram(X, lambda)
+```
+
+### Periodogram for a complex exponential curve
+Generate a complex exponential curve sample:
+```{r, periodogram() complex exponential}
+X <- exp(2 * pi * 1i * 1:100 / 100)
+lambda <- 2 * pi / 100
+periodogram(X, lambda)
+```
+
+### Requirements
+If the input does not correspond to the correct format, appropriate error messages are printed to inform the user what is wrong with their input. Here are several examples of how incorrect inputs are handled. \
+The time series data must be passed in an atomic vector:
+```{r, periodogram() time series error (format), error = TRUE}
+X <- list(1, 2, 3, 4, 5)
+lambda <- pi / 2
+
+periodogram(X, lambda)
+```
+
+The values of this atomic vector must be numeric or complex:
+```{r, periodogram() time series error (value format), error = TRUE}
+X <- c(1, 2, "3", 4, "5i")
+lambda <- pi / 2
+
+periodogram(X, lambda)
+```
+
+Similarly, the atomic vector may not contain any NAs:
+```{r, periodogram() time series error (value), error = TRUE}
+X <- c(1, NA, 2, 3, NA, 5)
+lambda <- pi / 2
+periodogram(X, lambda)
+```
+
+The lambda parameter must be a numerical value:
+```{r, periodogram() lambda error (format), error = TRUE}
+X <- 1:10
+lambda <- "0"
+
+periodogram(X, lambda)
+```
+
+Also, lambda must lie within the interval \((-\pi, \pi]\):
+```{r, periodogram() lambda error (range), error = TRUE}
+X <- 1:10
+lambda <- 2 * pi
+
+periodogram(X, lambda)
+```
+
+---
+
+
+## The spectral density plotting function `plot()`
+The periodogram of \(\{x_1, \dots, x_n\}\) is the function \(I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^{n} x_t e^{-it \lambda} \right|^2\)
+\
+The `plot(X, n)`-function provides a spectral density plot of a time series. The function takes a time series as input and returns a plot of the spectral density.
+```{r, plot() basic usage}
+set.seed(742)
+num_samples <- 10
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
+```
+
+### Adjusting the samples
+By default, the plot takes `n`-samples from the interval of \((0, \pi]\) and evaluates the spectral density across it using the `periodogram()` function. To get a more detailed.
+```{r, plot() adjust sample size}
+num_samples <- 250
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
+```
+
+### Adjusting the interval
+The `plot()` function also allows you to adjust the interval over which the spectral density is calculated by modifying the `from` and `to` parameters. By default, the interval is \((0, \pi]\), but you can specify a different interval that best suits your analysis. \
+\
+For example, to evaluate the spectral density over the interval \((\pi/2, \pi]\):
+```{r, plot() adjusting interval}
+num_samples <- 250
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples, from = pi / 2, to = pi)
+```
+By adjusting the `from` and `to` parameters, you can hone in on specific regions of interest in the frequency spectrum, allowing for more detailed spectral density analysis.
+
+### Practical example
+Here we will be using `DAX_similar`, a dataset approximating the course of the DAX between 2022-01-03 and 2024-07-31.
+```{r, plot() practical example}
+summary(DAX_similar)
+num_samples <- 250
+zeitreihen::plot(DAX_similar, num_samples, from = pi / 2, to = pi)
+```
+
+### Requirements
+`X` should be a native vector consisting of either numeric (real numbers) or complex numbers. `X` should not include any values that are not finite such as `Inf`, `NaN` or `NA`.
+```{r, plot() Example error with X, error = TRUE}
+num_samples <- 10
+X <- c(0, 1, 3, 4, Inf, NA)
+zeitreihen::plot(X, num_samples)
+```
+
+`n` should be a whole number without any decimal component and should be a single value, not a vector.
+```{r, plot() Example error with n, error = TRUE}
+num_samples <- 10.42
+X <- stats::rnorm(30)
+zeitreihen::plot(X, num_samples)
+```
+
+---
+
+
+## Appendix
+TODO
+
+---
+
+
+## References
+If you need more information, please refer to the package documentation or the following resources:
+
+- [Introduction to Time Series and Forecasting](https://link.springer.com/book/10.1007/978-3-319-29854-2)
