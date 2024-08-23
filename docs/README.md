@@ -23,8 +23,8 @@
 - [x] Periodogramm zum Schätzen der sprektralen Dichte, (Alexander)
 - [x] komfortable Plot-Funktionen zur Darstellung der Zeitreihen ihrer spektralen Dichten und der Schätzung letzterer (Philip)
 - [x] Illustrieren der Methoden anhand geeigneter Beispiele. (Alle, parallel zur Entwicklung)
-- [ ] Vignette (Alle)
+- [x] Vignette (Alle)
 - [x] Zugriffsrechte für Betreuer freischalten
 - [x] Zwischenbericht
-- [ ] Abschlussbericht
+- [x] Abschlussbericht
 - [ ] Abschlusspräsentation
