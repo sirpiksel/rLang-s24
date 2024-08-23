@@ -29,18 +29,15 @@ where \eqn{X_t} represents the time series at time \eqn{t} and \eqn{Z_t} is whit
 \examples{
 # Example 1: Simple MA(1) model
 ma_one <- make_MA(t = 10, theta = -0.25, sigma = 2)
-zeitreihen::plot(ma_one, 100)
-sample_ACVF(ma_one)
+graphics::plot(ma_one, type = "l")
 
 # Example 2: Simple MA(2) model
 ma_two <- make_MA(t = 10, theta = c(9, 2))
-zeitreihen::plot(ma_two, 100)
-sample_ACVF(ma_two)
+graphics::plot(ma_two, type = "l")
 
 # Example 3: Simple MA(3) model
 ma_three <- make_MA(t = 10, theta = c(1, 3, 4))
-zeitreihen::plot(ma_three, 100)
-sample_ACVF(ma_three)
+graphics::plot(ma_three, type = "l")
 
 }
 \references{
