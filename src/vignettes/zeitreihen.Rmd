@@ -747,15 +747,15 @@ zeitreihen::plot(X, num_samples)
 
 
 ## Appendix
-| Function           | Arguments              | Return                                               | Usage                                           |
-|--------------------|------------------------|------------------------------------------------------|-------------------------------------------------|
-| `make_AR`          | `t, phi, sigma, start` | time series (`X`)                                    | Erzeugt eine AR(p) time series                  |
-| `make_MA`          | `t, theta, sigma`      | time series (`X`)                                    | Erzeugt eine MA(q) time series                  |
-| `sample_ACVF`      | `X, h`                 | Autocovariance (`gamma`)                             | calculates the autocovariance for lags          |
-| `periodogram`      | `X, lambda`            | Periodogram (`I_n`)                                  | estimates the spectral density of a time series |
-| `DLA`              | `X`                    | AR-Coefficients (`phi`), Innovations-variances (`v`) | calculates the coefficients for a given model   |
-| `IA`               | `X, max_lag`           | Innovations-coefficients (`theta`), Variances (`nu`) | calculates the coefficients for a given model   |
-| `zeitreihen::plot` | `X, h`                 | - (generates a plot)                                 | visualizes the spectral density estimate        |
+| Function           | Arguments              | Return                                                                          | Usage                                           |
+|--------------------|------------------------|---------------------------------------------------------------------------------|-------------------------------------------------|
+| `make_AR`          | `t, phi, sigma, start` | time series (`X`)                                                               | Erzeugt eine AR(p) time series                  |
+| `make_MA`          | `t, theta, sigma`      | time series (`X`)                                                               | Erzeugt eine MA(q) time series                  |
+| `sample_ACVF`      | `X, h`                 | Autocovariance                                                                  | calculates the autocovariance for lags          |
+| `DLA`              | `X, m`                 | model coefficients (`phi`), error of the one-step predictors (`nu`)             | calculates the coefficients for a given model   |
+| `IA`               | `X, max_lag`           | model coefficients (`coeffs`), innovations (`nu`), coefficient matrix (`theta`) | calculates the coefficients for a given model   |
+| `periodogram`      | `X, lambda`            | spectral density estimate                                                       | estimates the spectral density of a time series |
+| `zeitreihen::plot` | `X, h`                 | - (generates a plot)                                                            | visualizes the spectral density estimate        |
 
 ---
 
@@ -765,7 +765,7 @@ If you need more information, please refer to the package documentation or the f
 
 - [Introduction to Time Series and Forecasting](https://link.springer.com/book/10.1007/978-3-319-29854-2)
   - ARMA Processes: **Definition 3.1.1**
-  - sample autocovariance function: **3.2.1 Calculation of the ACVF**
+  - sample autocovariance function: **Definition 1.4.4**
   - Durbin–Levinson Algorithm: **2.5.3 The Durbin–Levinson Algorithm**
   - Innovations Algorithm: **2.5.4 The Innovations Algorithm**
-  - periodogram **Definition 4.2.1**
+  - periodogram: **Definition 4.2.1**
