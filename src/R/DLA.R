@@ -104,21 +104,21 @@ DLA <- function(X) {
     )
 
     gamma <- sapply(0:m, saf)
-    nu <- numeric(m + 1)
+    nu <- numeric(1)
     phi <- numeric(m)
 
-    nu[1] <- gamma[1]
+    nu <- gamma[1]
     phi[1] <- gamma[2] / (gamma[1])
-    nu[2] <- nu[1] * (1 - phi[1]**2)
+    nu <- nu * (1 - phi[1]**2)
 
     if (m == 1) {
       return(list(phi = phi, nu = nu))
     }
 
     for (i in 2:m) {
-      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu[i]
+      phi[i] <- (gamma[i + 1] - sum(phi[1:(i - 1)] * gamma[i:2])) / nu
       phi[1:(i - 1)] <- phi[1:(i - 1)] - phi[i] * phi[(i - 1):1]
-      nu[i + 1] <- nu[i] * (1 - phi[i]**2)
+      nu <- nu * (1 - phi[i]**2)
     }
 
     return(list(phi = phi, nu = nu))
