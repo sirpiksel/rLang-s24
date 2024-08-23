@@ -140,6 +140,8 @@ library(zeitreihen)
 ```
 In this vignette we will generally be omitting the namespace qualifiers except `zeitreihen::plot()` to avoid confusion with `graphics::plot`.
 
+To work with time series data, the time series contained in base R, such as 'AirPassengers' or 'nottem', as well as any other data that can be converted to a native numeric vector, can be used with our package.
+
 ---
 
 
