@@ -427,7 +427,7 @@ sample_ACVF(X, h)
 
 
 ## Durbin-Levinson Algorithm `DLA()`
-The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\).
+The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_n\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\).
 
 ### Basic usage
 To apply the algorithm to a time series X, we call the function `DLA()` with parameter X. Every time we call upon the algorithm, a warning will be given that the user has to check if the time series is stationary.
@@ -437,19 +437,19 @@ m <- 2
 model <- DLA(X)
 model(m)
 ```
-We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared errors `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the amount last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared errors).
+We use the `DLA` function from the `zeitreihen` package to calculate the coefficients `phi` and the mean squared error `nu` for this time series, focusing on `m = 2`. The `DLA` function returns an anonymous function that takes `m` as a parameter, where `m` represents the amount last values used to predict the next value of the time series using the Durbin-Levinson algorithm. This function calculates the necessary coefficients and mean squared errors, returning a list with two components: `phi` (the coefficients) and `nu` (the mean squared error).
 These coefficients can be used to calculate the one-step predictor:
 \[
-P_n X_{n+1} = \phi_{n1} X_n + \cdots + \phi_{nn} X_1
+P_m X_{m+1} = \phi_{m1} X_m + \cdots + \phi_{mm} X_1
 \]
 
 Here's what happens step-by-step:
 
 1. **Start**: The algorithm begins by calculating the first coefficient \(\phi_{11}\). This is computed as \(\gamma(1) / \gamma(0)\), where \(\gamma(1)\) is the autocovariance at lag 1, and \(\gamma(0)\) is the variance of the time series.
-2. **Recursive Calculation**: For each step \(n\), the algorithm calculates the coefficient \(\phi_{nn}\) by adjusting the autocovariance \(\gamma(n)\). This adjustment is based on the previous coefficients \(\phi_{n-1,j}\) and the autocovariances \(\gamma(n-j)\).
-3. **Phi Computation**: The coefficients \(\phi_{n,1}\) to \(\phi_{n,n-1}\) are computed through the previous \(\phi_{n-1,1}\) to \(\phi_{n-1,n-1}\) and \(\phi_{n, n}\).
-4. **Mean Squared Errors**: The mean squared error \(v_n\) is calculated at each step to capture the uncertainty in the estimates. This variance is based on the previous variance \(v_{n-1}\) and the current coefficient \(\phi_{nn}\).
-5. **Results**: At the end, the algorithm returns a list with two named vectors: `phi`, containing the calculated coefficients, and `nu`, containing the mean squared errors. These values are important for forecasting time series data.
+2. **Recursive Calculation**: For each step \(m\), the algorithm calculates the coefficient \(\phi_{mm}\) by adjusting the autocovariance \(\gamma(m)\). This adjustment is based on the previous coefficients \(\phi_{m-1,j}\) and the autocovariances \(\gamma(m-j)\).
+3. **Phi Computation**: The coefficients \(\phi_{m,1}\) to \(\phi_{m,m-1}\) are computed through the previous \(\phi_{m-1,1}\) to \(\phi_{m-1,m-1}\) and \(\phi_{m, m}\).
+4. **Mean Squared Errors**: The mean squared error \(v_m\) is calculated at each step to capture the uncertainty in the estimates. This variance is based on the previous variance \(v_{m-1}\) and the current coefficient \(\phi_{mm}\).
+5. **Results**: At the end, the algorithm returns a list with two named vectors: `phi`, containing the calculated coefficients, and `nu`, containing the mean squared error. These values are important for forecasting time series data.
 
 
 ### Generating larger output
