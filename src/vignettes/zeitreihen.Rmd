@@ -749,8 +749,8 @@ zeitreihen::plot(X, num_samples)
 ## Appendix
 | Function           | Arguments              | Return                                                                          | Usage                                           |
 |--------------------|------------------------|---------------------------------------------------------------------------------|-------------------------------------------------|
-| `make_AR`          | `t, phi, sigma, start` | time series (`X`)                                                               | Erzeugt eine AR(p) time series                  |
-| `make_MA`          | `t, theta, sigma`      | time series (`X`)                                                               | Erzeugt eine MA(q) time series                  |
+| `make_AR`          | `t, phi, sigma, start` | time series                                                                     | generates a sample AR(p) time series            |
+| `make_MA`          | `t, theta, sigma`      | time series                                                                     | generates a sample MA(q) time series            |
 | `sample_ACVF`      | `X, h`                 | Autocovariance                                                                  | calculates the autocovariance for lags          |
 | `DLA`              | `X, m`                 | model coefficients (`phi`), error of the one-step predictors (`nu`)             | calculates the coefficients for a given model   |
 | `IA`               | `X, max_lag`           | model coefficients (`coeffs`), innovations (`nu`), coefficient matrix (`theta`) | calculates the coefficients for a given model   |
