@@ -27,7 +27,7 @@ The sample autocovariance function is an important tool in time series analysis.
 
 The output of the sample autocovariance function is dependent on the considered time series and lag:
 
-* If the output value is near zero, then we can assume a weak relation between the points \(X_t\) and \(X_{t + h}$.
+* If the output value is near zero, then we can assume a weak relation between the points \(X_t\) and \(X_{t + h}\).
 * If the output value is big and positive, then we can assume a strong relation between the points \(X_t\) and \(X_{t + h}\).
 * If the output value is big and negative, then we can assume a strong relation between the points \(X_{t + h}\) and \(X_{t}\).
 
@@ -47,7 +47,7 @@ What happens:
 * Within the function, It is checked if `X` and `h` have the required format.
 * \(\bar{x}\), the mean of `X`, is computed.
 * \(n\), the length of `X`, is extracted from `X`.
-* For each \(h_i \in\) `h`: we compute \(n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})$
+* For each \(h_i \in\) `h`: we compute \(n^{-1} \sum_{t=1}^{n - |h_i|} (x_{t + |h_i|} - \bar{x}) \cdot (x_t - \bar{x})\)
   * The last \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
   * The first \(n\) - `h` values from `X`, and subtract component wise the mean of `X` from it.
   * We compute the dot product of the vectors.

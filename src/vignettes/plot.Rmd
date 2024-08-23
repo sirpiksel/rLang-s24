@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ```
 
 ## the plotting function `plot()`
-The periodogram of $\{x_1, \dots, x_n\}$ is the function \(I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^{n} x_t e^{-it \lambda} \right|^2\)
+The periodogram of \(\{x_1, \dots, x_n\}\) is the function \(I_n(\lambda) = \frac{1}{n} \left| \sum_{t=1}^{n} x_t e^{-it \lambda} \right|^2\)
 \
 The `plot(X, n)`-function provides a spectral density plot of a time series. The function takes a time series as input and returns a plot of the spectral density.
 ```{r, plot() basic usage}
