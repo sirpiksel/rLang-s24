@@ -6,7 +6,7 @@ output:
     number_sections: false
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{zeitreihen}
+  %\VignetteIndexEntry{`zeitreihen` Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,8 +17,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   echo = TRUE,
-  fig.height = 6,
-  fig.width = 6,
+  fig.height = 7,
+  fig.width = 7,
   tidy = TRUE
 )
 
@@ -426,7 +426,7 @@ sample_ACVF(X, h)
 ---
 
 
-## Durbin-Levinson Algorithm
+## Durbin-Levinson Algorithm `DLA()`
 The Durbin-Levinson Algorithm is a recursive method applied to stationary time series \(\{X_t\}\) for the efficient calculation of coefficients needed for one-step predictors \(\hat{X}_1, \hat{X}_2, \dots\).
 
 ### Basic usage
@@ -747,7 +747,15 @@ zeitreihen::plot(X, num_samples)
 
 
 ## Appendix
-TODO
+| Funktion      | Argumente              | Ausgabewerte                                         | Beschreibung / Verwendung                              |
+|---------------|------------------------|------------------------------------------------------|--------------------------------------------------------|
+| `make_AR`     | `t, phi, sigma, start` | Zeitreihe (`X`)                                      | Erzeugt eine AR(p)-Zeitreihe                           |
+| `make_MA`     | `t, theta, sigma`      | Zeitreihe (`X`)                                      | Erzeugt eine MA(q)-Zeitreihe                           |
+| `sample_ACVF` | `X, h`                 | Autokovarianz (`gamma`)                              | Berechnet Autokovarianz für verschiedene Lags          |
+| `periodogram` | `X, lambda`            | Periodogramm (`I_n`)                                 | Schätzt spektrale Dichte einer Zeitreihe               |
+| `DLA`         | `X`                    | AR-Koeffizienten (`phi`), Innovationsvarianzen (`v`) | Berechnet Koeffizienten für ein                        |
+| `IA`          | `X, max_lag`           | Innovationskoeffizienten (`theta`), Varianzen (`nu`) | Berechnet Koeffizienten und Varianzen für ARMA-Modelle |
+| `plot`        | `X, h`                 | - (Erzeugt Plot)                                     | Visualisiert Zeitreihe                                 |
 
 ---
 
@@ -756,3 +764,8 @@ TODO
 If you need more information, please refer to the package documentation or the following resources:
 
 - [Introduction to Time Series and Forecasting](https://link.springer.com/book/10.1007/978-3-319-29854-2)
+  - ARMA Processes: **Definition 3.1.1**
+  - sample autocovariance function: **3.2.1 Calculation of the ACVF**
+  - Durbin–Levinson Algorithm: **2.5.3 The Durbin–Levinson Algorithm**
+  - Innovations Algorithm: **2.5.4 The Innovations Algorithm**
+  - periodogram **Definition 4.2.1**
