@@ -54,33 +54,6 @@ test_that("DLA: X must be numeric or complex atomic vector", {
 
   X <- raw(1)
   expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c(TRUE, FALSE)
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c("", "")
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c("asdf", "ghjk")
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c("42", "87")
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c("a", "b", "c")
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c(1L, 2, TRUE, "42", 5)
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c(-pi, -0.1, "0", 1, 2)
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- c(1:100, "101")
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
-
-  X <- raw(1)
-  expect_error(DLA(X), "X must be numeric or complex atomic vector")
 })
 
 test_that("DLA: X must have more than one value", {
